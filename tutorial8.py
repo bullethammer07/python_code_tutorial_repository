@@ -151,7 +151,7 @@ print("lstrip : ",val10.rstrip("&*)@"),"end")
 
 #-----------------------------------------------------------------------------------------------------------------------------
 """
-translate()
+translate() and maketrans()
 Description : the translate() method returns a string where some specified characters are replaced with the characters described in
               a dictionary, or in a mapping table.
               -> Use the maketrans() method to create a mapping table
@@ -180,4 +180,13 @@ txt2 = "This is a simple text message"
 my_table3 = txt.maketrans("simple","simple","message") # individual characters of 'message' will be removed from the complete text
 print("translate : ",txt2.translate(my_table3))
 
-
+#---------------------------------------------------------------------------------------------------------------------------------
+"""
+partition()
+Description : the method searches for a specified string, and splits the string into a tuple containing three elements
+              The first element contains the part before the string
+              The second element contains the specified string
+              The third element contains the part after the string 
+"""
+txt3 = "This is before the string match match_value This is after the string match"
+print("partition  : ",txt3.partition("match_value"))
