@@ -134,5 +134,37 @@ print("ljust : ",val8.ljust(15,"x")) # NOTE : The character can only be one char
 #------------------------------------------------------------------------------------------------------------------------
 """
 lstrip() and rstrip()
-Description : 
+Description : lstrip() removes any whitespaces at the left of the string
+              rstrip() removes any whitespaces at the right of the string
+
+Syntax : string.lstrip(characters)   --> You can specify a set of characters to removes from the start
+         string.rstrip(characters)
 """
+
+val9 = "          My name is Slim Shady          "
+val10 = ".....,,,,,$$$$$#####^^^^^Banana&&&***)))@@@"
+
+print("lstrip : ",val9.lstrip(),"end")
+print("rstrip : ",val9.rstrip(),"end")
+print("lstrip : ",val10.lstrip(".,$#^"),"end")
+print("lstrip : ",val10.rstrip("&*)@"),"end")
+
+#-----------------------------------------------------------------------------------------------------------------------------
+"""
+translate()
+Description : the translate() method returns a string where some specified characters are replaced with the characters described in
+              a dictionary, or in a mapping table.
+              -> Use the maketrans() method to create a mapping table
+Syntax : string.translate(table)    <- table can be created with maketrans()
+         table : Required. Either a 'dictionary' , or a 'mapping table' describing how to perform the replace 
+"""
+txt = "Hello Sam!"
+my_table = txt.maketrans("Sa","Ta") # NOTE : The replacement character must be of the same length as the character(s) that need to be replaced.
+                                    # for eg . valid combinations are : ("S","T") , ("Sa","Ta") , ("Sam","Tam")
+print("translate : ",type(my_table),txt.translate(my_table)) # Output of type is L <class 'dict'>
+
+# There is a respective one to one mapping of the characters to specify to replace, for eg :
+# If you specify ("mSa","eJo") , then 'm' corresponds to be replaced with 'e'
+#                                     'S' corresponds to be replaced with 'J'
+#                                     'a' corresponds to be replaced with 'o'
+# Hence, even if the characters to be replaced are out of order as specified. In the output 'Sam' will still be replaced with 'Joe'
