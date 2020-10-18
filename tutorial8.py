@@ -189,3 +189,8 @@ print("partition  : ",txt3.partition("match_value"))
 #          oldvalue : the phrase to be replaced
 #          newvalue : new value with with the older phrase has to be replaced with
 #          count    :  (Optionl) . A number specifying how many occurrences of the old value you want to replace. Default is all occurrences
+
+txt4 = "The quick brown fox fox fox fox fox fox fox jumps over the lazy dog"
+
+print("replace : ",txt4.replace("fox","tiger"))  # This will replace all occurrences of 'fox' with 'tiger'
+print("replace : ",txt4.replace("fox","wolf",4)) # This will replace the first 4 occurences of 'fox' with 'wolf'
