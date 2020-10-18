@@ -163,7 +163,7 @@ my_table = txt.maketrans("Sa","Ta") # NOTE : The replacement character must be o
                                     # for eg . valid combinations are : ("S","T") , ("Sa","Ta") , ("Sam","Tam")
 print("translate : ",type(my_table),txt.translate(my_table)) # Output of type is L <class 'dict'>
 
-# There is a respective one to one mapping of the characters to specify to replace, for eg :
+# There is a respective one to one mapping in the arguments of maketrans() of the characters to specify to replace, for eg :
 # If you specify ("mSa","eJo") , then 'm' corresponds to be replaced with 'e'
 #                                     'S' corresponds to be replaced with 'J'
 #                                     'a' corresponds to be replaced with 'o'
