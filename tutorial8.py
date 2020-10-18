@@ -163,8 +163,21 @@ my_table = txt.maketrans("Sa","Ta") # NOTE : The replacement character must be o
                                     # for eg . valid combinations are : ("S","T") , ("Sa","Ta") , ("Sam","Tam")
 print("translate : ",type(my_table),txt.translate(my_table)) # Output of type is L <class 'dict'>
 
+# OUT OF ORDER ARGUMENTS :
 # There is a respective one to one mapping in the arguments of maketrans() of the characters to specify to replace, for eg :
 # If you specify ("mSa","eJo") , then 'm' corresponds to be replaced with 'e'
 #                                     'S' corresponds to be replaced with 'J'
 #                                     'a' corresponds to be replaced with 'o'
 # Hence, even if the characters to be replaced are out of order as specified. In the output 'Sam' will still be replaced with 'Joe'
+# refer example below
+my_table2 = txt.maketrans("mSa","eJo")
+print("translate : ",txt.translate(my_table2))
+
+# CHARACTERS TO BE REMOVED FROM THE STRING
+# You can also specify a third character in the maketrans() that will create a mapping table with the specified character removed. for eg :
+
+txt2 = "This is a simple text message"
+my_table3 = txt.maketrans("simple","simple","message") # individual characters of 'message' will be removed from the complete text
+print("translate : ",txt2.translate(my_table3))
+
+
