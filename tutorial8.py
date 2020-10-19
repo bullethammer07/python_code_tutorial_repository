@@ -1,12 +1,12 @@
 str = "Hello World"
 
-print(str[0:7])
-print(str[-7:-1])
+print("using +ve and -ve indexes : ",str[0:7])
+print("using +ve and -ve indexes : ",str[-7:-1])
 
 # ----------------------------------------------------------------------------------------------------------------------
 # capitalize()
-val = "jayant"
-print(val.capitalize()) # To convert the first letter to capitals
+val = "jayant yadav"
+print("capitalize : ",val.capitalize()) # To convert the first letter to capitals
 
 #-----------------------------------------------------------------------------------------------------------------------
 # casefold() and lower()
@@ -23,15 +23,15 @@ print("center : ",val2.center(50),"end") # Prints the string in the centre of sp
 #-----------------------------------------------------------------------------------------------------------------------
 # count()
 val3 = "what what what what WHAT WHAT WHAT WHY WHY when when"
-print(val3.count("what")) # Counts the number of occurences of a specified value in a string
-print(val3.count("WHAT"))
-print(val3.count("WHY"))
-print(val3.count("when"))
+print("count : ",val3.count("what")) # Counts the number of occurences of a specified value in a string
+print("count : ",val3.count("WHAT"))
+print("count : ",val3.count("WHY"))
+print("count : ",val3.count("when"))
 
 # ----------------------------------------------------------------------------------------------------------------------
 # encode()
 val4 = "jayant"
-print(val4.encode())  #  The encode() method encodes the string, using the specified encoding. If no encoding is specified, UTF-8 will be used.
+print("encode : ",val4.encode())  #  The encode() method encodes the string, using the specified encoding. If no encoding is specified, UTF-8 will be used.
                       #  Refer :  https://docs.python.org/2.4/lib/standard-encodings.html for a link of all encoding types
 
 # ------------------------------------------------------------------------------------------------------------------------
@@ -42,8 +42,8 @@ print(val4.encode())  #  The encode() method encodes the string, using the speci
 #   end   : Optional. An Integer specifying at which position to end the search
 
 val4 = "Hello World"
-print(val4.endswith("rld")) # --> Will return as true
-print(val4.endswith("Hello World")) # --> Will also return as true. NOTE : Can be used as a method for string match.
+print("endswith : ",val4.endswith("rld")) # --> Will return as true
+print("endswith : ",val4.endswith("Hello World")) # --> Will also return as true. NOTE : Can be used as a method for string match.
 
 # ------------------------------------------------------------------------------------------------------------------------
 # expandtabs()
@@ -51,8 +51,8 @@ print(val4.endswith("Hello World")) # --> Will also return as true. NOTE : Can b
 # Description : Replaces any tabs in the string with the specified number of whitespaces
 
 val5 = "Hello\tWorld"
-print(val5)
-print(val5.expandtabs(100))
+print("expandtabs : ",val5)
+print("expandtabs : ",val5.expandtabs(100))
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -62,8 +62,8 @@ print(val5.expandtabs(100))
 #                Method returns -1 (type int) is the value is not found.
 
 val6 = "My name is Slim Shady"
-print(val6.find("Slim")) # --> Returns Index 11 as 'S' of Slim starts at that location
-print(val6.find("xyz"))  # --> This will return -1
+print("find : ",val6.find("Slim")) # --> Returns Index 11 as 'S' of Slim starts at that location
+print("find : ",val6.find("xyz"))  # --> This will return -1
 
 #-----------------------------------------------------------------------------------------------------------------------
 # index()
@@ -86,7 +86,7 @@ print("index :",ival6.index("Slim")) # --> Returns Index 11 as 'S' of Slim start
 #          txt3 = "My name is {}, I'am {}".format("John",36)  --> by position
 
 val7 = "Hi my name is {name} and I love {hobby}"
-print(val7.format(name="Jayant",hobby="Coding"))
+print("format : ",val7.format(name="Jayant",hobby="Coding"))
 
 # ----------------------------------------------------------------------------------------------------------------------
 
