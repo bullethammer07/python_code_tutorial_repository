@@ -9,6 +9,14 @@ val = "jayant yadav"
 print("capitalize : ",val.capitalize()) # To convert the first letter to capitals
 
 #-----------------------------------------------------------------------------------------------------------------------
+# upper()
+# Description : Converts all characters in a string to uppercase
+# Syntax : string.upper()
+
+valx = "all characters are lowercase"
+print("upper : ",valx.upper())
+
+#-----------------------------------------------------------------------------------------------------------------------
 # casefold() and lower()
 val1 = "JAYANT"
 print("casefold : ",val1.casefold()) # To convert string to lowercase
@@ -275,3 +283,102 @@ print("splitlines : ",txt9.splitlines(True)) # This will return -> splitlines : 
 txt10 = "TwItTeR sCrEeNsHoTs ArE nOt MeMeS 1a2B___@@123$$%"
 
 print("swapcase : ",txt10.swapcase())
+
+#---------------------------------------------------------------------------------------------------------------------------------
+# title()
+# Description : Converts the first character of each word in string to uppercase
+# Syntax : string.title()
+
+txt11 = "nothing is permanent in this material world"
+
+print("title : ",txt11.title())
+
+#---------------------------------------------------------------------------------------------------------------------------------
+# zfill()
+# Description : The zfill() method adds zeros (0) at the beginning of the string, until it reaches the specified length.
+#               If the value of the len parameter is less than the length of the string, no filling is done.
+# Syntax : string.zfill(len)
+#          len : (Required)
+
+txt12 = "hello"
+txt13 = "welcome to the jungle"
+txt14 = "10.000"
+
+print("zfill : ",txt12.zfill(10))
+print("zfill : ",txt13.zfill(50))
+print("zfill : ",txt14.zfill(20))
+
+#===================================================================
+#               CODE OUTPUT
+#===================================================================
+# using +ve and -ve indexes :  Hello W
+# using +ve and -ve indexes :  o Worl
+# capitalize :  Jayant yadav
+# upper :  ALL CHARACTERS ARE LOWERCASE
+# casefold :  jayant
+# lower    :  jayant
+# center :                        jayant                       end
+# count :  4
+# count :  3
+# count :  2
+# count :  2
+# encode :  b'jayant'
+# endswith :  True
+# endswith :  True
+# startswith :  True
+# startswith :  True
+# expandtabs :  Hello	World
+# expandtabs :  Hello                                                                                               World
+# find :  11
+# find :  -1
+# index : 11
+# format :  Hi my name is Jayant and I love Coding
+# join : ThisXYXisXYXoneXYXsentence
+# join :  Thisisonesentence
+# ljust :  Jayant               rocks
+# ljust :  Jayantxxxxxxxxx
+# rjust :                Jayant rocks
+# rjust :  xxxxxxxxxJayant
+# lstrip :  My name is Slim Shady           end
+# rstrip :            My name is Slim Shady end
+# lstrip :  Banana&&&***)))@@@ end
+# rstrip :  .....,,,,,$$$$$#####^^^^^Banana end
+# strip :  My name is Slim Shady end
+# strip :  Banana end
+# translate :  <class 'dict'> Hello Tam!
+# translate :  Hello Joe!
+# translate :  Thi i  ipl txt
+# partition  :  ('This is before the string match ', 'match_value', ' This is after the string match ... match_value again')
+# rpartition  :  ('This is before the string match match_value This is after the string match ... ', 'match_value', ' again')
+# replace :  The quick brown tiger tiger tiger tiger tiger tiger tiger jumps over the lazy dog
+# replace :  The quick brown wolf wolf wolf wolf fox fox fox jumps over the lazy dog
+# rfind :  50
+# rfind :  -1
+# rindex :  50
+# rsplit :  ['Apple,', 'Banana,', 'Orange,', 'Pineapple,', 'Cherry,', 'Strawberry']
+# rsplit :  ['Apple', 'Banana', 'Orange', 'Pineapple', 'Cherry', 'Strawberry']
+# rsplit :  ['Apple_Banana_Orange_Pineapple_Cherry_Strawberry']
+# rsplit :  ['Apple_Banana_Orange_Pineapple_Cherry', 'Strawberry']
+# rsplit :  ['Apple_Banana_Orange_Pineapple', 'Cherry', 'Strawberry']
+# rsplit :  ['Apple_Banana_Orange', 'Pineapple', 'Cherry', 'Strawberry']
+# rsplit :  ['Apple_Banana', 'Orange', 'Pineapple', 'Cherry', 'Strawberry']
+# rsplit :  ['Apple', 'Banana', 'Orange', 'Pineapple', 'Cherry', 'Strawberry']
+# split :  ['Apple,', 'Banana,', 'Orange,', 'Pineapple,', 'Cherry,', 'Strawberry']
+# split :  ['Apple', 'Banana', 'Orange', 'Pineapple', 'Cherry', 'Strawberry']
+# split :  ['Apple_Banana_Orange_Pineapple_Cherry_Strawberry']
+# split :  ['Apple', 'Banana_Orange_Pineapple_Cherry_Strawberry']
+# split :  ['Apple', 'Banana', 'Orange_Pineapple_Cherry_Strawberry']
+# split :  ['Apple', 'Banana', 'Orange', 'Pineapple_Cherry_Strawberry']
+# split :  ['Apple', 'Banana', 'Orange', 'Pineapple', 'Cherry_Strawberry']
+# split :  ['Apple', 'Banana', 'Orange', 'Pineapple', 'Cherry', 'Strawberry']
+# splitlines :  This is line 1
+#  This is line 2
+#  This is line 3
+#  This is line 4
+# splitlines :  ['This is line 1 ', ' This is line 2 ', ' This is line 3 ', ' This is line 4']
+# splitlines :  ['This is line 1 \n', ' This is line 2 \n', ' This is line 3 \n', ' This is line 4']
+# swapcase :  tWiTtEr ScReEnShOtS aRe NoT mEmEs 1A2b___@@123$$%
+# title :  Nothing Is Permanent In This Material World
+# zfill :  00000hello
+# zfill :  00000000000000000000000000000welcome to the jungle
+# zfill :  0000000000000010.000
