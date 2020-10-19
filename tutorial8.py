@@ -35,15 +35,20 @@ print("encode : ",val4.encode())  #  The encode() method encodes the string, usi
                       #  Refer :  https://docs.python.org/2.4/lib/standard-encodings.html for a link of all encoding types
 
 # ------------------------------------------------------------------------------------------------------------------------
-# endswith()
+# endswith() and startswith()
+# Description : The startswith() method returns True if the string starts with the specified value, otherwise False.
+#               The endswith() method returns True if the string ends with the specified value, otherwise False.
 # Syntax : string.endswith(value,start,end)
-#   value : Required. The value to check of if the string ends with.
-#   start : Optional. An Integer specifying at which position to start the search
-#   end   : Optional. An Integer specifying at which position to end the search
+#          string.startswith(value,start,end)
+#          value : Required. The value to check of if the string ends with.
+#          start : Optional. An Integer specifying at which position to start the search
+#          end   : Optional. An Integer specifying at which position to end the search
 
 val4 = "Hello World"
 print("endswith : ",val4.endswith("rld")) # --> Will return as true
 print("endswith : ",val4.endswith("Hello World")) # --> Will also return as true. NOTE : Can be used as a method for string match.
+print("startswith : ",val4.startswith("Hel")) # --> Will return as true
+print("startswith : ",val4.startswith("Hello World")) # --> Will also return as true. NOTE : Can be used as a method for string match.
 
 # ------------------------------------------------------------------------------------------------------------------------
 # expandtabs()
@@ -143,7 +148,7 @@ val10 = ".....,,,,,$$$$$#####^^^^^Banana&&&***)))@@@"
 print("lstrip : ",val9.lstrip(),"end")
 print("rstrip : ",val9.rstrip(),"end")
 print("lstrip : ",val10.lstrip(".,$#^"),"end")
-print("lstrip : ",val10.rstrip("&*)@"),"end")
+print("rstrip : ",val10.rstrip("&*)@"),"end")
 
 #-----------------------------------------------------------------------------------------------------------------------------
 # translate() and maketrans()
@@ -219,8 +224,11 @@ print("rindex : ",txt5.rindex("text"))
 
 #---------------------------------------------------------------------------------------------------------------------------------
 # rsplit()
-# Description : Splits a string into a list, using comma ',' followed by a space ' ' as the separator (Default separator ... YOU CAN ALSO SPECIFY A DIFFERENT SEPARATOR)
+# Description : rsplit() :Splits a string into a list starting from the right end, using comma ',' followed by a space ' ' as the separator (Default separator)
+#               YOU CAN ALSO SPECIFY A DIFFERENT SEPARATOR)
+#               split() : Split a string into a list starting from the left, using comma ',' followed by a space ' ' as the separator (Default separator)
 # Syntax  : string.rsplit(separator,maxsplit)
+#           string.split(separator,maxsplit)
 #            separator : (Optional).  Specifies the separator to use when splitting the string. By default any whitespace is a separator
 #            MAXSPLIT  : (Optional). Specifies how many splits to do. Default value is -1 , which is "all occurrences"
 
@@ -236,3 +244,13 @@ print("rsplit : ",text8.rsplit("_",2)) # three occuernce in the output list
 print("rsplit : ",text8.rsplit("_",3)) # four occuernce in the output list
 print("rsplit : ",text8.rsplit("_",4)) # five occuernce in the output list
 print("rsplit : ",text8.rsplit("_",5)) # six occuernce in the output list
+
+print("split : ",text6.split()) # With default separator
+print("split : ",text7.split(":")) # With ":" as specified separator
+print("split : ",text8.split("_",0)) # one occuernce in the output list
+print("split : ",text8.split("_",1)) # two occuernce in the output list
+print("split : ",text8.split("_",2)) # three occuernce in the output list
+print("split : ",text8.split("_",3)) # four occuernce in the output list
+print("split : ",text8.split("_",4)) # five occuernce in the output list
+print("split : ",text8.split("_",5)) # six occuernce in the output list
+
