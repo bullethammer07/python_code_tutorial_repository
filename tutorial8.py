@@ -135,9 +135,10 @@ print("rjust : ",val8.rjust(20),"rocks")
 print("rjust : ",val8.rjust(15,"x"))
 
 #------------------------------------------------------------------------------------------------------------------------
-# lstrip() and rstrip()
+# lstrip() and rstrip() and strip()
 # Description : lstrip() removes any whitespaces at the left of the string
 #               rstrip() removes any whitespaces at the right of the string
+#               strip() removes any whitespaces at both ends of the string
 #
 # Syntax : string.lstrip(characters)   --> You can specify a set of characters to removes from the start
 #          string.rstrip(characters)
@@ -149,7 +150,8 @@ print("lstrip : ",val9.lstrip(),"end")
 print("rstrip : ",val9.rstrip(),"end")
 print("lstrip : ",val10.lstrip(".,$#^"),"end")
 print("rstrip : ",val10.rstrip("&*)@"),"end")
-
+print("strip : ",val9.strip(),"end")
+print("strip : ",val10.strip(".,$#^&*)@"),"end")
 #-----------------------------------------------------------------------------------------------------------------------------
 # translate() and maketrans()
 # Description : the translate() method returns a string where some specified characters are replaced with the characters described in
@@ -254,3 +256,22 @@ print("split : ",text8.split("_",3)) # four occuernce in the output list
 print("split : ",text8.split("_",4)) # five occuernce in the output list
 print("split : ",text8.split("_",5)) # six occuernce in the output list
 
+#---------------------------------------------------------------------------------------------------------------------------------
+# splitlines()
+# Description : The method splits a string into a list. The splitting is done at the linebreaks
+# Syntax : string.splitlines(keeplinebreaks)
+#          keeplinebreaks : (Optional). Specifies if the line breaks should be included (True) or not (False). [Default is False]
+
+txt9 = "This is line 1 \n This is line 2 \n This is line 3 \n This is line 4"
+print("splitlines : ",txt9)
+print("splitlines : ",txt9.splitlines()) # This will return -> splitlines :  ['This is line 1 ', ' This is line 2 ', ' This is line 3 ', ' This is line 4']
+print("splitlines : ",txt9.splitlines(True)) # This will return -> splitlines :  ['This is line 1 \n', ' This is line 2 \n', ' This is line 3 \n', ' This is line 4']
+
+#---------------------------------------------------------------------------------------------------------------------------------
+# swapcase()
+# Description : Swaps lowercase to upper and uppercases to lower
+# Syntax : string.swapcase()
+
+txt10 = "TwItTeR sCrEeNsHoTs ArE nOt MeMeS 1a2B___@@123$$%"
+
+print("swapcase : ",txt10.swapcase())
