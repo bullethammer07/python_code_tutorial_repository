@@ -118,13 +118,16 @@ print("join :",x)
 print("join : ","".join(arr))
 
 #-----------------------------------------------------------------------------------------------------------------------
-# ljust()
-# Description : appends the character specified number of specified times after the string. Default character is a whitespace
+# ljust() and rjust()
+# Description : ljust() appends the character specified number of specified times after the string. Default character is a whitespace
+#               rjust() appends the character specified number of specified times before the string. Default character is a whitespace
 # Syntax : string.1just(length,character)
 
 val8 = "Jayant"
 print("ljust : ",val8.ljust(20),"rocks")
 print("ljust : ",val8.ljust(15,"x")) # NOTE : The character can only be one character long. Else it will return an exception.
+print("rjust : ",val8.rjust(20),"rocks")
+print("rjust : ",val8.rjust(15,"x"))
 
 #------------------------------------------------------------------------------------------------------------------------
 # lstrip() and rstrip()
@@ -173,14 +176,16 @@ my_table3 = txt.maketrans("simple","simple","message") # individual characters o
 print("translate : ",txt2.translate(my_table3))
 
 #---------------------------------------------------------------------------------------------------------------------------------
-# partition()
-# Description : the method searches for a specified string, and splits the string into a tuple containing three elements
+# partition() and rpartition()
+# Description : partition() : the method searches for a specified string, and splits the string into a tuple containing three elements
+#               rpartition() : The method searches for the last occurrence of the specified string and returns a tuple with three elements
 #               The first element contains the part before the string
 #               The second element contains the specified string
 #               The third element contains the part after the string
 
-txt3 = "This is before the string match match_value This is after the string match"
+txt3 = "This is before the string match match_value This is after the string match ... match_value again"
 print("partition  : ",txt3.partition("match_value"))
+print("rpartition  : ",txt3.rpartition("match_value"))
 
 #---------------------------------------------------------------------------------------------------------------------------------
 # replace()
@@ -194,3 +199,20 @@ txt4 = "The quick brown fox fox fox fox fox fox fox jumps over the lazy dog"
 
 print("replace : ",txt4.replace("fox","tiger"))  # This will replace all occurrences of 'fox' with 'tiger'
 print("replace : ",txt4.replace("fox","wolf",4)) # This will replace the first 4 occurences of 'fox' with 'wolf'
+
+#---------------------------------------------------------------------------------------------------------------------------------
+# rfind() and rindex()
+# Description : finds the last occurence of the specified value in a string
+#               rfind() returns -1 if the value is not found whereas rindex() raises an exception if the value is not found.
+# Syntax : string.rfind(value,start,end)
+#          string.rindex(value,start,end)
+#          value : (Required). The value to search for
+#          start : (Optional), Where to start the search. Default is 0
+#          end   : (Optional), Where to end the search, Default is end of string.
+
+txt5 = "this is text ... this is text again ... text text text"
+
+print("rfind : ",txt5.rfind("text"))
+print("rfind : ",txt5.rfind("rext"))
+print("rindex : ",txt5.rindex("text"))
+# print("rindex : ",txt5.rindex("rext"))   # Commented because method returns an exception. UNCOMMENT TO RUN
