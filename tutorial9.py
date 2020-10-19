@@ -2,7 +2,8 @@
 #             Python lists inbuilt functions
 #--------------------------------------------------------------
 # abs()              : Returns the absolute value of a secified number.
-# all()              : Returns true if all items in an iterable are true, otherwise it returns false.
+# all()              : Returns true if all items in an iterable are true, otherwise it returns False.
+# any()              : Returns True if any item in an iterable are true, otherwise it returns False.
 
 #----------------------------------------------------------------------------------------------------------------------
 # abs()
@@ -17,9 +18,11 @@ y = abs(3+5j)
 print("abs : ",y)
 
 #----------------------------------------------------------------------------------------------------------------------
-# all()
-# Description : returns true if all items in an iterable are true, otherwise it returns false.
+# all() and any()
+# Description : all() : returns true if all items in an iterable are true, otherwise it returns false.
 #               NOTE : if the iterable object is empty, all() function also returns true.
+#               any() : returns True if any item in an iterable are true, otherwise it returns False.
+#               NOTE : If the iterable object is empty, the any() function will return False.
 # Syntax : all(iterable)
 #          iterable : list, tuple, dictioary
 
@@ -32,3 +35,8 @@ print("all : ",all(list1)) # -> returns TRUE
 print("all : ",all(list2)) # -> returns FALSE
 print("all : ",all(list3)) # -> returns FALSE
 print("all : ",all(list4)) # -> returns TRUE
+
+print("any : ",any(list1)) # -> returns TRUE
+print("any : ",any(list2)) # -> returns FALSE
+print("any : ",any(list3)) # -> returns TRUE
+print("any : ",any(list4)) # -> returns FALSE
