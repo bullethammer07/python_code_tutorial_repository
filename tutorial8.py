@@ -216,3 +216,23 @@ print("rfind : ",txt5.rfind("text"))
 print("rfind : ",txt5.rfind("rext"))
 print("rindex : ",txt5.rindex("text"))
 # print("rindex : ",txt5.rindex("rext"))   # Commented because method returns an exception. UNCOMMENT TO RUN
+
+#---------------------------------------------------------------------------------------------------------------------------------
+# rsplit()
+# Description : Splits a string into a list, using comma ',' followed by a space ' ' as the separator (Default separator ... YOU CAN ALSO SPECIFY A DIFFERENT SEPARATOR)
+# Syntax  : string.rsplit(separator,maxsplit)
+#            separator : (Optional).  Specifies the separator to use when splitting the string. By default any whitespace is a separator
+#            MAXSPLIT  : (Optional). Specifies how many splits to do. Default value is -1 , which is "all occurrences"
+
+text6 = "Apple, Banana, Orange, Pineapple, Cherry, Strawberry"
+text7 = "Apple:Banana:Orange:Pineapple:Cherry:Strawberry"
+text8 = "Apple_Banana_Orange_Pineapple_Cherry_Strawberry"
+
+print("rsplit : ",text6.rsplit()) # With default separator
+print("rsplit : ",text7.rsplit(":")) # With ":" as specified separator
+print("rsplit : ",text8.rsplit("_",0)) # one occuernce in the output list
+print("rsplit : ",text8.rsplit("_",1)) # two occuernce in the output list
+print("rsplit : ",text8.rsplit("_",2)) # three occuernce in the output list
+print("rsplit : ",text8.rsplit("_",3)) # four occuernce in the output list
+print("rsplit : ",text8.rsplit("_",4)) # five occuernce in the output list
+print("rsplit : ",text8.rsplit("_",5)) # six occuernce in the output list
