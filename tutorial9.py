@@ -20,24 +20,24 @@
 # getattr()          : Function returns the value of the specified attribute from the specified object.
 # hasattr()          : Function returns True if the specified object has the specified attribute, otherwise False.
 # setattr()          : Function sets the value of the specified attribute of the specified object.
-# dict()             : Creates a dictionary containing information.
+# dict()            *: Creates a dictionary containing information.
 # dir()              : Function returns all properties and methods of the specified object, without the values.
 # divmod()           : Function returns a tuple containing the quotient  and the remainder when argument1 (divident) is divided by argument2 (divisor).
-# list()             : Returns a list
+# list()            *: Returns a list
 # enumerate()        : Function takes a collection (e.g. a tuple) and returns it as an enumerate object.
 # filter()          *: Function returns an iterator were the items are filtered through a function to test if the item is accepted or not.
-# float()            : Function converts the specified value into a floating point number.
+# float()           *: Function converts the specified value into a floating point number.
 # format()           : Function formats a specified value into a specified format.
-# frozenset()
-# globals()
-# hash()
-# help()
-# hex()
-# id()
-# input()
-# int()
-# isinstance()
-# issubclass()
+# frozenset()        : Function returns an unchangeable frozenset object (which is like a set object, only unchangeable).
+# globals()          : Function returns the global symbol table as a dictionary.
+# hash()             : Not Specified
+# help()             : Not Specified
+# hex()             *: Function converts the specified number into a hexadecimal value.
+# id()               : Function returns a unique id for the specified object.
+# input()            : <Already Known>
+# int()             *: Function converts the specified value into an integer number.
+# isinstance()      *: Function returns True if the specified object is of the specified type, otherwise False.
+# issubclass()      *: Function returns True if the specified object is a subclass of the specified object, otherwise False.
 # iter()
 # len()
 # locals()
@@ -47,7 +47,6 @@
 # min()
 # next()
 # object()
-# oct()
 # open()
 # ord()
 # pow()
@@ -60,13 +59,14 @@
 # set()
 # slice()
 # sorted()
-# str()
 # sum()
 # super()
 # tuple()
 # type()
 # vars()
 # zip()
+# oct()
+# str()
 
 #----------------------------------------------------------------------------------------------------------------------
 # abs()
@@ -398,3 +398,109 @@ print("float : ",float1, float2)
 print("\n")
 print("format : ",format(255, 'x'))
 print("format : ",format(255, 'b'))
+
+#----------------------------------------------------------------------------------------------------------------------
+# frozenset()
+# Description : Function returns an unchangeable frozenset object (which is like a set object, only unchangeable).
+# Syntax : frozenset(iterable)
+#            iterable : An iterable object, like list, set, tuple etc.
+
+print("\n")
+frozen_list = ['apple', 'banana', 'cherry']
+var2 = frozenset(frozen_list)
+print("frozenset : ",var2)
+
+# trying to set some value in a frozenset
+# var2[1] = "strawberry" # UNCOMMENT TO RUN , as it will generate an exception.
+
+#----------------------------------------------------------------------------------------------------------------------
+# globals()
+# Description : Function returns the global symbol table as a dictionary.
+# Syntax : globals()
+
+print("\n")
+var3 = globals()
+print("globals : ",var3)
+
+#----------------------------------------------------------------------------------------------------------------------
+# hex()
+# Description : Function converts the specified number into a hexadecimal value.
+#               the returned string always starts with prefix 0x
+# Syntax : hex(number)
+#            number : An Integer
+
+print("\n")
+var4 = hex(255)
+print("hex : ", var4)
+
+#----------------------------------------------------------------------------------------------------------------------
+# id()
+# Description : Function returns a unique id for the specified object. All objects in Python has its own unique id.
+#               The id is assigned to the object when it is created. The id is the object's memory address, and will be different for each time you run the program.
+#               (except for some object that has a constant unique id, like integers from -5 to 256)
+# Syntax : id(object)
+#            object : Any object, String, Number, List, Class etc.
+
+print("\n")
+print("id : ",id(var4)) # printing id of var4
+
+#----------------------------------------------------------------------------------------------------------------------
+# int()
+# Description : Function converts the specified value into an integer number.
+# Syntax : int(value,base)
+#            value : A number or a string that can be converted into an integer number
+#            base : A number representing the number format. Default value: 10
+
+print("\n")
+var5 = int("11111111",2) # binary value
+var6 = int("377",8) # octal value
+var7 = int("ff",16) # hexadecimal value
+
+print("int : ", var5)
+print("int : ", var6)
+print("int : ", var7)
+
+#----------------------------------------------------------------------------------------------------------------------
+# isinstance()
+# Description : Function returns True if the specified object is of the specified type, otherwise False.
+# Syntax : isinstance(object,type)
+#            object : (Required). An object
+#            type : A type or a class, or a tuple of types and/or classes
+
+print("\n")
+var8 = isinstance("Hello", (float, int, str, list, dict, tuple)) # checking if object is part of from a tuple of types , this will return as TRUE
+print("isinstance : ",var8)
+
+var9 = isinstance("Hello",int)
+print("isinstance : ", var9) # this will return false
+
+class myObj:
+  name = "John"
+
+class_obj = myObj()
+
+var10 = isinstance(class_obj, myObj)
+print("isinstance : ", var10) # this will return true
+
+#----------------------------------------------------------------------------------------------------------------------
+# issubclass()
+# Description : Function returns True if the specified object is a subclass of the specified object, otherwise False.
+# Syntax : issubclass(object, parentclass)
+#            object : (Required). An Object
+#            parentclass : A class object, or a tuple of class objects
+
+print("\n")
+class myAge:
+  age = 36
+
+class myNameAge(myAge):
+  name = "John"
+  age = myAge
+
+print("issubclass : ",issubclass(myNameAge, myAge)) # Will return true as myNameAge is extended form myAge
+print("issubclass : ",issubclass(myAge, myNameAge)) # Will return false as myAge is not extended form myNameAge
+
+#----------------------------------------------------------------------------------------------------------------------
+# ()
+# Description :
+# Syntax :
