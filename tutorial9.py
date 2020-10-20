@@ -42,10 +42,10 @@
 # iter()            *: TODO : [Need to Understand Better ... Skipping for now] Function creates an object which can be iterated one element at a time.
 # reversed()         : Function returns a reversed iterator object.
 # len()             *: Function returns the number of items in an object. When the object is a string, the len() function returns the number of characters in the string.
-# map()
-# max()
-# memoryview()
-# min()
+# map()             *: Function executes a specified function for each item in an iterable. The item is sent to the function as a parameter.
+# max()              : Function returns the item with the highest value, or the item with the highest value in an iterable.
+# min()              : Function returns the item with the lowest value, or the item with the lowest value in an iterable.
+# memoryview()       :
 # next()
 # object()
 # open()
@@ -555,6 +555,51 @@ print("len : ",len(obj2)) # returns number of items in tuple obj2
 print("len : ",len(obj3)) # returns length of string obj3
 print("len : ",len(class_inst)) # NOTE : we have implemented function __len__ in class 'test_class' due to which we are able to get an output
                                 # however if we did not implement the function we would get an exception -> TypeError: object of type 'test_class' has no len()
+
+#----------------------------------------------------------------------------------------------------------------------
+# map()
+# Description : Function executes a specified function for each item in an iterable. The item is sent to the function as a parameter.
+# Syntax : map(function, iterables)
+#            function : (Required). The function to execute for each item
+#            iterable : (Required). A sequence, collection or an iterator object. You can send as many iterables as you like, just make sure the function has one parameter for each iterable.
+
+print("\n")
+
+map_arr = ["This", "is", "an", "array", "example"]
+def length_func(n):
+    return len(n)
+
+map_var = map(length_func, map_arr) # creates an iterator object
+print("map : ",list(map_var)) # used 'list()' to print the iterator object
+
+#----------------------------------------------------------------------------------------------------------------------
+# max() and min()
+# Description : max() : Function returns the item with the highest value, or the item with the highest value in an iterable. If the values are strings, an alphabetically comparison is done.
+#               min() : Function returns the item with the lowest value, or the item with the lowest value in an iterable. If the values are strings, an alphabetically comparison is done.
+# Syntax : max(n1, n2, n3, ...) or max(iterable)
+#          min(n1, n2, n3, ...) or min(iterable)
+#            n1, n2, n3, ... : One or more items to compare
+#            iterable : An iterable, with one or more items to compare
+
+print("\n")
+
+# specifying list or array directly
+maxval = max(1,2,3,4,5,6,7)
+minval = min(1,2,3,4,5,6,7)
+print("max : ", maxval)
+print("min : ", minval)
+
+str_arr = ["a", "bb", "ccc", "dddd", "eeeee", "ffffff"]
+strmax = max(str_arr)
+strmin = min(str_arr)
+print("max : ", strmax) # returns the string of max length
+print("min : ", strmin) # returns the string of min length
+
+num_str_arr = ["a", "bb", "ccc", "dddd", "eeeee", "ffffff" ,1 , 2 , 3]
+#num_str_maxval = max(num_str_arr) # UNCOMMENT TO RUN
+#num_str_minval = min(num_str_arr) # UNCOMMENT TO RUN
+#print("max : ", num_str_maxval) # UNCOMMENT TO RUN : This will return an error as the list has both 'str' and 'int' -> TypeError: '>' not supported between instances of 'int' and 'str'
+#print("max : ", num_str_minval) # UNCOMMENT TO RUN : This will return an error as the list has both 'str' and 'int' -> TypeError: '>' not supported between instances of 'int' and 'str'
 
 #----------------------------------------------------------------------------------------------------------------------
 # ()
