@@ -64,9 +64,9 @@
 # tuple()
 # type()
 # vars()
-# zip()
-# oct()
-# str()
+# zip()             *: Function returns a zip object, which is an iterator of tuples where the corresponding item in each passed iterator is paired together (one to one mapping fashion)
+# oct()              : Function converts an integer into an octal string.
+# str()             *: Function converts the specified value into a string.
 
 #----------------------------------------------------------------------------------------------------------------------
 # abs()
@@ -635,6 +635,65 @@ print("memoryview : ", memview[0]) # we accessed the 'memview's 0th index, 'A', 
 print("memoryview : ", bytes(memview[0:2])) # we accessed the 'memview's indices from 0 and 1, 'AB' , and converted them into bytes.
 print("memoryview : ", list(memview[0:3])) # we accessed all indices of 'memview' and converted it to a list. Since internally bytearray stores ASCII value for the alphabets,
                                            # the output is a list of ASCII values of A, B, and C.
+
+#----------------------------------------------------------------------------------------------------------------------
+# zip()
+# Description : Function returns a zip object, which is an iterator of tuples where the first item in each passed iterator is paired together, and then the second item in each passed iterator are
+#               paired together etc.
+#               NOTE : If the passed iterators have different lengths, the iterator with the least items decides the length of the new iterator.
+#               NOTE : zip() returns an iterator object
+# Syntax : zip(iterator1, iterator2, iterator3 ...
+#            iterator1, iterator2, iterator3 ... : 	Iterator objects that will be joined together
+
+print("\n")
+list_1_l4 = ["This", "is", "list", "one"]
+list_2_l5 = ["This", "is", "list", "number", "two"]
+list_3_l6 = ["This", "is", "another", "list", "number", "three"]
+tuple_1_l4 = ("This", "is", "tuple", "one")
+tuple_2_l5 = ("This", "is", "tuple", "number", "two")
+tuple_3_l6 = ("This", "is", "another", "tuple", "number", "three")
+
+# joining list1 length4 to itself
+print("zip : ", list(zip(list_1_l4, list_1_l4))) # using list since zip returns an iterator object
+# joining list1 length4 to itself thrice
+print("zip : ", list(zip(list_1_l4, list_1_l4, list_1_l4))) # We can zip a list with a tuple and vice versa
+# joining two lists with diff length
+print("zip : ", list(zip(list_1_l4, list_3_l6))) # the smaller list determines the length of the resulting list
+
+# joining a list and a tuple
+print("zip : ", list(zip(list_1_l4, tuple_1_l4)))
+
+#----------------------------------------------------------------------------------------------------------------------
+# oct()
+# Description : Function converts an integer into an octal string.
+#               Octal strings in Python are prefixed with 0o.
+# Syntax : oct(int)
+#            int : An integer number
+
+print("\n")
+oct_val = oct(255)
+print("oct : ", oct_val)
+
+#----------------------------------------------------------------------------------------------------------------------
+# str()
+# Description : Function converts the specified value into a string.
+# Syntax : str(object, encoding, errors)
+#            object : Any object. Specifies the object to convert into a string
+#            encoding : The encoding of the object. Default is UTF-8
+#            errors : Specifies what to do if the decoding fails
+
+print("\n")
+ob1 = 123
+ob2 = ["This", "is", "list"]
+ob3 = ("This", "is", "tuple")
+
+class_inst2 = test_class() # making object of test_class made earlier
+
+print("str : ", str(ob1))
+print("str : ", str(ob2)) # a list also gets converted to string
+print("str : ", str(ob3)) # a tuple also gets converted to string
+print("str : ", str(class_inst2)) # Need to analyze
+
 
 #----------------------------------------------------------------------------------------------------------------------
 # ()
