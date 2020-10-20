@@ -62,8 +62,8 @@
 # sum()
 # super()
 # tuple()
-# type()
-# vars()
+# type()             : Function returns the type of the specified object
+# vars()            *: Function returns the __dict__ attribute of an object.
 # zip()             *: Function returns a zip object, which is an iterator of tuples where the corresponding item in each passed iterator is paired together (one to one mapping fashion)
 # oct()              : Function converts an integer into an octal string.
 # str()             *: Function converts the specified value into a string.
@@ -637,6 +637,31 @@ print("memoryview : ", list(memview[0:3])) # we accessed all indices of 'memview
                                            # the output is a list of ASCII values of A, B, and C.
 
 #----------------------------------------------------------------------------------------------------------------------
+# type()
+# Description : Function returns the type of the specified object
+# Syntax : type(object, bases, dict)
+#            object : (Required). If only one parameter is specified, the type() function returns the type of this object
+#            bases : (Optional). Specifies the base classes
+#            dict : (Optional). Specifies the namespace with the definition for the class
+
+# Just pass any variable to type() without any 'bases' and 'dict' and it will return the object type, SIMPLE
+
+# IMPT : Creating a 'type' object
+
+print("\n")
+o1 = type('X', (object,), dict(a='Foo', b=12))
+print("type : ", type(o1))
+print("type : ", vars(o1))
+
+class test:
+    a = 'Foo'
+    b = 12
+
+o2 = type('Y', (test,), dict(a='Foo', b=12))
+print("type : ", type(o2))
+print("type : ", vars(o2))
+
+#----------------------------------------------------------------------------------------------------------------------
 # zip()
 # Description : Function returns a zip object, which is an iterator of tuples where the first item in each passed iterator is paired together, and then the second item in each passed iterator are
 #               paired together etc.
@@ -662,6 +687,25 @@ print("zip : ", list(zip(list_1_l4, list_3_l6))) # the smaller list determines t
 
 # joining a list and a tuple
 print("zip : ", list(zip(list_1_l4, tuple_1_l4)))
+
+#----------------------------------------------------------------------------------------------------------------------
+# vars()
+# Description : Function returns the __dic__ attribute of an object.
+#               The __dict__ attribute is a dictionary containing the object's changeable attributes.
+# Syntax : vars(object)
+#            object : Any object with a __dict__attribute
+
+print("\n")
+class dict_class:
+  name = "Jayant"
+  age = 27
+  country = "India"
+
+dict_class_inst = dict_class()
+
+#print("vars : ",vars(list_1_l4)) # UNCOMMENT TO RUN : This will create an excption as the list passed does not have an __dict__ attribute
+print("vars : ",vars(dict_class_inst)) # returns {}
+print("vars : ",vars(dict_class)) # returns the complete attribute
 
 #----------------------------------------------------------------------------------------------------------------------
 # oct()
