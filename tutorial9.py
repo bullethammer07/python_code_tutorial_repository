@@ -30,6 +30,7 @@
 # format()           : Function formats a specified value into a specified format.
 # frozenset()        : Function returns an unchangeable frozenset object (which is like a set object, only unchangeable).
 # globals()          : Function returns the global symbol table as a dictionary.
+# locals()           : Function returns the local symbol table as a dictionary. A symbol table contains necessary information about the current program.
 # hash()             : Not Specified
 # help()             : Not Specified
 # hex()             *: Function converts the specified number into a hexadecimal value.
@@ -38,9 +39,9 @@
 # int()             *: Function converts the specified value into an integer number.
 # isinstance()      *: Function returns True if the specified object is of the specified type, otherwise False.
 # issubclass()      *: Function returns True if the specified object is a subclass of the specified object, otherwise False.
-# iter()
-# len()
-# locals()
+# iter()            *: TODO : [Need to Understand Better ... Skipping for now] Function creates an object which can be iterated one element at a time.
+# reversed()         : Function returns a reversed iterator object.
+# len()             *: Function returns the number of items in an object. When the object is a string, the len() function returns the number of characters in the string.
 # map()
 # max()
 # memoryview()
@@ -54,7 +55,6 @@
 # property()
 # range()
 # repr()
-# reversed()
 # round()
 # set()
 # slice()
@@ -414,13 +414,17 @@ print("frozenset : ",var2)
 # var2[1] = "strawberry" # UNCOMMENT TO RUN , as it will generate an exception.
 
 #----------------------------------------------------------------------------------------------------------------------
-# globals()
-# Description : Function returns the global symbol table as a dictionary.
+# globals() and locals()
+# Description : globals() : Function returns the global symbol table as a dictionary.
+#               locals() : Function returns the local symbol table as a dictionary.
 # Syntax : globals()
+#          locals()
 
 print("\n")
 var3 = globals()
+var3l = locals()
 print("globals : ",var3)
+print("locals : ", var3l)
 
 #----------------------------------------------------------------------------------------------------------------------
 # hex()
@@ -499,6 +503,58 @@ class myNameAge(myAge):
 
 print("issubclass : ",issubclass(myNameAge, myAge)) # Will return true as myNameAge is extended form myAge
 print("issubclass : ",issubclass(myAge, myNameAge)) # Will return false as myAge is not extended form myNameAge
+
+#----------------------------------------------------------------------------------------------------------------------
+# iter()
+# Description : Function returns an iterator object.
+#               NOTE : If the user-defined object doesn't implement __iter__(), and __next__() or __getitem()__, the TypeError exception is raised.
+# Syntax : iter(object, sentinel)
+#            object : (Required).  object whose iterator has to be created (can be sets, tuples, etc.)
+#            sentinel : (Optional). special value that is used to represent the end of a sequence
+#            NOTE : If the sentinel parameter is also provided, iter() returns an iterator until the sentinel character isn't found.
+
+#----------------------------------------------------------------------------------------------------------------------
+# reversed()
+# Description : Function returns a reversed iterator object.
+# Syntax : reversed(sequence)
+#            sequence : (Required). Any iterable object.
+
+print("\n")
+alph = ["j", "a", "y", "a", "n", "t"]
+ralph = reversed(alph)
+for x in ralph:
+  print("reversed : ", x)
+
+#----------------------------------------------------------------------------------------------------------------------
+# len()
+# Description : Function returns the number of items in an object.
+#               When the object is a string, the len() function returns the number of characters in the string.
+# Syntax : len(object)
+#            object : (Required).  An object. Must be a sequence or a collection
+
+obj1 = ["This", "is", "a", "list"]
+obj2 = ("This", "is", "a", "simple", "tuple")
+obj3 = "This is a String"
+
+class test_class:
+    name = "Jayant"
+    surname = "Yadav"
+    age = "27"
+    company = "xyz_firm"
+    emp_id = "12345A"
+    desig = "engg"
+
+    def __len__(self):
+        return 6
+
+class_inst = test_class()
+
+print("\n")
+print("len : ",len(obj1)) # returns number of items in list obj1
+print("len : ",len(obj2)) # returns number of items in tuple obj2
+print("len : ",len(obj3)) # returns length of string obj3
+print("len : ",len(class_inst)) # NOTE : we have implemented function __len__ in class 'test_class' due to which we are able to get an output
+                                # however if we did not implement the function we would get an exception -> TypeError: object of type 'test_class' has no len()
 
 #----------------------------------------------------------------------------------------------------------------------
 # ()
