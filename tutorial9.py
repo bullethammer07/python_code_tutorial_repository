@@ -21,11 +21,12 @@
 # delattr()          : Function will delete the specified attribute from the specified object
 # getattr()          : Function returns the value of the specified attribute from the specified object.
 # hasattr()          : Function returns True if the specified object has the specified attribute, otherwise False.
-# setattr()          :
-# dict()
-# dir()
-# divmod()
-# enumerate()
+# setattr()          : Function sets the value of the specified attribute of the specified object.
+# dict()             : Creates a dictionary containing information.
+# dir()              : Function returns all properties and methods of the specified object, without the values.
+# divmod()           : Function returns a tuple containing the quotient  and the remainder when argument1 (divident) is divided by argument2 (divisor).
+# list()             : Returns a list
+# enumerate()        : Function takes a collection (e.g. a tuple) and returns it as an enumerate object.
 # filter()
 # float()
 # format()
@@ -41,7 +42,6 @@
 # issubclass()
 # iter()
 # len()
-# list()
 # locals()
 # map()
 # max()
@@ -283,3 +283,55 @@ print("hasattr : ",hasat1,hasat2)
 
 setattr(mydata,"name","Jayant Yadav")
 print("setattr : ",mydata.name) # This will return name as "Jayant Yadav" instead of "Jayant"
+
+#----------------------------------------------------------------------------------------------------------------------
+# dict()
+# Description : creates a dictionary (array) containing information specified
+# Syntax : dict(keyword arguments)
+#            keyword arguments : (Required).  As many keyword arguments you like, separated by comma: key = value, key = value ...
+
+print("\n")
+mydict = dict(name = "Jayant", age = "27", country = "India")
+print("dict : ",mydict)
+
+#----------------------------------------------------------------------------------------------------------------------
+# dir()
+# Description : function returns all properties and methods of the specified object, without the values.
+# Syntax : dir(object)
+
+print("\n")
+print(dir(mydict))
+
+#----------------------------------------------------------------------------------------------------------------------
+# divmod()
+# Description : Function returns a tuple containing the quotient  and the remainder when argument1 (divident) is divided by argument2 (divisor).
+# Syntax : divmod(divident, divisor)
+#            divident : A Number. The number you want to divide
+#            divisor : A Number. The number you want to divide with
+
+print("\n")
+dmod_var = divmod(100,6)
+print("divmod : ",dmod_var)
+
+#----------------------------------------------------------------------------------------------------------------------
+# list()
+# Description : Creates a list object
+# Syntax : list(iterable)
+#            iterable : (Required). A sequence, collection or an iterator object.
+
+print("\n")
+list_var = list(("apple","banana","orange","strawberry"))
+print("list : ",list_var)
+
+#----------------------------------------------------------------------------------------------------------------------
+# enumerate()
+# Description : Function takes a collection (e.g. a tuple) and returns it as an enumerate object.
+#               The enumerate() function adds a counter as the key of the enumerate object.
+# Syntax : enumerate(iterable,start)
+#            iterable : An iterable object
+#            start : (Optional). A Number. Defining the start number of the enumerate object. Default 0
+
+print("\n")
+tup1 = ("apple", "banana", "orange")
+enum1 = enumerate(tup1)
+print("enumerate : ", list(enum1)) # enum1 is an iterator object and can be printed as a list
