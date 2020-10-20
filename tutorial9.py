@@ -45,7 +45,7 @@
 # map()             *: Function executes a specified function for each item in an iterable. The item is sent to the function as a parameter.
 # max()              : Function returns the item with the highest value, or the item with the highest value in an iterable.
 # min()              : Function returns the item with the lowest value, or the item with the lowest value in an iterable.
-# memoryview()       :
+# memoryview()      *: A memory view is a safe way to expose the buffer protocol in Python.
 # next()
 # object()
 # open()
@@ -600,6 +600,41 @@ num_str_arr = ["a", "bb", "ccc", "dddd", "eeeee", "ffffff" ,1 , 2 , 3]
 #num_str_minval = min(num_str_arr) # UNCOMMENT TO RUN
 #print("max : ", num_str_maxval) # UNCOMMENT TO RUN : This will return an error as the list has both 'str' and 'int' -> TypeError: '>' not supported between instances of 'int' and 'str'
 #print("max : ", num_str_minval) # UNCOMMENT TO RUN : This will return an error as the list has both 'str' and 'int' -> TypeError: '>' not supported between instances of 'int' and 'str'
+
+#----------------------------------------------------------------------------------------------------------------------
+# memoryview()
+#
+# Before we get into what memory views are, we need to first understand about Python's buffer protocol.
+#
+# Python Buffer Protocol :
+# 1. The buffer protocol provides a way to access the internal data of an object. This internal data is a memory array or a buffer.
+# 2. The buffer protocol allows one object to expose its internal data (buffers) and the other to access those buffers without intermediate copying.
+# 3. This protocol is only accessible to us at the C-API level and not using our normal codebase.
+# 4. So, in order to expose the same protocol to the normal Python codebase, memory views are present.
+#
+# Q : What is a memory view ?.
+# Ans : A memory view is a safe way to expose the buffer protocol in Python.
+#       It allows you to access the internal buffers of an object by creating a memory view object.
+#
+# Q : Why buffer protocol and memory views are important?
+# Ans : We need to remember that whenever we perform some action on an object (call a function of an object, slice an array), Python needs to create a copy of the object.
+#       If we have large data to work with (eg. binary data of an image), we would unnecessarily create copies of huge chunks of data, which serves almost no use.
+#       Using the buffer protocol, we can give another object access to use/modify the large data without copying it. This makes the program use less memory and increases the execution speed.
+#
+# Description : A memory view is a safe way to expose the buffer protocol in Python.
+# Syntax : memoryview(obj)
+#            obj : A Bytes object or a Bytearray object.
+
+print("\n")
+# creating a bytearray for a random string
+random_byte_array = bytearray('ABC', 'utf-8')
+memview = memoryview(random_byte_array) # Here, we created a memory view object 'memview' from the byte array random_byte_array.
+
+# accessing the 0th location
+print("memoryview : ", memview[0]) # we accessed the 'memview's 0th index, 'A', and printed it (which gives the ASCII value - 65).
+print("memoryview : ", bytes(memview[0:2])) # we accessed the 'memview's indices from 0 and 1, 'AB' , and converted them into bytes.
+print("memoryview : ", list(memview[0:3])) # we accessed all indices of 'memview' and converted it to a list. Since internally bytearray stores ASCII value for the alphabets,
+                                           # the output is a list of ASCII values of A, B, and C.
 
 #----------------------------------------------------------------------------------------------------------------------
 # ()
