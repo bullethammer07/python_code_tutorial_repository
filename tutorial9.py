@@ -14,7 +14,7 @@
 # ord()              : Returns the number representing the unicode code of a specified character.
 # eval()            *: Evaluates the specified expression, if the expression is a legal Python statement, it will be executed.
 # exec()            *: The exec() function accepts large blocks of code, unlike the eval() function which only accepts a single expression
-# compile()          : Returns the specified source as a code object, ready to be executed.
+# compile()         *: Returns the specified source as a code object, ready to be executed.
 # complex()          : Returns a complex number for the real and img value passed
 # delattr()          : Function will delete the specified attribute from the specified object
 # getattr()          : Function returns the value of the specified attribute from the specified object.
@@ -26,8 +26,8 @@
 # list()             : Returns a list
 # enumerate()        : Function takes a collection (e.g. a tuple) and returns it as an enumerate object.
 # filter()          *: Function returns an iterator were the items are filtered through a function to test if the item is accepted or not.
-# float()
-# format()
+# float()            : Function converts the specified value into a floating point number.
+# format()           : Function formats a specified value into a specified format.
 # frozenset()
 # globals()
 # hash()
@@ -352,3 +352,49 @@ def filter_func(xy):
 
 adults = filter(filter_func,ages) # adults is an iterator object and can be print using list()
 print("filter : ",list(adults)) # adults is printed using list()
+
+#----------------------------------------------------------------------------------------------------------------------
+# float()
+# Description : function converts the specified value into a floating point number.
+# Syntax : float(value)
+#            value : A number or a string that can be converted into a floating point number
+
+print("\n")
+float1 = float(5)
+float2 = float("3.145987")
+print("float : ",float1, float2)
+
+#----------------------------------------------------------------------------------------------------------------------
+# format()
+# Description : Function formats a specified value into a specified format.
+# Syntax : format(value, format)
+#            value : A value of any format.
+#            format : The format you want to format the value into.
+#                     Legal values:
+#                     '<' - Left aligns the result (within the available space)
+#                     '>' - Right aligns the result (within the available space)
+#                     '^' - Center aligns the result (within the available space)
+#                     '=' - Places the sign to the left most position
+#                     '+' - Use a plus sign to indicate if the result is positive or negative
+#                     '-' - Use a minus sign for negative values only
+#                     ' ' - Use a leading space for positive numbers
+#                     ',' - Use a comma as a thousand separator
+#                     '_' - Use a underscore as a thousand separator
+#                    *'b' - Binary format
+#                    *'c' - Converts the value into the corresponding unicode character
+#                    *'d' - Decimal format
+#                    *'e' - Scientific format, with a lower case e
+#                    *'E' - Scientific format, with an upper case E
+#                    *'f' - Fix point number format
+#                    *'F' - Fix point number format, upper case
+#                     'g' - General format
+#                     'G' - General format (using a upper case E for scientific notations)
+#                    *'o' - Octal format
+#                    *'x' - Hex format, lower case
+#                    *'X' - Hex format, upper case
+#                     'n' - Number format
+#                     '%' - Percentage format
+
+print("\n")
+print("format : ",format(255, 'x'))
+print("format : ",format(255, 'b'))
