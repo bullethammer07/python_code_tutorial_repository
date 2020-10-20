@@ -15,6 +15,7 @@
 # ord()              : Returns the number representing the unicode code of a specified character.
 # compile()          : Returns the specified source as a code object, ready to be executed.
 # eval()             : Evaluates the specified expression, if the expression is a legal Python statement, it will be executed.
+# exec()             : The exec() function accepts large blocks of code, unlike the eval() function which only accepts a single expression
 
 #----------------------------------------------------------------------------------------------------------------------
 # abs()
@@ -125,39 +126,47 @@ print("chr : ",chr(97),chr(120),chr(36))
 print("ord : ",ord("a"),ord("x"),ord("$"))
 
 #----------------------------------------------------------------------------------------------------------------------
-# eval()
+# eval() and exec()
 # Description : eval() : Evaluates the specified expression, if the expression is a legal Python statement, it will be executed.
 #                        In simple words, the eval function evaluates the “String” like a python expression and returns the result as an integer.
 #                        The return value would be the result of the evaluated expression. Often the return type would be an integer.
+#                        NOTE : eval() function which only accepts a single expression.
 #                        Q : Where is the eval function mostly used?
 #                        Ans : Eval function is mostly used in situations or applications which need to evaluate mathematical expressions.
 #                              Also if the user wants to evaluate the string into code then can use eval function, because eval function evaluates the string expression and returns the integer as a result.
 #                        Q : What is the difference between the input() and eval()?
 #                        Ans : the input() takes the user input, but when the user enters an integer as an input the input function returns a string,
 #                              but in the case of eval it will evaluate the returned value from a string to an integer.
+#               exec() : Executes the specified Python code.
+#                        NOTE : The exec() function accepts large blocks of code, unlike the eval() function which only accepts a single expression
 # Syntax : eval(expression,globals,locals)
+#          exec(expression,globals,locals)
 #            expresion : A string, that will be evaluates as Python code.
 #            globals : (Optional). A dictionary containing global variables.
 #            locals : (Optional). A dictionary containing local variables.
 
 print("\n")
 
-input_int = input("Enter Integer :: ")
-print(input_int,type(input_int)) # the type will be returned as 'str' i.e string type
+#input_int = input("Enter Integer :: ")
+# UNCOMMENT BELOW TO RUN
+#print(input_int,type(input_int)) # the type will be returned as 'str' i.e string type
                                  # NOTE : If you enter an expression such as '10+10' it will not be evaluated as an interger with output 20.
                                  #        instead it will be returned as a string -> '10+10'
 
-input_int2 = eval(input("Enter Integer :: "))
-print(input_int2,type(input_int2)) # the type will be returned as 'int' i.e integer type
+# UNCOMMENT BELOW TO RUN
+#input_int2 = eval(input("Enter Integer :: "))
+#print(input_int2,type(input_int2)) # the type will be returned as 'int' i.e integer type
                                    # NOTE : You can also enter an expression here like '10+20' and the output will be evaluated as 30 and as integer
 
 # x = 'print(\"Hello World\")  print(\"This is text 1\")  print(\"this is text 2\")'
-x = 'print("Hello world") | print("Jayant")' # multi print
+x = 'print("Hello world") | print("Jayant")' # multi print using eval (not recommended)
 y = 'print("xyx")' # single print
 z = 'val1 = 10  | print(val1)'
-# eval(y)
-# eval(z)
-# eval(x)
+eval(y)
+
+x1 = 'print("Hello world")\nprint("Jayant")' # Multi expressions
+                                             # NOTE : do not put spaces before and after the \n as they can be treated as indents.
+exec(x1)
 
 #----------------------------------------------------------------------------------------------------------------------
 # compile()
