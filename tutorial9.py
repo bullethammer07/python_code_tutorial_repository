@@ -5,7 +5,6 @@
 # all()              : Returns true if all items in an iterable are true, otherwise it returns False.
 # any()              : Returns True if any item in an iterable are true, otherwise it returns False.
 # ascii()            : Returns a readable version of any object (Strings, Tuples, Lists, etc). function will replace any non-ascii characters with escape characters.
-#                      syntax: ascii(object)
 # bin()              : Returns the binary version of a specified integer.
 # bool()             : Returns the boolean value of a specified object (Any object, like String, List, Number etc).
 # bytearray()        : Both bytearray() and bytes() returns a bytearray object.
@@ -13,9 +12,8 @@
 # callable()         : Returns True if the specified object is callable, otherwise it returns False.
 # chr()              : Returns the character that represents the specified unicode.
 # ord()              : Returns the number representing the unicode code of a specified character.
-# compile()          : Returns the specified source as a code object, ready to be executed.
-# eval()             : Evaluates the specified expression, if the expression is a legal Python statement, it will be executed.
-# exec()             : The exec() function accepts large blocks of code, unlike the eval() function which only accepts a single expression
+# eval()            *: Evaluates the specified expression, if the expression is a legal Python statement, it will be executed.
+# exec()            *: The exec() function accepts large blocks of code, unlike the eval() function which only accepts a single expression
 # compile()          : Returns the specified source as a code object, ready to be executed.
 # complex()          : Returns a complex number for the real and img value passed
 # delattr()          : Function will delete the specified attribute from the specified object
@@ -27,7 +25,7 @@
 # divmod()           : Function returns a tuple containing the quotient  and the remainder when argument1 (divident) is divided by argument2 (divisor).
 # list()             : Returns a list
 # enumerate()        : Function takes a collection (e.g. a tuple) and returns it as an enumerate object.
-# filter()
+# filter()          *: Function returns an iterator were the items are filtered through a function to test if the item is accepted or not.
 # float()
 # format()
 # frozenset()
@@ -335,3 +333,22 @@ print("\n")
 tup1 = ("apple", "banana", "orange")
 enum1 = enumerate(tup1)
 print("enumerate : ", list(enum1)) # enum1 is an iterator object and can be printed as a list
+
+#----------------------------------------------------------------------------------------------------------------------
+# filter()
+# Description : Function returns an iterator were the items are filtered through a function to test if the item is accepted or not.
+# Syntax : filter(function,iterable)
+#            function : A function to be run for each item in the iterable
+#            iterable : the iterable to be filtered.
+
+print("\n")
+ages = [5, 12, 17, 18, 24, 32]
+
+def filter_func(xy):
+    if xy < 18:
+        return False
+    else:
+        return True
+
+adults = filter(filter_func,ages) # adults is an iterator object and can be print using list()
+print("filter : ",list(adults)) # adults is printed using list()
