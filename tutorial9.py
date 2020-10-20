@@ -16,6 +16,59 @@
 # compile()          : Returns the specified source as a code object, ready to be executed.
 # eval()             : Evaluates the specified expression, if the expression is a legal Python statement, it will be executed.
 # exec()             : The exec() function accepts large blocks of code, unlike the eval() function which only accepts a single expression
+# compile()          : Returns the specified source as a code object, ready to be executed.
+# complex()          : Returns a complex number for the real and img value passed
+# delattr()          : Function will delete the specified attribute from the specified object
+# getattr()          : Function returns the value of the specified attribute from the specified object.
+# hasattr()          : Function returns True if the specified object has the specified attribute, otherwise False.
+# setattr()          :
+# dict()
+# dir()
+# divmod()
+# enumerate()
+# filter()
+# float()
+# format()
+# frozenset()
+# globals()
+# hash()
+# help()
+# hex()
+# id()
+# input()
+# int()
+# isinstance()
+# issubclass()
+# iter()
+# len()
+# list()
+# locals()
+# map()
+# max()
+# memoryview()
+# min()
+# next()
+# object()
+# oct()
+# open()
+# ord()
+# pow()
+# print()
+# property()
+# range()
+# repr()
+# reversed()
+# round()
+# set()
+# slice()
+# sorted()
+# str()
+# sum()
+# super()
+# tuple()
+# type()
+# vars()
+# zip()
 
 #----------------------------------------------------------------------------------------------------------------------
 # abs()
@@ -170,4 +223,63 @@ exec(x1)
 
 #----------------------------------------------------------------------------------------------------------------------
 # compile()
-# Description :  returns the specified source as a code object, ready to be executed.
+# Description :  Returns the specified source as a code object, ready to be executed.
+#                The compile() method returns a Python code object from the source (normal string, a byte string, or an AST object).
+#                The code object returned by compile() method can later be called using methods like: exec() and eval() which will execute dynamically generated Python code.
+# Syntax : compile(source,filename,mode,flags=0,dont_inherit=False,optimize=-1)
+#            source : a normal string, a byte string, or an AST object
+#            filename : file from which the code was read. If it wasn't read from a file, you can give a name yourself
+#            mode : Either 'exec' or 'eval' or 'single'.
+#              eval : accepts only a single expression
+#              exec : It can take a code block that has Python statements, class and functions, and so on.
+#              single :  if it consists of a single interactive statement.
+#            flags : (optional). controls which future statements affect the compilation of the source. Default Value: 0
+#            dont_inherit : (optional). controls which future statements affect the compilation of the source. Default Value: False
+#            optimize : (optional). optimization level of the compiler. Default value -1.
+
+print("\n")
+compile_val = 'a = 10\nb = 20\nsum=a+b\nprint("compile : ",sum)'
+code_object = compile(compile_val, 'sum_string', 'exec')
+
+exec(code_object)
+
+#----------------------------------------------------------------------------------------------------------------------
+# complex()
+# Description : Returns a complex number by specifying a real number and an imaginary number.
+# Syntax : complex(real,iamginary)
+#            real : (Required). represents real part of the number
+
+print("\n")
+complex_val = complex(3,4)
+print("complex : ",complex_val,type(complex_val))
+
+#----------------------------------------------------------------------------------------------------------------------
+# delattr() getattr() hasattr() setattr()
+# Description : delattr() :  function will delete the specified attribute from the specified object.
+# Syntax : delattr(object,attribute) / getattr(object,attribute) / hasattr(object,attribute)
+#            object : (Required). An Object
+#            attribute : (Required). The name of the attrubute you want to remove/get/has.
+#          setattr(object,attribute,value)
+#            object : (Required). An Object
+#            attribute : (Required). The name of the attrubute you want to set
+#            value : (Required). The value you want to give the specified attribute
+
+class mydata:
+    name = "Jayant"
+    age = 27
+    country = "India"
+
+print("\n")
+print(mydata.name)
+delattr(mydata,"name")
+#print("delattr : ",mydata.name) # This will return an error as attribute "name" has been removed : UNCOMMENT TO RUN
+
+getat = getattr(mydata,"country")
+print("getattr : ",getat)
+
+hasat1 = hasattr(mydata,"age")
+hasat2 = hasattr(mydata,"sex")
+print("hasattr : ",hasat1,hasat2)
+
+setattr(mydata,"name","Jayant Yadav")
+print("setattr : ",mydata.name) # This will return name as "Jayant Yadav" instead of "Jayant"
