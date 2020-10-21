@@ -46,22 +46,22 @@
 # max()              : Function returns the item with the highest value, or the item with the highest value in an iterable.
 # min()              : Function returns the item with the lowest value, or the item with the lowest value in an iterable.
 # memoryview()      *: A memory view is a safe way to expose the buffer protocol in Python.
+# object()           : Function returns a featureless object which is a base for all classes.
+# print()            : Function prints the given object to the standard output device (screen) or to the text stream file.
+# property()
 # next()
-# object()
+# super()
 # open()
 # ord()
 # pow()
-# print()
-# property()
 # range()
 # repr()
 # round()
 # set()
 # slice()
-# sorted()
-# sum()
-# super()
-# tuple()
+# sorted()          *: Function sorts the elements of a given iterable in a specific order (either ascending or descending) and returns the sorted iterable as a list.
+# sum()             *: Function adds the items of an iterable and returns the sum.
+# tuple()            : Function creates a tuple object.
 # type()             : Function returns the type of the specified object
 # vars()            *: Function returns the __dict__ attribute of an object.
 # zip()             *: Function returns a zip object, which is an iterator of tuples where the corresponding item in each passed iterator is paired together (one to one mapping fashion)
@@ -236,7 +236,7 @@ exec(x1)
 #            optimize : (optional). optimization level of the compiler. Default value -1.
 
 print("\n")
-compile_val = 'a = 10\nb = 20\nsum=a+b\nprint("compile : ",sum)'
+compile_val = 'a = 10\nb = 20\nsum_val=a+b\nprint("compile : ",sum_val)'
 code_object = compile(compile_val, 'sum_string', 'exec')
 
 exec(code_object)
@@ -635,6 +635,123 @@ print("memoryview : ", memview[0]) # we accessed the 'memview's 0th index, 'A', 
 print("memoryview : ", bytes(memview[0:2])) # we accessed the 'memview's indices from 0 and 1, 'AB' , and converted them into bytes.
 print("memoryview : ", list(memview[0:3])) # we accessed all indices of 'memview' and converted it to a list. Since internally bytearray stores ASCII value for the alphabets,
                                            # the output is a list of ASCII values of A, B, and C.
+
+#----------------------------------------------------------------------------------------------------------------------
+# object()
+# Description : Function returns a featureless object.
+# Syntax : object()
+
+print("\n")
+obj_object = object()
+print("object : ", type(obj_object))
+print("object : ", dir(obj_object))
+
+#----------------------------------------------------------------------------------------------------------------------
+# print()
+# Description : Function prints the given object to the standard output device (screen) or to the text stream file.
+# Syntax : print(*objects, sep=' ', end='\n', file=sys.stdout, flush=False)
+#            objects : object to the printed. * indicates that there may be more than one object
+#            sep : NOTE : objects are separated by sep. Default value: ' '
+#            end : end is printed at last
+#            file : must be an object with write(string) method. If omitted it, sys.stdout will be used which prints objects on the screen.
+#            flush : If True, the stream is forcibly flushed. Default value: False
+
+# We have a fair ides of how print works so we can skip with the usual
+
+# below example is of writing to a file. We will comment this for now to avoid any creation of new files in the database
+# UNCOMMENT BELOW TO RUN
+# print("\n")
+# source_file = open('python.txt', 'w')
+# print('Hello World !!...', file = source_file)
+# source_file.close()
+
+#----------------------------------------------------------------------------------------------------------------------
+# sorted()
+# Description : Function sorts the elements of a given iterable in a specific order (either ascending or descending) and returns the sorted iterable as a list.
+# Syntax : sorted(iterable, key, reverse)
+#            iterable : A sequence (string, tuple, list) or collection (set, dictionary, frozen set) or any other iterator.
+#            key : (Optional). A function that serves as a key for the sort comparison. Defaults to None.
+#            reverse : (Optional). If True, the sorted list is reversed (or sorted in descending order). Defaults to False if not provided.
+
+print("\n")
+# Example 1 : Sorting string, list and tuple
+
+# vowels list
+py_list = ['e', 'a', 'u', 'o', 'i']
+print("sorted : ", sorted(py_list)) # sorts all the characters in the list alphabetically
+# string
+py_string = 'Python'
+print("sorted : ",sorted(py_string)) # sorts all characters in the string alphabetically
+# vowels tuple
+py_tuple = ('e', 'a', 'u', 'o', 'i')
+print("sorted : ", sorted(py_tuple)) # sorts all the characters in the tuple alphabetically
+
+# Example 2 : Sort in descending order
+
+# set
+py_set = {'e', 'a', 'u', 'o', 'i'}
+print("sorted : ", sorted(py_set, reverse=True)) # the set is reverse alphabetically sorted
+# dictionary
+py_dict = {'e': 1, 'a': 2, 'u': 3, 'o': 4, 'i': 5}
+print("sorted : ", sorted(py_dict, reverse=True)) # the dictionary is reverse apphabetically sorted
+# frozen set
+frozen_set = frozenset(('e', 'a', 'u', 'o', 'i'))  # the frozen set is reverse aplhabetically sorted
+print("sorted : ", sorted(frozen_set, reverse=True))
+
+# Example 3 : key Parameter in Python sorted() function
+#             If you want your own implementation for sorting, sorted() also accepts a key function as an optional parameter.
+#             Based on the returned value of the key function, you can sort the given iterable.
+
+# sorting with ky=len : Here, len() is Python's in-built function to count the length of an object. The list is sorted based on the length of the element, from the lowest count to highest.
+text = "This is a random string having words with different length sizes"
+sorting_list = text.split() # converts text into a list
+print("sorted : ", sorted(sorting_list, key=len)) # sorts the list by length
+
+#----------------------------------------------------------------------------------------------------------------------
+# sum()
+# Description : Function adds the items of an iterable and returns the sum.
+# Syntax : sum(iterable, start)
+#            iterable : iterable (list, tuple, dict, etc). NOTE : The items of the iterable should be numbers.
+#            start : this value is added to the sum of items of the iterable. The default value of start is 0 (if omitted)
+
+print("\n")
+
+ls1 = [1, 2, 3, 4, 5, 6]
+list_sum = sum(ls1)
+
+tp1 = (1, 2, 3, 4, 5, 6)
+tup_sum = sum(tp1, 10) # adding a start value
+
+print("sum : ", list_sum)
+print("sum : ", tup_sum)
+
+#----------------------------------------------------------------------------------------------------------------------
+# tuple()
+# Description : Function creates a tuple object.
+# Syntax : tuple(iterable)
+#            iterable : Required. A sequence, collection or an iterator object
+#            NOTE : If the iterable is not passed to tuple(), the function returns an empty tuple.
+
+print("\n")
+
+tup1 = tuple()
+print('tuple : ', tup1)
+
+# creating a tuple from a list
+tup2 = tuple([1, 4, 6])
+print('tuple : ', tup2)
+
+# creating a tuple from a string
+tup3 = tuple('Python')
+print('tuple : ', tup3)
+
+# creating a tuple from a dictionary
+tup4 = tuple({1: 'one', 2: 'two'})
+print('tuple : ', tup4)
+
+# creating a tuple from a list
+tup5 = tuple(['Python', 'programming', 'is', 'fun'])
+print('tuple : ', tup5)
 
 #----------------------------------------------------------------------------------------------------------------------
 # type()
