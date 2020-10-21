@@ -54,9 +54,9 @@
 # open()             :
 # ord()              :
 # pow()              :
-# range()            :
-# repr()             :
-# round()            :
+# range()            : Returns an immutable sequence of numbers between the given start integer to the stop integer.
+# repr()             : Function returns a printable representation of the given object.
+# round()            : Function returns a floating-point number rounded to the specified number of decimals.
 # set()              : Creates a set in Python.
 # slice()           *: Function returns a slice object that can use used to slice strings, lists, tuple etc.
 # sorted()          *: Function sorts the elements of a given iterable in a specific order (either ascending or descending) and returns the sorted iterable as a list.
@@ -666,6 +666,96 @@ print("object : ", dir(obj_object))
 # source_file.close()
 
 #----------------------------------------------------------------------------------------------------------------------
+# range()
+# Description : Returns an immutable sequence of numbers between the given start integer to the stop integer.
+# Syntax : range(start,stop,step)
+#            start : integer starting from which the sequence of integers is to be returned.
+#            stop : stop - integer before which the sequence of integers is to be returned. # The range of integers ends at stop - 1.
+#            step : (Optional). Integer value which determines the increment between each integer in the sequence.
+
+# Return value from range()
+# range() returns an immutable sequence object of numbers depending upon the definitions used:
+#
+# range(stop) :
+#   1. Returns a sequence of numbers starting from 0 to stop - 1
+#   2. Returns an empty sequence if stop is negative or 0.
+#
+# range(start, stop[, step]) :
+#
+# The return value is calculated by the following formula with the given constraints:
+#
+# r[n] = start + step*n (for both positive and negative step)
+# where, n >=0 and r[n] < stop (for positive step)
+# where, n >= 0 and r[n] > stop (for negative step)
+#
+#   1. (If no step) Step defaults to 1. Returns a sequence of numbers starting from start and ending at stop - 1.
+#   2. (if step is zero) Raises a ValueError exception
+#   3. (if step is non-zero) Checks if the value constraint is met and returns a sequence according to the formula
+#      If it doesn't meet the value constraint, Empty sequence is returned.
+
+print("\n")
+# Example 1: How range works in Python?
+
+# empty range
+print("range : ", list(range(0)))
+# using range(stop)
+print("range : ", list(range(10)))
+# using range(start, stop)
+print("range : ", list(range(1, 10)))
+
+# Example 2: Create a list of even number between the given numbers using range()
+print("range : ", list(range(2, 14, 2)))
+
+# Example 3: How range() works with negative step?
+print("range : ", list(range(2, -14, -2)))
+
+# value constraint not met
+print("range : ", list(range(2, 14, -2)))
+
+#----------------------------------------------------------------------------------------------------------------------
+# repr()
+# Description : Function returns a printable representation of the given object.
+# Syntax : repr(obj)
+#            obj : the object whose printable representation has to be returned
+
+print("\n")
+# Example 1: How repr() works in Python?
+
+var = 'foo'
+print("repr : ", repr(var))
+
+# Example 2: Implement __repr__() for custom objects
+
+class Person:
+    name = 'Adam'
+
+    def __repr__(self):
+        return repr('Hello ' + self.name )
+
+print("repr : ", repr(Person()))
+
+#----------------------------------------------------------------------------------------------------------------------
+# round()
+# Description : Function returns a floating-point number rounded to the specified number of decimals.
+# Syntax : round(number, ndigits)
+#            number : the number to be rounded
+#            ndigits : (optional). Number up to which the given number is rounded; defaults to 0
+
+print("\n")
+# Example 1: How round() works in Python?
+
+# for integers
+print("round : ", round(10))
+# for floating point
+print("round : ", round(10.7))
+# even choice"round : ",
+print("round : ", round(5.5))
+
+# Example 2: Round a number to the given number of decimal places
+print("round : ", round(2.665, 2))
+print("round : ", round(2.675, 2))
+
+#----------------------------------------------------------------------------------------------------------------------
 # set()
 # Description : creates a set in Python.
 # Syntax : set(iterable)
@@ -687,6 +777,36 @@ print("set : ", set(('a', 'e', 'i', 'o', 'u')))
 print("set : ", set(['a', 'e', 'i', 'o', 'u']))
 # from range
 print("set : ", set(range(5)))
+
+# Example 2: Create sets from another set, dictionary and frozen set
+
+# from set
+print("set : ", set({'a', 'e', 'i', 'o', 'u'}))
+# from dictionary
+print("set : ", set({'a':1, 'e': 2, 'i':3, 'o':4, 'u':5}))
+# set : ", "# from frozen set
+frozen_set = frozenset(('a', 'e', 'i', 'o', 'u'))
+print("set : ", set(frozen_set))
+
+# Example 3: Create set() for a custom iterable object
+class PrintNumber:
+    def __init__(self, max):
+        self.max = max
+
+    def __iter__(self):
+        self.num = 0
+        return self
+
+    def __next__(self):
+        if(self.num >= self.max):
+            raise StopIteration
+        self.num += 1
+        return self.num
+
+# print_num is an iterable
+print_num = PrintNumber(5)
+# creating a set
+print("set : ", set(print_num))
 
 #----------------------------------------------------------------------------------------------------------------------
 # slice()
