@@ -48,17 +48,17 @@
 # memoryview()      *: A memory view is a safe way to expose the buffer protocol in Python.
 # object()           : Function returns a featureless object which is a base for all classes.
 # print()            : Function prints the given object to the standard output device (screen) or to the text stream file.
-# property()
-# next()
-# super()
-# open()
-# ord()
-# pow()
-# range()
-# repr()
-# round()
-# set()
-# slice()
+# property()         :
+# next()             :
+# super()            :
+# open()             :
+# ord()              :
+# pow()              :
+# range()            :
+# repr()             :
+# round()            :
+# set()              : Creates a set in Python.
+# slice()           *: Function returns a slice object that can use used to slice strings, lists, tuple etc.
 # sorted()          *: Function sorts the elements of a given iterable in a specific order (either ascending or descending) and returns the sorted iterable as a list.
 # sum()             *: Function adds the items of an iterable and returns the sum.
 # tuple()            : Function creates a tuple object.
@@ -666,6 +666,64 @@ print("object : ", dir(obj_object))
 # source_file.close()
 
 #----------------------------------------------------------------------------------------------------------------------
+# set()
+# Description : creates a set in Python.
+# Syntax : set(iterable)
+#            iterable : (Optional). a sequence (string, tuple, etc.) or collection (set, dictionary, etc.) or an iterator object to be converted into a set.
+#                       NOTE : an empty set is returned if no parameters are passed.
+#                       NOTE : We cannot create empty sets using { } syntax as it creates an empty dictionary. To create an empty set, we use set().
+
+print("\n")
+
+# Example 1 : Create sets from string, tuple, list, and range
+
+# empty set
+print("set : ", set())
+# from string
+print("set : ", set('Python'))
+# from tuple
+print("set : ", set(('a', 'e', 'i', 'o', 'u')))
+# from list
+print("set : ", set(['a', 'e', 'i', 'o', 'u']))
+# from range
+print("set : ", set(range(5)))
+
+#----------------------------------------------------------------------------------------------------------------------
+# slice()
+# Description : The slice object is used to slice a given sequence (string, bytes, tuple, list or range) or any object
+#               which supports sequence protocol (implements __getitem__() and __len__() method).
+# Syntax : slice(start, stop, step)
+#            start : (optional) - Starting integer where the slicing of the object starts. Default to None if not provided.
+#            stop : Integer until which the slicing takes place. The slicing stops at index stop -1 (last element).
+#            step : (optional). Integer value which determines the increment between each index for slicing. Defaults to None if not provided.
+
+print("\n")
+# Example 1 : Creating a slice object for slicing
+
+result1 = slice(3) # contains indices 0,1,2
+result2 = slice(1,5,2) # contains indices 1,3
+print("slice : ", result1)
+print("slice : ", result2)
+
+# Example 2 : Get substring using slice object
+
+py_string = 'Python'
+print("slice : ",py_string[result1]) # printing py_string using slice object 'result1'
+print("slice : ",py_string[result2]) # printing py_string using slice object 'result2'
+
+# Example 3 : Get sublist and sub-tuple
+
+py_list = ['P', 'y', 't', 'h', 'o', 'n']
+py_tuple = ('P', 'y', 't', 'h', 'o', 'n')
+
+print("slice : ",py_list[result1]) # printing py_list using slice object 'result1'
+print("slice : ",py_tuple[result2]) # printing py_tuple using slice object 'result2'
+
+# Example 4 : Using indexing syntax for slicing
+print("slice : ",py_string[0:3]) # contains indices 0,1,2
+print("slice : ",py_string[1:5:2]) # contains indices 1,3
+
+#----------------------------------------------------------------------------------------------------------------------
 # sorted()
 # Description : Function sorts the elements of a given iterable in a specific order (either ascending or descending) and returns the sorted iterable as a list.
 # Syntax : sorted(iterable, key, reverse)
@@ -706,6 +764,18 @@ print("sorted : ", sorted(frozen_set, reverse=True))
 text = "This is a random string having words with different length sizes"
 sorting_list = text.split() # converts text into a list
 print("sorted : ", sorted(sorting_list, key=len)) # sorts the list by length
+
+# Example 4 : Sort the list using sorted() having a key function
+# take the second element for sort
+def take_second(elem):
+    return elem[1]
+
+# random list
+random_list = [(2, 2), (3, 4), (4, 1), (1, 3)]
+# sort list with key
+sort_list = sorted(random_list, key=take_second)
+# print list
+print('sorted : ', sort_list)
 
 #----------------------------------------------------------------------------------------------------------------------
 # sum()
