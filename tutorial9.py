@@ -39,7 +39,6 @@
 # int()             *: Function converts the specified value into an integer number.
 # isinstance()      *: Function returns True if the specified object is of the specified type, otherwise False.
 # issubclass()      *: Function returns True if the specified object is a subclass of the specified object, otherwise False.
-# iter()            *: TODO : [Need to Understand Better ... Skipping for now] Function creates an object which can be iterated one element at a time.
 # reversed()         : Function returns a reversed iterator object.
 # len()             *: Function returns the number of items in an object. When the object is a string, the len() function returns the number of characters in the string.
 # map()             *: Function executes a specified function for each item in an iterable. The item is sent to the function as a parameter.
@@ -48,9 +47,6 @@
 # memoryview()      *: A memory view is a safe way to expose the buffer protocol in Python.
 # object()           : Function returns a featureless object which is a base for all classes.
 # print()            : Function prints the given object to the standard output device (screen) or to the text stream file.
-# property()         :
-# next()             :
-# super()            :
 # open()             : Function returns a file object which can used to read, write and modify the file.
 # ord()              : Function returns an integer representing the Unicode character.
 # pow()             *: Function computes the power of a number.
@@ -67,6 +63,10 @@
 # zip()             *: Function returns a zip object, which is an iterator of tuples where the corresponding item in each passed iterator is paired together (one to one mapping fashion)
 # oct()              : Function converts an integer into an octal string.
 # str()             *: Function converts the specified value into a string.
+# property()        *: Returns the property attribute.
+# next()            *:
+# super()           *:
+# iter()            *: TODO : [Need to Understand Better ... Skipping for now] Function creates an object which can be iterated one element at a time.
 
 #----------------------------------------------------------------------------------------------------------------------
 # abs()
@@ -1109,6 +1109,119 @@ print("str : ", str(ob1))
 print("str : ", str(ob2)) # a list also gets converted to string
 print("str : ", str(ob3)) # a tuple also gets converted to string
 print("str : ", str(class_inst2)) # Need to analyze
+
+print("\n")
+# Example 1: Create attribute with getter, setter, and deleter
+class Person_class:
+    def __init__(self, name):
+        self._name = name
+
+    def get_name(self):
+        print('Getting name')
+        return self._name
+
+    def set_name(self, value):
+        print('Setting name to ' + value)
+        self._name = value
+
+    def del_name(self):
+        print('Deleting name')
+        del self._name
+
+    # Set property to use get_name, set_name
+    # and del_name methods
+    name = property(get_name, set_name, del_name, 'Name property')
+
+p = Person_class('Adam')
+
+print(p.name)
+p.name = 'John'
+del p.name
+
+#----------------------------------------------------------------------------------------------------------------------
+# property()
+# Description : Returns the property attribute.
+#               returns the property attribute from the given getter, setter, and deleter.
+#               NOTE : If no arguments are given, property() returns a base property attribute that doesn't contain any getter, setter or deleter.
+#               note : If doc isn't provided, property() takes the docstring of the getter function.
+# Syntax : property(fget=None, fset=None, fdel=None, doc=None)
+#            fget : (optional). Function for getting the attribute value. Defaults to None.
+#            fset :(optional). Function for setting the attribute value. Defaults to None.
+#            fdel :(optional). Function for deleting the attribute value. Defaults to None.
+#            doc :(optional). A string that contains the documentation (docstring) for the attribute. Defaults to None.
+
+print("\n")
+
+# Example 1: Create attribute with getter, setter, and deleter
+
+# Here, _name is used as the private variable for storing the name of Person.
+#
+# We also set:
+#
+# a getter method get_name() to get the name of the person,
+# a setter method set_name() to set the name of the person,
+# a deleter method del_name() to delete the name of the person.
+# Now, we set a new property attribute name by calling the property() method.
+#
+# As shown in the program, referencing p.name internally calls get_name() as getter, set_name() as setter and del_name() as deleter through the printed output present inside the methods.
+
+class Person_class2:
+    def __init__(self, name):
+        self._name = name
+
+    def get_name(self):
+        print('Getting name')
+        return self._name
+
+    def set_name(self, value):
+        print('Setting name to ' + value)
+        self._name = value
+
+    def del_name(self):
+        print('Deleting name')
+        del self._name
+
+    # Set property to use get_name, set_name
+    # and del_name methods
+    name = property(get_name, set_name, del_name, 'Name property')
+
+print("property :: ")
+p = Person_class2('Adam')
+print(p.name)
+p.name = 'John'
+print(p.name)
+del p.name
+# print(p.name) # UNCOMMENT TO RUN : This will return an exception as p.name attribute has been deleted
+
+# Example 2 : Using @property decorator
+# Instead of using property(), you can use the Python decorator @property to assign the getter, setter, and deleter.
+
+class Person_class3:
+    def __init__(self, name):
+        self._name = name
+
+    @property
+    def name(self):
+        print('Getting name')
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        print('Setting name to ' + value)
+        self._name = value
+
+    @name.deleter
+    def name(self):
+        print('Deleting name')
+        del self._name
+
+print("property :: ")
+pp = Person_class3('Adam')
+print('The name is:', pp.name)
+pp.name = 'John'
+print(pp.name)
+del pp.name
+# print(p.name) # UNCOMMENT TO RUN : This will return an exception as p.name attribute has been deleted
 
 
 #----------------------------------------------------------------------------------------------------------------------
