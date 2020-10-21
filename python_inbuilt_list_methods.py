@@ -264,10 +264,266 @@ print("index : ", 'The index of i:', idx)
 # idx = alphabets_list.index('i', 3, 5)   # Error! # UNCOMMENT TO RUN :
 # print("index : ", 'The index of i:', idx) # UNCOMMENT TO RUN : This will return an exception as the item will not be found.
 
+#----------------------------------------------------------------------------------------------------------------------
+# insert()
+# Description : Method inserts an element to the list at the specified index.
+# Syntax : list.insert(index,element)
+#            index : the index where the element needs to be inserted
+#            element : this is the element to be inserted in the list
+#            NOTE : If index is 0, the element is inserted at the beginning of the list.
+#            NOTE : If index is 3, the element is inserted after the 3rd element. Its position will be 4th.
 
+print("\n")
 
+# Return Value from insert()
+# The insert() method doesn't return anything; returns None. It only updates the current list.
+
+# Example 1: Inserting an Element to the List
+
+# vowel list
+vowel_list4 = ['a', 'e', 'i', 'u']
+# 'o' is inserted at index 3
+# the position of 'o' will be 4th
+vowel_list4.insert(3, 'o')
+print("insert : ", 'Updated List:', vowel_list4)
+
+# Example 2: Inserting a Tuple (as an Element) to the List
+
+mixed_list = [{1, 2}, [5, 6, 7]]
+# number tuple
+number_tuple = (3, 4)
+# inserting a tuple to the list
+mixed_list.insert(1, number_tuple)
+print("insert : ", 'Updated List:', mixed_list)
 
 #----------------------------------------------------------------------------------------------------------------------
-# ()
-# Description :
-# Syntax :
+# pop()
+# Description : Method removes the item at the given index from the list and returns the removed item.
+# Syntax : list.pop(index)
+#            index : which element at index to pop
+#            NOTE : The argument passed to the method is optional. If not passed, the default index -1 is passed as an argument (index of the last item).
+#            note : If the index passed to the method is not in range, it throws IndexError: pop index out of range exception.
+
+print("\n")
+
+# Return Value from pop()
+# The pop() method returns the item present at the given index. This item is also removed from the list.
+
+# Example 1: Pop item at the given index from the list
+
+# programming languages list
+prog_languages = ['Python', 'Java', 'C++', 'French', 'C']
+# remove and return the 4th item
+return_value = prog_languages.pop(3)
+print("pop : ", 'Return Value:', return_value)
+# Updated List
+print("pop : ", 'Updated List:', prog_languages)
+
+
+# Example 2: pop() without an index, and for negative indices
+
+# programming languages list
+planguages = ['Python', 'Java', 'C++', 'Ruby', 'C']
+
+# remove and return the last item
+print("pop : ", 'When index is not passed:')
+print("pop : ", 'Return Value:', planguages.pop())
+print("pop : ", 'Updated List:', planguages)
+# remove and return the last item
+print("pop : ", 'When -1 is passed:')
+print("pop : ", 'Return Value:', planguages.pop(-1))
+print("pop : ", 'Updated List:', planguages)
+# remove and return the third last item
+print("pop : ", 'When -3 is passed:')
+print("pop : ", 'Return Value:', planguages.pop(-3))
+print("pop : ", 'Updated List:', planguages)
+
+#----------------------------------------------------------------------------------------------------------------------
+# remove()
+# Description : Method removes the first matching element (which is passed as an argument) from the list.
+# Syntax : list.remove(element)
+#            element : the element to remove
+#            NOTE : If the element doesn't exist, it throws ValueError: list.remove(x): x not in list exception.
+
+print("\n")
+
+# Return Value from remove()
+# The remove() doesn't return any value (returns None).
+
+# Example 1: Remove element from the list
+
+# animals list
+animals3 = ['cat', 'dog', 'rabbit', 'guinea pig']
+# 'rabbit' is removed
+animals3.remove('rabbit')
+# Updated animals List
+print("remove : ", 'Updated animals list: ', animals3)
+
+# Example 2: remove() method on a list having duplicate elements
+# If a list contains duplicate elements, the remove() method only removes the first matching element.
+
+# animals list
+animals4 = ['cat', 'dog', 'dog', 'guinea pig', 'dog']
+# 'dog' is removed
+animals4.remove('dog')
+# Updated animals list
+print("remove : ", 'Updated animals list: ', animals4)
+
+#----------------------------------------------------------------------------------------------------------------------
+# reverse()
+# Description : Method reverses the elements of the list.
+# Syntax : list.reverse()
+#            The reverse() method doesn't take any arguments.
+
+print("\n")
+
+# Return Value from reverse()
+# The reverse() method doesn't return any value. It updates the existing list.
+
+# Example 1: Reverse a List
+
+# Operating System List
+systems = ['Windows', 'macOS', 'Linux']
+print("reverse : ", 'Original List:', systems)
+# List Reverse
+systems.reverse()
+# updated list
+print("reverse : ", 'Updated List:', systems)
+
+# Example 2: Reverse a List Using Slicing Operator
+
+# Operating System List
+systems2 = ['Windows', 'macOS', 'Linux']
+print("reverse list using slicing operator : ", 'Original List:', systems2)
+# Reversing a list
+#Syntax: reversed_list = systems[start:stop:step]
+reversed_list = systems2[::-1]
+# updated list
+print("reverse list using slicing operator : ", 'Updated List:', reversed_list)
+
+# Example 3: Accessing Elements in Reversed Order
+# If you need to access individual elements of a list in the reverse order, it's better to use reversed() function.
+
+# Operating System List
+systems3 = ['Windows', 'macOS', 'Linux']
+# Printing Elements in Reversed Order
+for o in reversed(systems3):
+    print("reverse : ", o)
+
+#----------------------------------------------------------------------------------------------------------------------
+# sort()
+# Description : Method sorts the elements of a given list in a specific ascending or descending order.
+# Syntax : list.sort(key=..., reverse=...)
+#            NOTE : Alternatively, you can also use Python's built-in sorted() function for the same purpose.
+#                   The simplest difference between sort() and sorted() is: sort() changes the list directly and doesn't return any value,
+#                   while sorted() doesn't change the list and returns the sorted list.
+#            reverse : (Optional), If True, the sorted list is reversed (or sorted in Descending order)
+#            key : (Optional), function that serves as a key for the sort comparison
+
+print("\n")
+
+# Return value from sort()
+# The sort() method doesn't return any value. Rather, it changes the original list.
+# If you want a function to return the sorted list rather than change the original list, use sorted().
+
+# Example 1: Sort a given list
+
+# vowels list
+vowels_list4 = ['e', 'a', 'u', 'o', 'i']
+# sort the vowels
+vowels_list4.sort()
+# print vowels
+print("sort : ", 'Sorted list:', vowels_list4)
+
+# Sort in Descending order
+# The sort() method accepts a reverse parameter as an optional argument.
+# Setting reverse = True sorts the list in the descending order.
+#   list.sort(reverse=True)
+# Alternately for sorted(), you can use the following code.
+#   sorted(list, reverse=True)
+
+# Example 2: Sort the list in Descending order
+
+# vowels list
+vowels_list5 = ['e', 'a', 'u', 'o', 'i']
+# sort the vowels
+vowels_list5.sort(reverse=True)
+# print vowels
+print("sort : ", 'Sorted list (in Descending):', vowels_list5)
+
+# ================================================================================================
+#                                OUTPUT
+# ================================================================================================
+
+# append :  Updated animals list:  ['cat', 'dog', 'rabbit', 'guinea pig']
+# append :  Updated animals list:  ['cat', 'dog', 'rabbit', ['tiger', 'fox']]
+#
+#
+# clear :  printing the list before clearing :  [{1, 2}, 'a', ['1.1', '2.2']]
+# clear :  Cleared list: []
+# clearing list using del :  printing the list before clearing :  [{1, 2}, 'a', ['1.1', '2.2']]
+# clear :  Cleared list: []
+#
+#
+# copying using '=' : [1, 2, 3]
+# Printing new_list :  New List: [1, 2, 3, 'a']
+# Printing old_list :  Old List: [1, 2, 3, 'a']
+# Original List: ['cat', 0, 6.7]
+# Copied List: ['cat', 0, 6.7]
+# Original List: ['cat', 0, 6.7]
+# Copied List: ['cat', 0, 6.7, 'append_val']
+# Copying using slicing syntax :  Old List: ['cat', 0, 6.7]
+# Copying using slicing syntax :  New List: ['cat', 0, 6.7, 'dog']
+#
+#
+# count :  The count of i is: 2
+# count :  The count of p is: 0
+# count :  The count of ('a', 'b') is: 2
+# count :  The count of [3, 4] is: 1
+#
+#
+# extend :  Language List: ['French', 'English', 'Spanish', 'Portuguese']
+# extend :  New Language List: ['French', 'Spanish', 'Portuguese']
+# extend :  Newer Language List: ['French', 'Spanish', 'Portuguese', 'Japanese', 'Chinese']
+# extend using + operator :  lits a = [1, 2, 3, 4]
+# extend using list slicing syntax  lst_a2 = [1, 2, 3, 4]
+#
+#
+# index :  The index of e: 1
+# index :  The index of i: 2
+# index :  The index of e: 1
+# index :  The index of i: 6
+#
+#
+# insert :  Updated List: ['a', 'e', 'i', 'o', 'u']
+# insert :  Updated List: [{1, 2}, (3, 4), [5, 6, 7]]
+#
+#
+# pop :  Return Value: French
+# pop :  Updated List: ['Python', 'Java', 'C++', 'C']
+# pop :  When index is not passed:
+# pop :  Return Value: C
+# pop :  Updated List: ['Python', 'Java', 'C++', 'Ruby']
+# pop :  When -1 is passed:
+# pop :  Return Value: Ruby
+# pop :  Updated List: ['Python', 'Java', 'C++']
+# pop :  When -3 is passed:
+# pop :  Return Value: Python
+# pop :  Updated List: ['Java', 'C++']
+#
+#
+# remove :  Updated animals list:  ['cat', 'dog', 'guinea pig']
+# remove :  Updated animals list:  ['cat', 'dog', 'guinea pig', 'dog']
+#
+#
+# reverse :  Original List: ['Windows', 'macOS', 'Linux']
+# reverse :  Updated List: ['Linux', 'macOS', 'Windows']
+# reverse list using slicing operator :  Original List: ['Windows', 'macOS', 'Linux']
+# reverse list using slicing operator :  Updated List: ['Linux', 'macOS', 'Windows']
+# reverse :  Linux
+# reverse :  macOS
+# reverse :  Windows
+#
+#
+# sort :  Sorted list: ['a', 'e', 'i', 'o', 'u']
+# sort :  Sorted list (in Descending): ['u', 'o', 'i', 'e', 'a']
