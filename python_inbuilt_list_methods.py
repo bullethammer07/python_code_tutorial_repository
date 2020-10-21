@@ -8,7 +8,7 @@
 # extend()	  *: Add the elements of a list (or any iterable), to the end of the current list
 # index()	  *: Returns the index of the first element with the specified value
 # insert()	  *: Adds an element at the specified position
-# pop()	      *: Removes the element at the specified position
+# pop()       *: Removes the element at the specified position
 # remove()	  *: Removes the first item with the specified value
 # reverse()	  *: Reverses the order of the list
 # sort()	  *: Sorts the list
@@ -123,6 +123,149 @@ new_mx_list.append('dog')
 # Printing new and old list
 print("Copying using slicing syntax : ", 'Old List:', mx_list)
 print("Copying using slicing syntax : ", 'New List:', new_mx_list)
+
+#----------------------------------------------------------------------------------------------------------------------
+# count()
+# Description : Method returns the number of times the specified element appears in the list.
+# Syntax : list.count(element)
+#            element : the element to be counted
+
+print("\n")
+
+# Return value from count()
+# The count() method returns the number of times element appears in the list.
+
+# Example 1: Use of count()
+
+# vowels list
+vowels_list = ['a', 'e', 'i', 'o', 'i', 'u']
+# count element 'i'
+count1 = vowels_list.count('i')
+# print count
+print("count : ", 'The count of i is:', count1)
+# count element 'p'
+count1 = vowels_list.count('p')
+# print count
+print("count : ", 'The count of p is:', count1)
+
+# Example 2: Count Tuple and List Elements Inside List
+
+# random list
+random_list = ['a', ('a', 'b'), ('a', 'b'), [3, 4]]
+# count element ('a', 'b')
+count2 = random_list.count(('a', 'b'))
+# print count
+print("count : ", "The count of ('a', 'b') is:", count2)
+# count element [3, 4]
+count2 = random_list.count([3, 4])
+# print count
+print("count : ", "The count of [3, 4] is:", count2)
+
+#----------------------------------------------------------------------------------------------------------------------
+# extend()
+# Description : Method adds all the elements of an iterable (list, tuple, string etc.) to the end of the list.
+# Syntax : list1.extend(iterable)
+#             Here, all the elements of iterable are added to the end of list1.
+
+print("\n")
+
+# Return Value from extend()
+# The extend() method modifies the original list. It doesn't return any value.
+
+# Example 1: Using extend() Method
+
+# language list
+language = ['French', 'English']
+# another list of language
+language1 = ['Spanish', 'Portuguese']
+# appending language1 elements to language
+language.extend(language1)
+print("extend : ", 'Language List:', language)
+
+# Example 2: Add Elements of Tuple and Set to List
+
+# language list
+language_list = ['French']
+# language tuple
+language_tuple = ('Spanish', 'Portuguese')
+# language set
+language_set = {'Chinese', 'Japanese'}
+# appending language_tuple elements to language_list
+language_list.extend(language_tuple)
+print("extend : ", 'New Language List:', language_list)
+# appending language_set elements to language_list
+language_list.extend(language_set)
+print("extend : ", 'Newer Language List:', language_list)
+
+# Other ways to extend a list :
+
+# Example 3 : the + operator
+
+lsta = [1, 2]
+lstb = [3, 4]
+lsta += lstb    # a = a + b
+# Output: [1, 2, 3, 4]
+print("extend using + operator : ", 'lits a =', lsta)
+
+# Example 4 : the list slicing syntax
+
+lst_a2 = [1, 2]
+lst_b2 = [3, 4]
+lst_a2[len(lst_a2):] = lst_b2
+# Output: [1, 2, 3, 4]
+print("extend using list slicing syntax ", 'lst_a2 =', lst_a2)
+
+#----------------------------------------------------------------------------------------------------------------------
+# index()
+# Description : Method returns the index of the specified element in the list.
+# Syntax : list.index(element, start, end)
+#            element : the element to be searched
+#            start : (optional). start searching from this index
+#            end : (optional). search the element up to this index
+
+# Return Value from List index()
+# The index() method returns the index of the given element in the list.
+# If the element is not found, a ValueError exception is raised.
+# NOTE : The index() method only returns the first occurrence of the matching element.
+
+print("\n")
+
+# Example 1 : Find the index of the element
+
+# vowels list
+vowels_list2 = ['a', 'e', 'i', 'o', 'i', 'u']
+# index of 'e' in vowels
+idx = vowels_list2.index('e')
+print("index : ", 'The index of e:', idx)
+# element 'i' is searched
+# index of the first 'i' is returned
+idx = vowels_list2.index('i')
+print("index : ", 'The index of i:', idx)
+
+# Example 2: Index of the Element not Present in the List
+
+# vowels list
+vowels_list3 = ['a', 'e', 'i', 'o', 'u']
+# index of 'p' is vowels
+# idx = vowels_list3.index('p') # UNCOMMENT TO RUN
+# print("index : ", 'The index of p:', idx) # UNCOMMENT TO RUN : This will return an exeception : ValueError: 'p' is not in list
+
+# Example 3: Working of index() With Start and End Parameters
+
+# alphabets list
+alphabets_list = ['a', 'e', 'i', 'o', 'g', 'l', 'i', 'u']
+# index of 'i' in alphabets
+idx = alphabets_list.index('e')   # 2
+print("index : ", 'The index of e:', idx)
+# 'i' after the 4th index is searched
+idx = alphabets_list.index('i', 4)   # 6
+print("index : ", 'The index of i:', idx)
+# 'i' between 3rd and 5th index is searched
+# idx = alphabets_list.index('i', 3, 5)   # Error! # UNCOMMENT TO RUN :
+# print("index : ", 'The index of i:', idx) # UNCOMMENT TO RUN : This will return an exception as the item will not be found.
+
+
+
 
 #----------------------------------------------------------------------------------------------------------------------
 # ()
