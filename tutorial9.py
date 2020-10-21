@@ -64,9 +64,9 @@
 # oct()              : Function converts an integer into an octal string.
 # str()             *: Function converts the specified value into a string.
 # property()        *: Returns the property attribute.
-# next()            *:
-# super()           *:
-# iter()            *: TODO : [Need to Understand Better ... Skipping for now] Function creates an object which can be iterated one element at a time.
+# iter()            *: Function returns an iterator for the given object. creates an object which can be iterated one element at a time.
+# next()            *: Function returns the next item from the iterator.
+# super()           *: Returns a proxy object (temporary object of the superclass) that allows us to access methods of the base class.
 
 #----------------------------------------------------------------------------------------------------------------------
 # abs()
@@ -1223,8 +1223,502 @@ print(pp.name)
 del pp.name
 # print(p.name) # UNCOMMENT TO RUN : This will return an exception as p.name attribute has been deleted
 
+#----------------------------------------------------------------------------------------------------------------------
+# iter()
+# Description : Function creates an object which can be iterated one element at a time.
+#               NOTE : These objects are useful when coupled with loops like for loop, while loop.
+# Syntax : iter(object,sentinel)
+#            object - object whose iterator has to be created (can be sets, tuples, etc.)
+#            sentinel (optional) - special value that is used to represent the end of a sequence
+
+# Return value from iter()
+#  1. The iter() function returns an iterator object for the given object.
+#  2. If the user-defined object doesn't implement __iter__(), and __next__() or __getitem()__, the TypeError exception is raised.
+#  3. If the sentinel parameter is also provided, iter() returns an iterator until the sentinel character isn't found.
+
+print("\n")
+
+# Example 1: Working of Python iter()
+
+# list of vowels
+vowels = ['a', 'e', 'i', 'o', 'u']
+vowels_iter = iter(vowels)
+
+print("iter : ", next(vowels_iter))    # 'a'
+print("iter : ", next(vowels_iter))    # 'e'
+print("iter : ", next(vowels_iter))    # 'i'
+print("iter : ", next(vowels_iter))    # 'o'
+print("iter : ", next(vowels_iter))    # 'u'
+
+# Example 2: iter() for custom objects
+
+class PrintNumber:
+    def __init__(self, max):
+        self.max = max
+
+    def __iter__(self):
+        self.num = 0
+        return self
+
+    def __next__(self):
+        if(self.num >= self.max):
+            raise StopIteration
+        self.num += 1
+        return self.num
+
+print("\n")
+print_num = PrintNumber(3)
+
+print_num_iter = iter(print_num)
+print("iter : ", next(print_num_iter))  # 1
+print("iter : ", next(print_num_iter))  # 2
+print("iter : ", next(print_num_iter))  # 3
+
+# raises StopIteration
+# print("iter : ", next(print_num_iter)) # UNCOMMENT TO RUN : This will generate an exception
+
+# Example 3: iter() with sentinel parameter
+
+# Here, we have implemented a custom iterable object without a StopIteration condition.
+# However, we can use the iter() method with the sentinel parameter to stop the iteration.
+# If the value returned from __next__() is equal to sentinel, StopIteration will be raised, otherwise, the value will be returned.
+
+class DoubleIt:
+
+    def __init__(self):
+        self.start = 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.start *= 2
+        return self.start
+
+    __call__ = __next__
+
+my_iter = iter(DoubleIt(), 16)
+
+print("\n")
+for x in my_iter:
+    print("iter : ", x)
 
 #----------------------------------------------------------------------------------------------------------------------
-# ()
-# Description :
-# Syntax :
+# next()
+# Description : Function returns the next item from the iterator.
+# Syntax : next(iterator, default)
+#            iterator : next() retrieves next item from the iterator
+#            default : (optional). this value is returned if the iterator is exhausted (there is no next item)
+
+# Return Value from next
+# 1. The next() function returns the next item from the iterator.
+# 2. If the iterator is exhausted, it returns the default value passed as an argument.
+# 3. If the default parameter is omitted and the iterator is exhausted, it raises StopIteration exception.
+
+print("\n")
+
+# Example 1: Get the next item
+random_iter = [5, 9, 'cat']
+
+# converting the list to an iterator
+random_iterator = iter(random_iter)
+print("next : ", random_iterator)
+
+# Output: 5
+print("next : ", next(random_iterator))
+# Output: 9
+print("next : ", next(random_iterator))
+# Output: 'cat'
+print("next : ", next(random_iterator))
+# This will raise Error
+# iterator is exhausted
+# print("next : ", next(random_iterator)) # UNCOMMENT TO RUN : This will generate an exception because we tried to get the next item when no next item was available (iterator is exhausted).
+                                          # In such cases, you can give a default value as the second parameter.
+
+# Example 2: Passing default value to next()
+
+random_iter2 = [5, 9]
+
+# converting the list to an iterator
+random_iterator2 = iter(random_iter2)
+
+print("\n")
+# Output: 5
+print("next : ", next(random_iterator2, '-1'))
+# Output: 9
+print("next : ", next(random_iterator2, '-1'))
+# random_iterator is exhausted
+# Output: '-1'
+print("next : ", next(random_iterator2, '-1'))
+print("next : ", next(random_iterator2, '-1'))
+print("next : ", next(random_iterator2, '-1'))
+
+#----------------------------------------------------------------------------------------------------------------------
+# super()
+# Description : Returns a proxy object (temporary object of the superclass) that allows us to access methods of the base class.
+#               In Python, super() has two major use cases:
+#                1. Allows us to avoid using the base class name explicitly
+#                2. Working with Multiple Inheritance
+# Syntax : super()
+
+print("\n")
+print("super :: ")
+# Example 1: super() with Single Inheritance
+# In the case of single inheritance, it allows us to refer base class by super().
+
+# Here, we called the __init__() method of the Mammal class (from the Dog class) using code
+# super().__init__('Dog')
+# instead of
+# Mammal.__init__(self, 'Dog')
+
+class Mammal(object):
+    def __init__(self, mammalName):
+        print(mammalName, 'is a warm-blooded animal.')
+
+class Dog(Mammal):
+    def __init__(self):
+        print('Dog has four legs.')
+        super().__init__('Dog')
+
+d1 = Dog()
+
+# Example 2: super() with Multiple Inheritance
+class Animal:
+    def __init__(self, Animal):
+        print(Animal, 'is an animal.');
+
+class Mammal2(Animal):
+    def __init__(self, mammalName):
+        print(mammalName, 'is a warm-blooded animal.')
+        super().__init__(mammalName)
+
+class NonWingedMammal(Mammal2):
+    def __init__(self, NonWingedMammal):
+        print(NonWingedMammal, "can't fly.")
+        super().__init__(NonWingedMammal)
+
+class NonMarineMammal(Mammal2):
+    def __init__(self, NonMarineMammal):
+        print(NonMarineMammal, "can't swim.")
+        super().__init__(NonMarineMammal)
+
+class Dog(NonMarineMammal, NonWingedMammal):
+    def __init__(self):
+        print('Dog has 4 legs.');
+        super().__init__('Dog')
+
+print("\n")
+print("super multi inheritance :: ")
+d = Dog()
+
+print("\n")
+print("super multi inheritance :: ")
+bat = NonMarineMammal('Bat')
+
+# ================================================================================================
+#                                OUTPUT
+# ================================================================================================
+# abs :  7.21
+# abs :  5.830951894845301
+#
+#
+# all :  True
+# all :  False
+# all :  False
+# all :  True
+# any :  True
+# any :  False
+# any :  True
+# any :  False
+#
+#
+# bin :  0b1000101
+# bool :  False False False True False
+#
+#
+# bytearray :  bytearray(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+# bytearray :  bytearray(b'xyz')
+#
+#
+# bytes :  b'\x00\x00\x00\x00\x00\x00'
+# bytes :  b'xyz'
+#
+#
+# callable :  True
+# callable :  False
+#
+#
+# chr :  a x $
+# ord :  97 120 36
+#
+#
+# xyx
+# Hello world
+# Jayant
+#
+#
+# compile :  30
+#
+#
+# complex :  (3+4j) <class 'complex'>
+#
+#
+# Jayant
+# getattr :  India
+# hasattr :  True False
+# setattr :  Jayant Yadav
+#
+#
+# dict :  {'name': 'Jayant', 'age': '27', 'country': 'India'}
+#
+#
+# ['__class__', '__class_getitem__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__ior__', '__iter__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__ror__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values']
+#
+#
+# divmod :  (16, 4)
+#
+#
+# list :  ['apple', 'banana', 'orange', 'strawberry']
+#
+#
+# enumerate :  [(0, 'apple'), (1, 'banana'), (2, 'orange')]
+#
+#
+# filter :  [18, 24, 32]
+#
+#
+# float :  5.0 3.145987
+#
+#
+# format :  ff
+# format :  11111111
+#
+#
+# frozenset :  frozenset({'cherry', 'banana', 'apple'})
+#
+#
+# globals :  {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x000001E63DBC3760>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': 'C:\\Users\\Bullet-HammeR\\PycharmProjects\\first_proj\\tutorial9.py', '__cached__': None, 'x': 'print("Hello world") | print("Jayant")', 'y': 'print("xyx")', 'list1': ['Hi', 'my', 'name', 'is', 'Jayant'], 'list2': ['', '', '', '', ''], 'list3': ['Hi', 'my', 'name', '', ''], 'list4': [], 'empty_list': [], 'empty_tuple': (), 'empty_array': {}, 'func': <function func at 0x000001E63DBBE040>, 'var1': 5, 'z': 'val1 = 10  | print(val1)', 'x1': 'print("Hello world")\nprint("Jayant")', 'compile_val': 'a = 10\nb = 20\nsum_val=a+b\nprint("compile : ",sum_val)', 'code_object': <code object <module> at 0x000001E63E3850E0, file "sum_string", line 1>, 'a': 10, 'b': 20, 'sum_val': 30, 'complex_val': (3+4j), 'mydata': <class '__main__.mydata'>, 'getat': 'India', 'hasat1': True, 'hasat2': False, 'mydict': {'name': 'Jayant', 'age': '27', 'country': 'India'}, 'dmod_var': (16, 4), 'list_var': ['apple', 'banana', 'orange', 'strawberry'], 'tup1': ('apple', 'banana', 'orange'), 'enum1': <enumerate object at 0x000001E63E3879C0>, 'ages': [5, 12, 17, 18, 24, 32], 'filter_func': <function filter_func at 0x000001E63E11B430>, 'adults': <filter object at 0x000001E63E13B6D0>, 'float1': 5.0, 'float2': 3.145987, 'frozen_list': ['apple', 'banana', 'cherry'], 'var2': frozenset({'cherry', 'banana', 'apple'}), 'var3': {...}, 'var3l': {...}}
+# locals :  {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x000001E63DBC3760>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': 'C:\\Users\\Bullet-HammeR\\PycharmProjects\\first_proj\\tutorial9.py', '__cached__': None, 'x': 'print("Hello world") | print("Jayant")', 'y': 'print("xyx")', 'list1': ['Hi', 'my', 'name', 'is', 'Jayant'], 'list2': ['', '', '', '', ''], 'list3': ['Hi', 'my', 'name', '', ''], 'list4': [], 'empty_list': [], 'empty_tuple': (), 'empty_array': {}, 'func': <function func at 0x000001E63DBBE040>, 'var1': 5, 'z': 'val1 = 10  | print(val1)', 'x1': 'print("Hello world")\nprint("Jayant")', 'compile_val': 'a = 10\nb = 20\nsum_val=a+b\nprint("compile : ",sum_val)', 'code_object': <code object <module> at 0x000001E63E3850E0, file "sum_string", line 1>, 'a': 10, 'b': 20, 'sum_val': 30, 'complex_val': (3+4j), 'mydata': <class '__main__.mydata'>, 'getat': 'India', 'hasat1': True, 'hasat2': False, 'mydict': {'name': 'Jayant', 'age': '27', 'country': 'India'}, 'dmod_var': (16, 4), 'list_var': ['apple', 'banana', 'orange', 'strawberry'], 'tup1': ('apple', 'banana', 'orange'), 'enum1': <enumerate object at 0x000001E63E3879C0>, 'ages': [5, 12, 17, 18, 24, 32], 'filter_func': <function filter_func at 0x000001E63E11B430>, 'adults': <filter object at 0x000001E63E13B6D0>, 'float1': 5.0, 'float2': 3.145987, 'frozen_list': ['apple', 'banana', 'cherry'], 'var2': frozenset({'cherry', 'banana', 'apple'}), 'var3': {...}, 'var3l': {...}}
+#
+#
+# hex :  0xff
+#
+#
+# id :  2088397994736
+#
+#
+# int :  255
+# int :  255
+# int :  255
+#
+#
+# isinstance :  True
+# isinstance :  False
+# isinstance :  True
+#
+#
+# issubclass :  True
+# issubclass :  False
+#
+#
+# reversed :  t
+# reversed :  n
+# reversed :  a
+# reversed :  y
+# reversed :  a
+# reversed :  j
+#
+#
+# len :  4
+# len :  5
+# len :  16
+# len :  6
+#
+#
+# map :  [4, 2, 2, 5, 7]
+#
+#
+# max :  7
+# min :  1
+# max :  ffffff
+# min :  a
+#
+#
+# memoryview :  65
+# memoryview :  b'AB'
+# memoryview :  [65, 66, 67]
+#
+#
+# object :  <class 'object'>
+# object :  ['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
+#
+#
+#
+#
+# ord :  53
+# ord :  65
+# ord :  36
+#
+#
+# pow :  4
+# pow :  4
+# pow :  0.25
+# pow :  0.25
+# pow :  4
+#
+#
+# range :  []
+# range :  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+# range :  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# range :  [2, 4, 6, 8, 10, 12]
+# range :  [2, 0, -2, -4, -6, -8, -10, -12]
+# range :  []
+#
+#
+# repr :  'foo'
+# repr :  'Hello Adam'
+#
+#
+# round :  10
+# round :  11
+# round :  6
+# round :  2.67
+# round :  2.67
+#
+#
+# set :  set()
+# set :  {'t', 'y', 'n', 'o', 'h', 'P'}
+# set :  {'i', 'u', 'a', 'o', 'e'}
+# set :  {'i', 'u', 'a', 'o', 'e'}
+# set :  {0, 1, 2, 3, 4}
+# set :  {'a', 'o', 'e', 'i', 'u'}
+# set :  {'a', 'o', 'e', 'i', 'u'}
+# set :  {'a', 'o', 'e', 'i', 'u'}
+# set :  {1, 2, 3, 4, 5}
+#
+#
+# slice :  slice(None, 3, None)
+# slice :  slice(1, 5, 2)
+# slice :  Pyt
+# slice :  yh
+# slice :  ['P', 'y', 't']
+# slice :  ('y', 'h')
+# slice :  Pyt
+# slice :  yh
+#
+#
+# sorted :  ['a', 'e', 'i', 'o', 'u']
+# sorted :  ['P', 'h', 'n', 'o', 't', 'y']
+# sorted :  ['a', 'e', 'i', 'o', 'u']
+# sorted :  ['u', 'o', 'i', 'e', 'a']
+# sorted :  ['u', 'o', 'i', 'e', 'a']
+# sorted :  ['u', 'o', 'i', 'e', 'a']
+# sorted :  ['a', 'is', 'This', 'with', 'words', 'sizes', 'random', 'string', 'having', 'length', 'different']
+# sorted :  [(4, 1), (2, 2), (1, 3), (3, 4)]
+#
+#
+# sum :  21
+# sum :  31
+#
+#
+# tuple :  ()
+# tuple :  (1, 4, 6)
+# tuple :  ('P', 'y', 't', 'h', 'o', 'n')
+# tuple :  (1, 2)
+# tuple :  ('Python', 'programming', 'is', 'fun')
+#
+#
+# type :  <class 'type'>
+# type :  {'a': 'Foo', 'b': 12, '__module__': '__main__', '__dict__': <attribute '__dict__' of 'X' objects>, '__weakref__': <attribute '__weakref__' of 'X' objects>, '__doc__': None}
+# type :  <class 'type'>
+# type :  {'a': 'Foo', 'b': 12, '__module__': '__main__', '__doc__': None}
+#
+#
+# zip :  [('This', 'This'), ('is', 'is'), ('list', 'list'), ('one', 'one')]
+# zip :  [('This', 'This', 'This'), ('is', 'is', 'is'), ('list', 'list', 'list'), ('one', 'one', 'one')]
+# zip :  [('This', 'This'), ('is', 'is'), ('list', 'another'), ('one', 'list')]
+# zip :  [('This', 'This'), ('is', 'is'), ('list', 'tuple'), ('one', 'one')]
+#
+#
+# vars :  {}
+# vars :  {'__module__': '__main__', 'name': 'Jayant', 'age': 27, 'country': 'India', '__dict__': <attribute '__dict__' of 'dict_class' objects>, '__weakref__': <attribute '__weakref__' of 'dict_class' objects>, '__doc__': None}
+#
+#
+# oct :  0o377
+#
+#
+# str :  123
+# str :  ['This', 'is', 'list']
+# str :  ('This', 'is', 'tuple')
+# str :  <__main__.test_class object at 0x000001E63E13BB80>
+#
+#
+# Getting name
+# Adam
+# Setting name to John
+# Deleting name
+#
+#
+# property ::
+# Getting name
+# Adam
+# Setting name to John
+# Getting name
+# John
+# Deleting name
+# property ::
+# Getting name
+# The name is: Adam
+# Setting name to John
+# Getting name
+# John
+# Deleting name
+#
+#
+# iter :  a
+# iter :  e
+# iter :  i
+# iter :  o
+# iter :  u
+#
+#
+# iter :  1
+# iter :  2
+# iter :  3
+#
+#
+# iter :  2
+# iter :  4
+# iter :  8
+#
+#
+# next :  <list_iterator object at 0x000001E63E13B9A0>
+# next :  5
+# next :  9
+# next :  cat
+#
+#
+# next :  5
+# next :  9
+# next :  -1
+# next :  -1
+# next :  -1
+#
+#
+# super ::
+# Dog has four legs.
+# Dog is a warm-blooded animal.
+#
+#
+# super multi inheritance ::
+# Dog has 4 legs.
+# Dog can't swim.
+# Dog can't fly.
+# Dog is a warm-blooded animal.
+# Dog is an animal.
+#
+#
+# super multi inheritance ::
+# Bat can't swim.
+# Bat is a warm-blooded animal.
+# Bat is an animal.
