@@ -51,9 +51,9 @@
 # property()         :
 # next()             :
 # super()            :
-# open()             :
-# ord()              :
-# pow()              :
+# open()             : Function returns a file object which can used to read, write and modify the file.
+# ord()              : Function returns an integer representing the Unicode character.
+# pow()             *: Function computes the power of a number.
 # range()            : Returns an immutable sequence of numbers between the given start integer to the stop integer.
 # repr()             : Function returns a printable representation of the given object.
 # round()            : Function returns a floating-point number rounded to the specified number of decimals.
@@ -664,6 +664,71 @@ print("object : ", dir(obj_object))
 # source_file = open('python.txt', 'w')
 # print('Hello World !!...', file = source_file)
 # source_file.close()
+
+#----------------------------------------------------------------------------------------------------------------------
+# open()
+# Description : Function returns a file object which can used to read, write and modify the file.
+# Syntax : open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
+#            file : The path and name of the file
+#            mode : mode while opening a file. If not provided, it defaults to 'r' (open for reading in text mode). Available file modes are:
+#                     'r'	Open a file for reading. (default)
+#                     'w'	Open a file for writing. Creates a new file if it does not exist or truncates the file if it exists.
+#                     'x'	Open a file for exclusive creation. If the file already exists, the operation fails.
+#                     'a'	Open for appending at the end of the file without truncating it. Creates a new file if it does not exist.
+#                     't'	Open in text mode. (default)
+#                     'b'	Open in binary mode.
+#                     '+'	Open a file for updating (reading and writing)
+#            buffering : (optional). used for setting buffering policy
+#            encoding : (optional). the encoding format
+#            errors : (optional). string specifying how to handle encoding/decoding errors
+#            newline : (optional). how newlines mode works (available values: None, ' ', '\n', 'r', and '\r\n'
+#            closefd : (optional). must be True (default); if given otherwise, an exception will be raised
+#            opener : (optional). a custom opener; must return an open file descriptor
+
+# Return Value from open()
+# The open() function returns a file object which can used to read, write and modify the file. If the file is not found, it raises the FileNotFoundError exception.
+
+print("\n")
+# Example 1: How to open a file in Python?
+
+# opens test.text file of the current directory
+# f = open("test.txt") # UNCOMMENT TO RUN : This will return an exceptionn as the file is not found
+# specifying the full path
+# f = open("C:/README.txt") # UNCOMMENT TO RUN : This will return an exceptionn as the file is not found
+
+#----------------------------------------------------------------------------------------------------------------------
+# ord()
+# Description : function returns an integer representing the Unicode character.
+# Syntax : ord(ch)
+#           ch : a Unicode character
+
+print("\n")
+print("ord : ", ord('5'))    # 53
+print("ord : ", ord('A'))    # 65
+print("ord : ", ord('$'))    # 36
+
+#----------------------------------------------------------------------------------------------------------------------
+# pow()
+# Description : Function computes the power of a number.
+# Syntax : pow(x,y,z)
+#            x : a number, the base
+#            y : a number, the exponent
+#            z : (Optional). a number, used for modulus
+
+print("\n")
+# Example 1: Python pow()
+
+# positive x, positive y (x**y)
+print("pow : ", pow(2, 2))    # 4
+# negative x, positive y
+print("pow : ", pow(-2, 2))    # 4
+# positive x, negative y
+print("pow : ", pow(2, -2))    # 0.25
+# negative x, negative y
+print("pow : ", pow(-2, -2))    # 0.25
+
+# Example 2: pow() with three arguments (x**y) % z
+print("pow : ", pow(7, 2, 5))    # 4
 
 #----------------------------------------------------------------------------------------------------------------------
 # range()
