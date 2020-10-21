@@ -1,5 +1,5 @@
 #--------------------------------------------------------------
-#             Python lists inbuilt functions
+#             Python inbuilt functions
 #--------------------------------------------------------------
 # abs()              : Returns the absolute value of a secified number.
 # all()              : Returns true if all items in an iterable are true, otherwise it returns False.
