@@ -16,7 +16,7 @@
 # remove()                 : Method removes the specified element from the set.
 # symmetric_difference()   : Method returns the symmetric difference of two sets.
 # union()                  : Method returns a new set with distinct elements from all the sets.
-# update()                 :
+# update()                 : Method updates the set, adding items from other iterables.
 
 #----------------------------------------------------------------------------------------------------------------------
 # add()
@@ -440,16 +440,144 @@ print("union : ", "using | operator : ", 'A U B =', us_A | us_B)
 print("union : ", "using | operator : ", 'B U C =', us_B | us_C)
 print("union : ", "using | operator : ", 'A U B U C =', us_A | us_B | us_C)
 
-
-
 #----------------------------------------------------------------------------------------------------------------------
-# ()
-# Description :
-# Syntax :
+# update()
+# Description : Method updates the set, adding items from other iterables.
+# Syntax : A.update(iterable)
+#            Here, A is a set, and iterable can be any iterable such as list, set, dictionary, string, etc. The elements of the iterable are added to the set A.
+#          A.update(iter1, iter2, iter3)
+#            Here, the elements of iterables iter1, iter2, and iter3 are added to set A.
+
 print("\n")
 
+# Return Value from update()
+# This set update() method returns None (returns nothing).
+
+# Example 1: Python set update()
+
+up_A = {'a', 'b'}
+up_B = {1, 2, 3}
+rslt = up_A.update(up_B)
+print("update : ", 'A =', up_A)
+print("update : ", 'result =', rslt)
+
+# Example 2: Add elements of string and dictionary to Set
+
+string_alphabet = 'abc'
+numbers_set = {1, 2}
+# add elements of the string to the set
+numbers_set.update(string_alphabet)
+print("update : ", 'numbers_set =', numbers_set)
+info_dictionary = {'key': 1, 'lock' : 2}
+numbers_set = {'a', 'b'}
+# add keys of dictionary to the set
+numbers_set.update(info_dictionary)
+print("update : ", 'numbers_set =', numbers_set)
 
 # ================================================================================================
 #                                OUTPUT
 # ================================================================================================
+
+# add :  Vowels are: {'a', 'e', 'o', 'i', 'u'}
+# add :  Vowels are: {'a', 'e', 'o', 'i', 'u'}
+# add :  printing initial set of vowel :  Vowels are: {'a', 'e', 'u'}
+# add :  after adding tuple to vowel :  Vowels are: {'a', ('i', 'o'), 'e', 'u'}
+# add :  after adding the same tuple again to vowel :  Vowels are: {'a', ('i', 'o'), 'e', 'u'}
+#
+#
+# clear :  Vowels (before clear): {'o', 'a', 'i', 'e', 'u'}
+# clear :  Vowels (after clear): set()
+#
+#
+# copy :  Original Set numbers:  {1, 2, 3, 4, 5}
+# copy :  Copied Set new_numbers:  {1, 2, 3, 4, 5}
+# copy :  Original Set numbers:  {1, 2, 3, 4}
+# copy :  Copied Set new_numbers:  {1, 2, 3, 4, 5}
+#
+#
+# difference :  {'a', 'b', 'd'}
+# difference :  {'f', 'g'}
+# difference :  {'a', 'b', 'd'}
+# difference :  {'f', 'g'}
+#
+#
+# difference_update :  A =  {'a', 'd'}
+# difference_update :  B =  {'f', 'g', 'c'}
+# difference_update :  result =  None
+#
+#
+# discard :  numbers =  {2, 4, 5}
+# discard :  numbers =  {2, 4}
+# discard :  numbers =  {2, 4}
+#
+#
+# intersection :  {2, 5}
+# intersection :  {2}
+# intersection :  {2, 3}
+# intersection :  {2}
+# intersection :  {100}
+# intersection :  {200}
+# intersection :  {300}
+# intersection :  set()
+#
+#
+# intersection_update :  result = None
+# intersection_update :  A = {2, 3, 4}
+# intersection_update :  B = {2, 3, 4, 5}
+# intersection_update :  result = None
+# intersection_update :  C = {4}
+# intersection_update :  B = {2, 3, 4, 5, 6}
+# intersection_update :  A = {1, 2, 3, 4}
+#
+#
+# isdisjoint :  Are A and B disjoint? True
+# isdisjoint :  Are A and C disjoint? False
+# isdisjoint :  Are A and B disjoint? False
+# isdisjoint :  Are A and C disjoint? False
+# isdisjoint :  Are A and D disjoint? True
+# isdisjoint :  Are A and E disjoint? False
+#
+#
+# issubset :  True
+# issubset :  False
+# issubset :  False
+# issubset :  True
+#
+#
+# issuperset :  True
+# issuperset :  False
+# issuperset :  True
+#
+#
+# pop :  Return Value is a
+# pop :  A =  {'b', 'c', 'd'}
+#
+#
+# remove :  Original language set : {'English', 'French', 'German'}
+# remove :  Updated language set after remove : {'English', 'French'}
+#
+#
+# symmetric_difference :  {'a', 'b', 'e'}
+# symmetric_difference :  {'a', 'b', 'e'}
+# symmetric_difference :  {'a', 'b', 'c', 'd'}
+# symmetric_difference :  {'e', 'c', 'd'}
+# symmetric_difference :  using ^ operator :  {'a', 'b', 'e'}
+# symmetric_difference :  using ^ operator :  {'a', 'b', 'e'}
+# symmetric_difference :  using ^ operator :  set()
+# symmetric_difference :  using ^ operator :  set()
+#
+#
+# union :  A U B = {2, 'd', 'a', 'c'}
+# union :  B U C = {1, 2, 3, 'd', 'c'}
+# union :  A U B U C = {1, 2, 3, 'd', 'a', 'c'}
+# union :  A.union() = {'a', 'c', 'd'}
+# union :  using | operator :  A U B = {2, 'd', 'a', 'c'}
+# union :  using | operator :  B U C = {1, 2, 3, 'd', 'c'}
+# union :  using | operator :  A U B U C = {1, 2, 3, 'd', 'a', 'c'}
+#
+#
+# update :  A = {1, 2, 3, 'a', 'b'}
+# update :  result = None
+# update :  numbers_set = {1, 2, 'a', 'b', 'c'}
+# update :  numbers_set = {'a', 'b', 'lock', 'key'}
 
