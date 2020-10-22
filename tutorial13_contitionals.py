@@ -90,3 +90,77 @@ numbers = [1, 2, 3, 4, 5, 6, 7]
 for var in numbers:
     print("Current value is :: ", var)
 
+# Iterating over different stuff
+sample_list = ["Jayant", "Nikhil", "Mohit", "Amit", "Parveen"]
+sample_tuple = ("Jayant", "Nikhil", "Mohit", "Amit", "Parveen")
+sample_dict = {1: "Jayant", 2: "Nikhil", 3: "Mohit", 4: "Amit", 5: "Parveen"}
+
+list_of_list = [ ["Jayant", "Micron"],
+                 ["Nikhil", "NXP"],
+                 ["Amit", "Air India"],
+                 ["Mohit", "Fraunhaufer"],
+                 ["Isha", "STM"],
+                 ["Vishal", "Cadence"],
+                 ["Sudhir", "Synopsys"]
+                ]
+
+for var in sample_list:
+    print("list : ", var)
+
+for var in sample_tuple:
+    print("tuple : ", var)
+
+for var in sample_dict: # This will only print the keys
+    print("dict : ", var)
+
+# Iterating over a list of lists
+# Here each iteration of the for loop will return a list
+for var in list_of_list:
+    print("element is : ", type(var), var)
+
+# To print both the elements of the list inside the list (Output will not be list this time, this time it will come as string):
+# This is called as unpacking
+for name, company in list_of_list:
+    print("name    : ", type(name), name)
+    print("company : ", type(company), company)
+
+# However if you try to cram another variable to print it will return with an exception:
+# ValueError: not enough values to unpack (expected 3, got 2)
+# UNCOMMENT BELOW TO RUN
+# for name, company, id in list_of_list:
+#     print("name    : ", name)
+#     print("company : ", company)
+#     print("id      : ", id)
+
+# however if we make a list in which each element is another list with 3 elements each :
+list_of_list2 = [ ["Jayant", "Micron", "123"],
+                  ["Nikhil", "NXP", "456"],
+                  ["Amit", "Air India", "789"],
+                  ["Mohit", "Fraunhaufer", "ABC"],
+                  ["Isha", "STM", "DEF"],
+                  ["Vishal", "Cadence", "GHI"],
+                  ["Sudhir", "Synopsys", "JKL"]
+                 ]
+
+# This will return proper output
+for name, company, id in list_of_list2:
+    print("name    :: ", name)
+    print("company :: ", company)
+    print("id      :: ", id)
+
+print("\n\n")
+
+# converting out list_of_list1 to a dictionary using typecasting
+
+dict2 = dict(list_of_list)
+print(type(dict2), dict2)
+
+# iterating using for loop over the created dictionary
+
+#for nm, comp in dict2: # UNCOMMENT TO RUN : As this will return an exception : ValueError: too many values to unpack (expected 2)
+#    print(nm, comp)
+
+# for iterating over a dictionary use the dictionary method : items() to help iterating ovr the dictionary
+
+for nm, comp in dict2.items():
+    print(nm, comp)
