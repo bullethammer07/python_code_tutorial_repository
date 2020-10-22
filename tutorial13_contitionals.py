@@ -1,5 +1,7 @@
 # Conditionals in Python
 #   1. if
+#        'in' keyowrd
+#        'not in' keyword
 #   2. if else
 #   3. if elif
 #   4. for loop
@@ -57,6 +59,19 @@ if choice2 == 'Y':
     print("Welcome to the store")
 elif choice2 == 'N':
     print("Please visit soon :) !!...")
+
+# 'in' and 'not in' keyowrd in if statements
+# can be clubbed  with if statements to checky if an element is present in an iterable. for eg
+
+# NOTE :
+# the statements '<var> in <iterable>' and '<var> not in <iterable>' can return True or False based on the conditions.
+# These can be used indifferent area where True/False judgement is required
+
+str1 = "This is a string"
+list2 = str1.split()
+
+if 'This' in list2: # Checks for keyword 'This' in the list list2
+    print("Element found")
 
 #-------------------------------------------------------------------------------------------------------------------
 # for loop
