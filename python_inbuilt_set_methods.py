@@ -4,12 +4,12 @@
 # add()                    : Method adds a given element to a set. If the element is already present, it doesn't add any element.
 # clear()                  : Method removes all elements from the set.
 # copy()                   : Method returns a shallow copy of the set.
-# difference()             :
-# difference_update()      :
-# discard()                :
-# intersection()           :
-# intersection_update()    :
-# isdisjoint()             :
+# difference()             : Method returns the set difference of two sets.
+# difference_update()      : Updates the set calling difference_update() method with the difference of sets.
+# discard()                : Method removes a specified element from the set (if present).
+# intersection()           : Method returns a new set with elements that are common to all sets.
+# intersection_update()    : Updates the set calling intersection_update() method with the intersection of sets.
+# isdisjoint()             : Method returns True if two sets are disjoint sets. If not, it returns False.
 # issubset()               :
 # issuperset()             :
 # pop()                    :
@@ -104,9 +104,183 @@ new_numbers2.add(5)
 print("copy : ", "Original Set", 'numbers: ', numbers2)
 print("copy : ", "Copied Set", 'new_numbers: ', new_numbers2)
 
+#----------------------------------------------------------------------------------------------------------------------
+# difference()
+# Description : Method returns the set difference of two sets.
+# Syntax : A.difference(B)
+#            Here, A and B are two sets. The following syntax is equivalent to A-B.
 
+print("\n")
 
+# Return Value from difference()
+# difference() method returns the difference between two sets which is also a set. It doesn't modify original sets.
 
+# Example 1: How difference() works in Python?
+
+A = {'a', 'b', 'c', 'd'}
+B = {'c', 'f', 'g'}
+# Equivalent to A-B
+print("difference : ", A.difference(B))
+# Equivalent to B-A
+print("difference : ", B.difference(A))
+
+# Example 2: Set Difference Using - Operator.
+print("difference : ", A-B)
+print("difference : ", B-A)
+
+#----------------------------------------------------------------------------------------------------------------------
+# difference_update()
+# Description : Updates the set calling difference_update() method with the difference of sets.
+# Syntax : A.difference_update(B)
+#            Here, A and B are two sets. difference_update() updates set A with the set difference of A-B.
+
+print("\n")
+
+# Return Value from difference_update()
+# difference_update() returns None indicating the object (set) is mutated.
+# Suppose,
+# result = A.difference_update(B)
+# When you run the code,
+# result will be None
+# A will be equal to A-B
+# B will be unchanged
+
+# Example: How difference_update() works?
+
+setA = {'a', 'c', 'g', 'd'}
+setB = {'c', 'f', 'g'}
+result = setA.difference_update(setB)
+print("difference_update : ", 'A = ', setA)
+print("difference_update : ", 'B = ', setB)
+print("difference_update : ", 'result = ', result)
+
+#----------------------------------------------------------------------------------------------------------------------
+# discard()
+# Description : Method removes a specified element from the set (if present).
+# Syntax : s.discard(x)
+#            discard() method takes a single element x and removes it from the set (if present).
+
+print("\n")
+
+# Return Value from discard()
+# discard() removes element x from the set if the element is present.
+# This method returns None (meaning, absence of a return value).
+
+# Example 1: How discard() works?
+
+numbers3 = {2, 3, 4, 5}
+numbers3.discard(3)
+print("discard : ", 'numbers = ', numbers3)
+numbers3.discard(5)
+print("discard : ", 'numbers = ', numbers3)
+numbers3.discard(10)
+print("discard : ", 'numbers = ', numbers3)
+
+#----------------------------------------------------------------------------------------------------------------------
+# intersection()
+# Description : method returns a new set with elements that are common to all sets.
+# Syntax : A.intersection(*other_sets)
+#            intersection() allows arbitrary number of arguments (sets).
+
+print("\n")
+
+# Return Value from Intersection()
+# intersection() method returns the intersection of set A with all the sets (passed as argument).
+# If the argument is not passed to intersection(), it returns a shallow copy of the set (A).
+
+# Example 1: How intersection() works?
+
+set_A = {2, 3, 5, 4}
+set_B = {2, 5, 100}
+set_C = {2, 3, 8, 9, 10}
+print("intersection : ", set_B.intersection(set_A))
+print("intersection : ", set_B.intersection(set_C))
+print("intersection : ", set_A.intersection(set_C))
+print("intersection : ", set_C.intersection(set_A, set_B))
+
+# Example 2 : More Examples
+
+set__A = {100, 7, 8}
+set__B = {200, 4, 5}
+set__C = {300, 2, 3}
+set__D = {100, 200, 300}
+print("intersection : ", set__A.intersection(set__D))
+print("intersection : ", set__B.intersection(set__D))
+print("intersection : ", set__C.intersection(set__D))
+print("intersection : ", set__A.intersection(set__B, set__C, set__D))
+
+#----------------------------------------------------------------------------------------------------------------------
+# intersection_update()
+# Description : Updates the set calling intersection_update() method with the intersection of sets.
+# Syntax : A.intersection_update(*other_sets)
+#            The intersection_update() method allows an arbitrary number of arguments (sets).
+
+print("\n")
+
+# Return Value from Intersection_update()
+# This method returns None (meaning it does not have a return value). It only updates the set calling the intersection_update() method.
+# For example:
+# result = A.intersection_update(B, C)
+# When you run the code,
+#   result will be None
+#   A will be equal to the intersection of A, B, and C
+#   B remains unchanged
+#   C remains unchanged
+
+# Example 1: How intersection_update() Works?
+
+set___A = {1, 2, 3, 4}
+set___B = {2, 3, 4, 5}
+result = set___A.intersection_update(set___B)
+print("intersection_update : ", 'result =', result)
+print("intersection_update : ", 'A =', set___A)
+print("intersection_update : ", 'B =', set___B)
+
+# Example 2: intersection_update() with Two Parameters
+
+SET_A = {1, 2, 3, 4}
+SET_B = {2, 3, 4, 5, 6}
+SET_C = {4, 5, 6, 9, 10}
+result = SET_C.intersection_update(SET_B, SET_A)
+print("intersection_update : ", 'result =', result)
+print("intersection_update : ", 'C =', SET_C)
+print("intersection_update : ", 'B =', SET_B)
+print("intersection_update : ", 'A =', SET_A)
+
+#----------------------------------------------------------------------------------------------------------------------
+# isdisjoint()
+# Description : Method returns True if two sets are disjoint sets. If not, it returns False.
+# Syntax : set_a.isdisjoint(set_b)
+#            isdisjoint() method takes a single argument (a set).
+#            NOTE : You can also pass an iterable (list, tuple, dictionary, and string) to disjoint().
+#            isdisjoint() method will automatically convert iterables to set and checks whether the sets are disjoint or not.
+
+print("\n")
+
+# Return Value from isdisjoint()
+# isdisjoint() method returns
+#   1. True if two sets are disjoint sets (if set_a and set_b are disjoint sets in above syntax)
+#   2. False if two sets are not disjoint sets
+
+# Example 1: How isdisjoint() works?
+
+set_a = {1, 2, 3, 4}
+set_b = {5, 6, 7}
+set_c = {4, 5, 6}
+print("isdisjoint : ", 'Are A and B disjoint?', set_a.isdisjoint(set_b))
+print("isdisjoint : ", 'Are A and C disjoint?', set_a.isdisjoint(set_c))
+
+# Example 2: isdisjoint() with Other Iterables as arguments
+
+set_aa = {'a', 'b', 'c', 'd'}
+set_bb = ['b', 'e', 'f']
+set_cc = '5de4'
+set_dd = {1 : 'a', 2 : 'b'}
+set_ee = {'a' : 1, 'b' : 2}
+print("isdisjoint : ", 'Are A and B disjoint?', set_aa.isdisjoint(set_bb))
+print("isdisjoint : ", 'Are A and C disjoint?', set_aa.isdisjoint(set_cc))
+print("isdisjoint : ", 'Are A and D disjoint?', set_aa.isdisjoint(set_dd))
+print("isdisjoint : ", 'Are A and E disjoint?', set_aa.isdisjoint(set_ee))
 
 
 
