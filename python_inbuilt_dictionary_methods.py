@@ -7,9 +7,9 @@
 # get()           : Method returns the value for the specified key if key is in dictionary.
 # items()         : Method returns a view object that displays a list of dictionary's (key, value) tuple pairs.
 # keys()          : Method returns a view object that displays a list of all the keys in the dictionary
-# pop()           :
-# popitem()       :
-# setdefault()    :
+# pop()          *: Method removes and returns an element from a dictionary having the given key.
+# popitem()       : Method removes and returns the last element (key, value) pair inserted into the dictionary.
+# setdefault()    : Method returns the value of a key (if the key is in dictionary). If not, it inserts key with a value to the dictionary.
 # update()        :
 # values()        :
 
@@ -209,6 +209,107 @@ print("keys : ", 'Before dictionary is updated', person2.keys())
 person2.update({'salary': 3500.0})
 print("keys : ", 'After dictionary is updated', person2.keys())
 
+#----------------------------------------------------------------------------------------------------------------------
+# pop()
+# Description : Method removes and returns an element from a dictionary having the given key.
+# Syntax : dictionary.pop(key,default)
+#            key : key which is to be searched for removal
+#            default : value which is to be returned when the key is not in the dictionary
+
+print("\n")
+
+# Return value from pop()
+# The pop() method returns:
+#   If key is found - removed/popped element from the dictionary
+#   If key is not found - value specified as the second argument (default)
+#   If key is not found and default argument is not specified - KeyError exception is raised
+
+# Example 1: Pop an element from the dictionary
+
+# random sales dictionary
+sales3 = { 'apple': 2, 'orange': 3, 'grapes': 4 }
+element = sales3.pop('apple')
+print("pop : ", 'The popped element is:', element)
+print("pop : ", 'The dictionary is:', sales3)
+
+# Example 2: Pop an element not present from the dictionary
+
+# random sales dictionary
+sales4 = { 'apple': 2, 'orange': 3, 'grapes': 4 }
+# element2 = sales4.pop('guava') # UNCOMMENT TO RUN : This will return an exception : KeyError: 'guava'
+
+# Example 3: Pop an element not present from the dictionary, provided a default value
+
+# random sales dictionary
+sales5 = { 'apple': 2, 'orange': 3, 'grapes': 4 }
+element3 = sales5.pop('guava', 'banana')
+print("pop with default : ", 'The popped element is:', element3)
+print("pop with default : ", 'The dictionary is:', sales5)
+
+#----------------------------------------------------------------------------------------------------------------------
+# popitem()
+# Description : Method removes and returns the last element (key, value) pair inserted into the dictionary.
+# Syntax : dict.popitem()
+#            The popitem() doesn't take any parameters.
+
+print("\n")
+
+# Return Value from popitem() method
+# The popitem() method removes and returns the (key, value) pair from the dictionary in the Last In, First Out (LIFO) order.
+#   1. Returns the latest inserted element (key,value) pair from the dictionary.
+#   2. Removes the returned element pair from the dictionary.
+
+# Example 1 : Working of popitem() method
+
+person3 = {'name': 'Phill', 'age': 22, 'salary': 3500.0}
+# ('salary', 3500.0) is inserted at the last, so it is removed.
+print("popitem : ", 'Initial Value = ', person3)
+result = person3.popitem()
+print("popitem : ", 'popitem Value = ', result)
+print("popitem : ", 'updated person dict = ', person3)
+# inserting a new element pair
+person3['profession'] = 'Plumber'
+print("popitem : ", 'Added item to person dict = ', result)
+print("popitem : ", 'updated person dict = ', person3)
+# popping last item
+result = person3.popitem()
+print("popitem : ", 'person updated dict after popitem ', person3)
+
+#----------------------------------------------------------------------------------------------------------------------
+# setdefault()
+# Description : Method returns the value of a key (if the key is in dictionary). If not, it inserts key with a value to the dictionary.
+# Syntax : dict.setdefault(key,default_value)
+#            key : the key to be searched in the dictionary
+#            default_value : (optional). key with a value default_value is inserted to the dictionary if the key is not in the dictionary.
+#                            If not provided, the default_value will be None.
+
+print("\n")
+
+# Return Value from setdefault() :
+# setdefault() returns:
+#   1. value of the key if it is in the dictionary
+#   2. None if the key is not in the dictionary and default_value is not specified
+#   3. default_value if key is not in the dictionary and default_value is specified
+
+# Example 1: How setdefault() works when key is in the dictionary?
+
+person4 = {'name': 'Phill', 'age': 22}
+person4_age = person4.setdefault('age')
+print("setdefault : ", 'person = ',person4)
+print("setdefault : ", 'Age = ', person4_age)
+
+# Example 2: How setdefault() works when key is not in the dictionary?
+
+person5 = {'name': 'Phill'}
+# key is not in the dictionary
+person5_salary = person5.setdefault('salary')
+print("setdefault : ", 'person = ', person5)
+print("setdefault : ", 'salary = ', person5_salary)
+# key is not in the dictionary
+# default_value is provided
+person5_age = person5.setdefault('age', 22)
+print("setdefault : ", 'person = ', person5)
+print("setdefault : ", 'age = ', person5_age)
 
 #----------------------------------------------------------------------------------------------------------------------
 # ()
