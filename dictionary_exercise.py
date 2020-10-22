@@ -6,4 +6,4 @@ my_dict = {"word1": "This is meaning of word1",
            "word4": "This is meaning of word4",}
 
 choice = input("Please enter the word :: ")
-print("MEaning is :: ", my_dict[choice])
+print("Meaning is :: ", my_dict[choice])
