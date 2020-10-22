@@ -10,8 +10,8 @@
 # pop()          *: Method removes and returns an element from a dictionary having the given key.
 # popitem()       : Method removes and returns the last element (key, value) pair inserted into the dictionary.
 # setdefault()    : Method returns the value of a key (if the key is in dictionary). If not, it inserts key with a value to the dictionary.
-# update()        :
-# values()        :
+# update()        : Updates the dictionary with the elements from the another dictionary object or from an iterable of key/value pairs.
+# values()        : Method returns a view object that displays a list of all the values in the dictionary.
 
 #----------------------------------------------------------------------------------------------------------------------
 # clear()
@@ -312,7 +312,130 @@ print("setdefault : ", 'person = ', person5)
 print("setdefault : ", 'age = ', person5_age)
 
 #----------------------------------------------------------------------------------------------------------------------
-# ()
-# Description :
-# Syntax :
+# update()
+# Description : Updates the dictionary with the elements from the another dictionary object or from an iterable of key/value pairs.
+# Syntax : dict.update([other])
+#            The update() method takes either a dictionary or an iterable object of key/value pairs (generally tuples).
+#            NOTE : If update() is called without passing parameters, the dictionary remains unchanged.
+
 print("\n")
+
+# Return Value from update()
+# update() method updates the dictionary with elements from a dictionary object or an iterable object of key/value pairs.
+#   It doesn't return any value (returns None).
+
+# Example 1: Working of update()
+
+d = {1: "one", 2: "three"}
+d1 = {2: "two"}
+# updates the value of key 2
+d.update(d1)
+print("update : ", d)
+d1 = {3: "three"}
+# adds element with key 3
+d.update(d1)
+print("update : ", d)
+
+# Example 2: update() When Tuple is Passed
+d2 = {'x': 2}
+d2.update(y = 3, z = 0)
+print("update : ", d2)
+
+#----------------------------------------------------------------------------------------------------------------------
+# values()
+# Description : Method returns a view object that displays a list of all the values in the dictionary.
+# Syntax : dictionary.values()
+#            values() method doesn't take any parameters.
+
+print("\n")
+
+# Return value from values()
+# values() method returns a view object that displays a list of all values in a given dictionary.
+
+# Example 1: Get all values from the dictionary
+
+# random sales dictionary
+sales6 = { 'apple': 2, 'orange': 3, 'grapes': 4 }
+print("values : ", sales6.values())
+
+# Example 2: How values() works when dictionary is modified?
+
+# random sales dictionary
+sales7 = { 'apple': 2, 'orange': 3, 'grapes': 4 }
+sales7_values = sales7.values()
+print("values : ", 'Original items:', sales7_values)
+# delete an item from dictionary
+del[sales7['apple']]
+print("values : ", 'Updated items:', sales7_values)
+
+# ================================================================================================
+#                                OUTPUT
+# ================================================================================================
+
+# clear :  {1: 'one', 2: 'two'}
+# clear :  {}
+#
+#
+# copy :  Orignal:  {1: 'one', 2: 'two'}
+# copy :  New:  {1: 'one', 2: 'two'}
+# copy dict using = operator :  new:  {}
+# copy dict using = operator :  original:  {}
+#
+#
+# fromkeys :  {'e': None, 'u': None, 'a': None, 'i': None, 'o': None}
+# fromkeys :  {'e': 'vowel', 'u': 'vowel', 'a': 'vowel', 'i': 'vowel', 'o': 'vowel'}
+# fromkeys :  {'e': [1], 'u': [1], 'a': [1], 'i': [1], 'o': [1]}
+# fromkeys :  {'e': [1, 2], 'u': [1, 2], 'a': [1, 2], 'i': [1, 2], 'o': [1, 2]}
+# value :  [1]
+# fromkeys using dictionary comprehension :  {'e': [1], 'u': [1], 'a': [1], 'i': [1], 'o': [1]}
+# value :  [1, 2]
+# fromkeys using dictionary comprehension :  {'e': [1], 'u': [1], 'a': [1], 'i': [1], 'o': [1]}
+#
+#
+# Name:  Phill
+# Age:  22
+# Salary:  None
+# Salary:  0.0
+#
+#
+# items :  dict_items([('apple', 2), ('orange', 3), ('grapes', 4)])
+# Original items: dict_items([('apple', 2), ('orange', 3), ('grapes', 4)])
+# Updated items: dict_items([('orange', 3), ('grapes', 4)])
+#
+#
+# keys :  dict_keys(['name', 'age', 'salary'])
+# keys :  dict_keys([])
+# keys :  Before dictionary is updated dict_keys(['name', 'age'])
+# keys :  After dictionary is updated dict_keys(['name', 'age', 'salary'])
+#
+#
+# pop :  The popped element is: 2
+# pop :  The dictionary is: {'orange': 3, 'grapes': 4}
+# pop with default :  The popped element is: banana
+# pop with default :  The dictionary is: {'apple': 2, 'orange': 3, 'grapes': 4}
+#
+#
+# popitem :  Initial Value =  {'name': 'Phill', 'age': 22, 'salary': 3500.0}
+# popitem :  popitem Value =  ('salary', 3500.0)
+# popitem :  updated person dict =  {'name': 'Phill', 'age': 22}
+# popitem :  Added item to person dict =  ('salary', 3500.0)
+# popitem :  updated person dict =  {'name': 'Phill', 'age': 22, 'profession': 'Plumber'}
+# popitem :  person updated dict after popitem  {'name': 'Phill', 'age': 22}
+#
+#
+# setdefault :  person =  {'name': 'Phill', 'age': 22}
+# setdefault :  Age =  22
+# setdefault :  person =  {'name': 'Phill', 'salary': None}
+# setdefault :  salary =  None
+# setdefault :  person =  {'name': 'Phill', 'salary': None, 'age': 22}
+# setdefault :  age =  22
+#
+#
+# update :  {1: 'one', 2: 'two'}
+# update :  {1: 'one', 2: 'two', 3: 'three'}
+# update :  {'x': 2, 'y': 3, 'z': 0}
+#
+#
+# values :  dict_values([2, 3, 4])
+# values :  Original items: dict_values([2, 3, 4])
+# values :  Updated items: dict_values([3, 4])
