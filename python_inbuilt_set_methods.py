@@ -14,7 +14,7 @@
 # issuperset()             : Method returns True if a set has every elements of another set (passed as an argument). If not, it returns False.
 # pop()                    : Method removes an arbitrary element from the set and returns the element removed.
 # remove()                 : Method removes the specified element from the set.
-# symmetric_difference()   :
+# symmetric_difference()   : Method returns the symmetric difference of two sets.
 # union()                  :
 # update()                 :
 
@@ -380,12 +380,36 @@ print("remove : ", 'Updated language set after remove :', language)
 # animal set
 animal = {'cat', 'dog', 'rabbit', 'guinea pig'}
 # Deleting 'fish' element
-animal.remove('fish')
+# animal.remove('fish') # UNCOMMENT TO RUN : This will return an exception : KeyError: 'fish'
 # Updated animal
 # print("remove : ", 'Updated animal set:', animal) # UNCOMMENT TO RUN : This will return an exception : KeyError: 'fish'
 
+#----------------------------------------------------------------------------------------------------------------------
+# symmetric_difference()
+# Description : Method returns the symmetric difference of two sets.
+#               The symmetric difference of two sets A and B is the set of elements that are in either A or B, but not in their intersection.
+# Syntax : A.symmetric_difference(B)
 
+print("\n")
 
+# Example 1: Working of symmetric_difference()
+
+p = {'a', 'b', 'c', 'd'}
+q = {'c', 'd', 'e' }
+r = {}
+
+print("symmetric_difference : ", p.symmetric_difference(q))
+print("symmetric_difference : ", q.symmetric_difference(p))
+print("symmetric_difference : ", p.symmetric_difference(r))
+print("symmetric_difference : ", q.symmetric_difference(r))
+
+# Example : Symmetric difference using ^ operator
+# In Python, we can also find the symmetric difference using the ^ operator.
+
+print("symmetric_difference : ", A ^ B)
+print("symmetric_difference : ", B ^ A)
+print("symmetric_difference : ", A ^ A)
+print("symmetric_difference : ", B ^ B)
 
 
 
