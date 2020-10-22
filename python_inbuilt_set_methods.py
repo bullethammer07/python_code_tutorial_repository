@@ -10,9 +10,9 @@
 # intersection()           : Method returns a new set with elements that are common to all sets.
 # intersection_update()    : Updates the set calling intersection_update() method with the intersection of sets.
 # isdisjoint()             : Method returns True if two sets are disjoint sets. If not, it returns False.
-# issubset()               :
-# issuperset()             :
-# pop()                    :
+# issubset()               : Method returns True if all elements of a set are present in another set (passed as an argument). If not, it returns False.
+# issuperset()             : Method returns True if a set has every elements of another set (passed as an argument). If not, it returns False.
+# pop()                    : Method removes an arbitrary element from the set and returns the element removed.
 # remove()                 :
 # symmetric_difference()   :
 # union()                  :
@@ -282,14 +282,76 @@ print("isdisjoint : ", 'Are A and C disjoint?', set_aa.isdisjoint(set_cc))
 print("isdisjoint : ", 'Are A and D disjoint?', set_aa.isdisjoint(set_dd))
 print("isdisjoint : ", 'Are A and E disjoint?', set_aa.isdisjoint(set_ee))
 
+#----------------------------------------------------------------------------------------------------------------------
+# issubset()
+# Description : method returns True if all elements of a set are present in another set (passed as an argument). If not, it returns False.
+# Syntax : A.issubset(B)
+#            The above code checks if A is a subset of B.
 
+print("\n")
 
+# Return Value from issubset()
+# issubset() returns
+#   True if A is a subset of B
+#   False if A is not a subset of B
+
+# Example: How issubset() works?
+
+s_A = {1, 2, 3}
+s_B = {1, 2, 3, 4, 5}
+s_C = {1, 2, 4, 5}
+# Returns True
+print("issubset : ", s_A.issubset(s_B))
+# Returns False
+# B is not subset of A
+print("issubset : ", s_B.issubset(s_A))
+# Returns False
+print("issubset : ", s_A.issubset(s_C))
+# Returns True
+print("issubset : ", s_C.issubset(s_B))
 
 #----------------------------------------------------------------------------------------------------------------------
-# ()
-# Description :
-# Syntax :
+# issuperset()
+# Description : method returns True if a set has every elements of another set (passed as an argument). If not, it returns False.
+# Syntax : A.issuperset(B)
+#            The following code checks if A is a superset of B.
+
 print("\n")
+
+# Return Value from issuperset()
+# issuperset() returns
+#   True if A is a superset of B
+#   False if A is not a superset of B
+
+# Example: How issuperset() works?
+
+st_A = {1, 2, 3, 4, 5}
+st_B = {1, 2, 3}
+st_C = {1, 2, 3}
+# Returns True
+print("issuperset : ", st_A.issuperset(st_B))
+# Returns False
+print("issuperset : ", st_B.issuperset(st_A))
+# Returns True
+print("issuperset : ", st_C.issuperset(st_B))
+
+#----------------------------------------------------------------------------------------------------------------------
+# pop()
+# Description : Method removes an arbitrary element from the set and returns the element removed.
+# Syntax : set.pop()
+#            The pop() method doesn't take any arguments.
+
+print("\n")
+
+# Return Value from pop()
+# The pop() method returns an arbitrary (random) element from the set. Also, the set is updated and will not contain the element (which is returned).
+# If the set is empty, TypeError exception is raised.
+
+# Example: How pop() works for Python Sets?
+
+stA ={'a', 'b', 'c', 'd'}
+print("pop : ", 'Return Value is', stA.pop())
+print("pop : ", 'A = ', stA)
 
 
 
