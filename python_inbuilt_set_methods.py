@@ -15,7 +15,7 @@
 # pop()                    : Method removes an arbitrary element from the set and returns the element removed.
 # remove()                 : Method removes the specified element from the set.
 # symmetric_difference()   : Method returns the symmetric difference of two sets.
-# union()                  :
+# union()                  : Method returns a new set with distinct elements from all the sets.
 # update()                 :
 
 #----------------------------------------------------------------------------------------------------------------------
@@ -406,10 +406,39 @@ print("symmetric_difference : ", q.symmetric_difference(r))
 # Example : Symmetric difference using ^ operator
 # In Python, we can also find the symmetric difference using the ^ operator.
 
-print("symmetric_difference : ", A ^ B)
-print("symmetric_difference : ", B ^ A)
-print("symmetric_difference : ", A ^ A)
-print("symmetric_difference : ", B ^ B)
+print("symmetric_difference : ", "using ^ operator : ", p ^ q)
+print("symmetric_difference : ", "using ^ operator : ", q ^ p)
+print("symmetric_difference : ", "using ^ operator : ", p ^ p)
+print("symmetric_difference : ", "using ^ operator : ", q ^ q)
+
+#----------------------------------------------------------------------------------------------------------------------
+# union()
+# Description : Method returns a new set with distinct elements from all the sets.
+# Syntax : A.union(*other_sets)
+#            NOTE : * is not part of the syntax. It is used to indicate that the method can take 0 or more arguments.
+
+print("\n")
+
+# Return Value from union()
+# The union() method returns a new set with elements from the set and all other sets (passed as an argument).
+# NOTE : If the argument is not passed to union(), it returns a shallow copy of the set.
+
+# Example 1: Working of union()
+
+us_A = {'a', 'c', 'd'}
+us_B = {'c', 'd', 2 }
+us_C = {1, 2, 3}
+print("union : ", 'A U B =', us_A.union(us_B))
+print("union : ", 'B U C =', us_B.union(us_C))
+print("union : ", 'A U B U C =', us_A.union(us_B, us_C))
+print("union : ", 'A.union() =', us_A.union())
+
+# You can also find the union of sets using the | operator.
+# Example 2: Set Union Using the | Operator
+
+print("union : ", "using | operator : ", 'A U B =', us_A | us_B)
+print("union : ", "using | operator : ", 'B U C =', us_B | us_C)
+print("union : ", "using | operator : ", 'A U B U C =', us_A | us_B | us_C)
 
 
 
