@@ -13,7 +13,7 @@
 # issubset()               : Method returns True if all elements of a set are present in another set (passed as an argument). If not, it returns False.
 # issuperset()             : Method returns True if a set has every elements of another set (passed as an argument). If not, it returns False.
 # pop()                    : Method removes an arbitrary element from the set and returns the element removed.
-# remove()                 :
+# remove()                 : Method removes the specified element from the set.
 # symmetric_difference()   :
 # union()                  :
 # update()                 :
@@ -353,7 +353,47 @@ stA ={'a', 'b', 'c', 'd'}
 print("pop : ", 'Return Value is', stA.pop())
 print("pop : ", 'A = ', stA)
 
+#----------------------------------------------------------------------------------------------------------------------
+# remove()
+# Description : Method removes the specified element from the set.
+# Syntax : set.remove(element)
+#            The remove() method takes a single element as an argument and removes it from the set.
 
+print("\n")
+
+# Return Value from remove()
+# The remove() removes the specified element from the set and updates the set. It doesn't return any value.
+# If the element passed to remove() doesn't exist, KeyError exception is thrown.
+
+# Example 1: Remove an Element From The Set
+
+# language set
+language = {'English', 'French', 'German'}
+# removing 'German' from language
+print("remove : ", 'Original language set :', language)
+language.remove('German')
+# Updated language set
+print("remove : ", 'Updated language set after remove :', language)
+
+# Example 2: Deleting Element That Doesn't Exist
+
+# animal set
+animal = {'cat', 'dog', 'rabbit', 'guinea pig'}
+# Deleting 'fish' element
+animal.remove('fish')
+# Updated animal
+# print("remove : ", 'Updated animal set:', animal) # UNCOMMENT TO RUN : This will return an exception : KeyError: 'fish'
+
+
+
+
+
+
+#----------------------------------------------------------------------------------------------------------------------
+# ()
+# Description :
+# Syntax :
+print("\n")
 
 
 # ================================================================================================
