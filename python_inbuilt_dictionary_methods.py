@@ -4,9 +4,9 @@
 # clear()         : Method removes all items from the dictionary.
 # copy()          : Method returns a shallow copy of the dictionary.
 # fromkeys()     *: Method creates a new dictionary from the given sequence of elements with a value provided by the user.
-# get()           :
-# items()         :
-# keys()          :
+# get()           : Method returns the value for the specified key if key is in dictionary.
+# items()         : Method returns a view object that displays a list of dictionary's (key, value) tuple pairs.
+# keys()          : Method returns a view object that displays a list of all the keys in the dictionary
 # pop()           :
 # popitem()       :
 # setdefault()    :
@@ -123,6 +123,92 @@ value3.append(2)
 # the dictionary vowels will not change even if we have updated the values.
 print("value : ", value3)
 print("fromkeys using dictionary comprehension : ", vowels4)
+
+#----------------------------------------------------------------------------------------------------------------------
+# get()
+# Description : Method returns the value for the specified key if key is in dictionary.
+# Syntax : dict.get(key[, value])
+#            key : key to be searched in the dictionary
+#            value : (optional). Value to be returned if the key is not found. The default value is None.
+
+print("\n")
+
+# Return Value from get()
+# get() method returns:
+#   1. the value for the specified key if key is in dictionary.
+#   2. None if the key is not found and value is not specified.
+#   3. value if the key is not found and value is specified.
+
+# Example 1: How get() works for dictionaries?
+
+person = {'name': 'Phill', 'age': 22}
+print('Name: ', person.get('name'))
+print('Age: ', person.get('age'))
+# value is not provided
+print('Salary: ', person.get('salary')) # This will return None
+# value is provided
+print('Salary: ', person.get('salary', 0.0)) # This will return 0 as default is provided
+
+# Python get() method Vs dict[key] to Access Elements :
+# NOTE : get() method returns a default value if the key is missing.
+#        However, if the key is not found when you use dict[key], KeyError exception is raised.
+
+#----------------------------------------------------------------------------------------------------------------------
+# items()
+# Description : Method returns a view object that displays a list of dictionary's (key, value) tuple pairs.
+# Syntax : dictionary.items()
+#            items() method is similar to dictionary's viewitems() method in Python 2.7.
+#            items() method doesn't take any parameters.
+
+print("\n")
+
+# Return value from items()
+# items() method returns a view object that displays a list of a given dictionary's (key, value) tuple pair.
+
+# Example 1: Get all items of a dictionary with items()
+
+# random sales dictionary
+sales = { 'apple': 2, 'orange': 3, 'grapes': 4 }
+print("items : ", sales.items())
+
+# Example 2: How items() works when a dictionary is modified?
+
+# random sales dictionary
+sales2 = { 'apple': 2, 'orange': 3, 'grapes': 4 }
+sale_items = sales2.items()
+print('Original items:', sale_items)
+# delete an item from dictionary
+del[sales2['apple']]
+print('Updated items:', sale_items)
+
+#----------------------------------------------------------------------------------------------------------------------
+# keys()
+# Description : Method returns a view object that displays a list of all the keys in the dictionary
+# Syntax : dict.keys()
+#            keys() doesn't take any parameters.
+
+print("\n")
+
+# Return Value from keys()
+# keys() returns a view object that displays a list of all the keys.
+# When the dictionary is changed, the view object also reflects these changes.
+
+# Example 1: How keys() works?
+
+person1 = {'name': 'Phill', 'age': 22, 'salary': 3500.0}
+print("keys : ", person1.keys())
+empty_dict = {}
+print("keys : ", empty_dict.keys())
+
+# Example 2: How keys() works when dictionary is updated?
+# Here, when the dictionary is updated, keys is also automatically updated to reflect changes.
+
+person2 = {'name': 'Phill', 'age': 22, }
+print("keys : ", 'Before dictionary is updated', person2.keys())
+# adding an element to the dictionary
+person2.update({'salary': 3500.0})
+print("keys : ", 'After dictionary is updated', person2.keys())
+
 
 #----------------------------------------------------------------------------------------------------------------------
 # ()
