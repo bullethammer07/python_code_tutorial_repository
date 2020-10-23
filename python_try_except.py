@@ -121,3 +121,30 @@ except (ValueError) as excp: # using another except block
 # In some situations, you might want to run a certain block of code if the code block inside try ran without any errors.
 # For these cases, you can use the optional else keyword with the try statement.
 #  NOTE : Exceptions in the else clause are not handled by the preceding except clauses.
+
+# for eg : below is code that excepts only even numbers and prints does some operation if even number is entered. Otherwise Exception is raised.
+
+try:
+    input_val = int(input("Enter a number : "))
+    assert input_val%2 == 0 , "Number not even"
+except Exception as e:
+    print("Encountered exception : ", e)
+else:
+    print("The number to the power 2 is :: ", pow(input_val, 2))
+
+# 'finally' statement
+#   1. The try statement in Python can have an optional finally clause. This clause is executed no matter what, and is generally used to release external resources.
+
+# For example, we may be connected to a remote data center through the network or working with a file or a Graphical User Interface (GUI).
+# In all these circumstances, we must clean up the resource before the program comes to a halt whether it successfully ran or not.
+# These actions (closing a file, GUI or disconnecting from network) are performed in the finally clause to guarantee the execution.
+
+# Here is an example of file operations to illustrate this.
+
+# try:
+#    f = open("test.txt",encoding = 'utf-8')
+#    # perform file operations
+# finally:
+#    f.close()
+
+# This type of construct makes sure that the file is closed even if an exception occurs during the program execution.
