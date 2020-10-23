@@ -20,7 +20,11 @@
 #   Greater than or equal to: a >= b
 
 #-------------------------------------------------------------------------------------------------------------------
+
+#---------------
 # If Statement :
+#---------------
+
 # if test expression:
 #     statement(s)
 
@@ -39,8 +43,9 @@ if num > 0:
     print(num, "is a positive number.")
 print("This is also always printed.")
 
-#-------------------------------------------------------------------------------------------------------------------
+#--------------------
 # If else statement :
+#--------------------
 
 # Take input from user
 choice = input("Do you want to continus ? (Y/N): ")
@@ -50,8 +55,19 @@ if choice == 'Y':
 else:
     print("The user does not want to continue")
 
-#-------------------------------------------------------------------------------------------------------------------
+#----------------------------------
+# If-Else shorthand representaton :
+#----------------------------------
+
+# Shorthand representation of if else (for small stuff that can be done in one line, use the below format for if-else)
+val_a = int(input("Enter the value of a : "))
+val_b = int(input("Enter the value of b : "))
+
+print("A is greater than B") if val_a > val_b else print("A is less than B")
+
+#-----------------------
 # If else-If statement :
+#-----------------------
 
 choice2 = input("Do you want to enter the store ? (Y/N) : ")
 
@@ -73,8 +89,12 @@ list2 = str1.split()
 if 'This' in list2: # Checks for keyword 'This' in the list list2
     print("Element found")
 
-#-------------------------------------------------------------------------------------------------------------------
-# for loop
+#------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#-----------
+# for loop :
+#-----------
+
 # The for loop in Python is used to iterate over a sequence (list, tuple, string) or other iterable objects. Iterating over a sequence is called traversal.
 
 # syntax : for val in sequence:
@@ -83,7 +103,9 @@ if 'This' in list2: # Checks for keyword 'This' in the list list2
 # Here, val is the variable that takes the value of the item inside the sequence on each iteration.
 # Loop continues until we reach the last item in the sequence. The body of for loop is separated from the rest of the code using indentation.
 
-# Example
+# -------------------------------------------------------
+# Example : Iterating over lists / tuple / dictionaries :
+# -------------------------------------------------------
 
 numbers = [1, 2, 3, 4, 5, 6, 7]
 
@@ -165,8 +187,35 @@ print(type(dict2), dict2)
 for nm, comp in dict2.items():
     print(nm, comp)
 
+#---------------------------------
+# for loop with range() function :
+#---------------------------------
+
+# We can use the range() function in for loops to iterate through a sequence of numbers.
+
+for val in range(10):
+    print("for with range () : ", val)
+
+#---------------------------------------------------------------------------------
+# combining with the len() function to iterate through a sequence using indexing :
+#---------------------------------------------------------------------------------
+
+# Program to iterate through a list using indexing
+genre = ['pop', 'rock', 'jazz']
+# iterate over the list using index
+for i in range(len(genre)):
+    print("for indexing using len() : ", genre[i])
+
+#---------------------
+# for loop with else :
+#---------------------
+
 #-------------------------------------------------------------------------------------------------------------------------
-# WHILE LOOPS
+
+#--------------
+# While loops :
+#--------------
+
 # syntax of while loop is as below :
 
 # while test_expression:
@@ -179,11 +228,18 @@ while i < 100:
     i = i + 1
 
 #-------------------------------------------------------------------------------------------------------------------------
-# 'break' and 'continue' statements
+
+#------------------------------------
+# 'break' and 'continue' statements :
+#------------------------------------
+
 #      break    : completely breaks the loop and comes out of it
 #      continue : when encountered, skips that iteration further and all the code fouther below in the loop, and jumps to the next iteration.
 
-# break example
+#----------------
+# break example :
+#----------------
+
 # In below code the break statement will exit the loop as soon as the value of j reaches greater than 20
 
 j = 0
@@ -196,7 +252,10 @@ while j < 100:
 
     j = j + 1
 
-# continue example
+#-------------------
+# continue example :
+#-------------------
+
 # Prints values only above 50
 k = 0
 while k < 100:
@@ -207,9 +266,3 @@ while k < 100:
         print(k)
 
     k = k + 1
-
-# Shorthand representation of if else (for small stuff that can be done in one line, use the below format for if-else)
-val_a = int(input("Enter the value of a : "))
-val_b = int(input("Enter the value of b : "))
-
-print("A is greater than B") if val_a > val_b else print("A is less than B")
