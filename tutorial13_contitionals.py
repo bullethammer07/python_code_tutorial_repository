@@ -210,6 +210,27 @@ for i in range(len(genre)):
 # for loop with else :
 #---------------------
 
+# A for loop can have an optional else block as well. The else part is executed if the items in the sequence used in for loop exhausts.
+# NOTE : The break keyword can be used to stop a for loop. In such cases, the else part is ignored.
+#        Hence, a for loop's else part runs if no break occurs.
+
+digits = [0, 1, 5]
+for i in digits:
+    print(i)
+else:
+    print("No items left.")
+
+# This for...else statement can be used with the break keyword to run the else block only when the break keyword was not executed. Let's take an example:
+# program to display student's marks from record
+student_name = 'Soyuj'
+marks = {'James': 90, 'Jules': 55, 'Arthur': 77}
+for student in marks:
+    if student == student_name:
+        print(marks[student])
+        break
+else:
+    print('No entry with that name found.')
+
 #-------------------------------------------------------------------------------------------------------------------------
 
 #--------------
@@ -226,6 +247,21 @@ i = 0
 while i < 100:
     print("value of i is :: ", i)
     i = i + 1
+
+#------------------------
+# While loops with else :
+#------------------------
+
+# Same as with for loops, while loops can also have an optional else block.
+# The while loop can be terminated with a break statement. In such cases, the else part is ignored.
+# Hence, a while loop's else part runs if no break occurs and the condition is false.
+
+counter = 0
+while counter < 3:
+    print("Inside loop")
+    counter = counter + 1
+else:
+    print("Inside else")
 
 #-------------------------------------------------------------------------------------------------------------------------
 
