@@ -164,3 +164,52 @@ print(type(dict2), dict2)
 
 for nm, comp in dict2.items():
     print(nm, comp)
+
+#-------------------------------------------------------------------------------------------------------------------------
+# WHILE LOOPS
+# syntax of while loop is as below :
+
+# while test_expression:
+#     Body of while
+
+i = 0
+
+while i < 100:
+    print("value of i is :: ", i)
+    i = i + 1
+
+#-------------------------------------------------------------------------------------------------------------------------
+# 'break' and 'continue' statements
+#      break    : completely breaks the loop and comes out of it
+#      continue : when encountered, skips that iteration further and all the code fouther below in the loop, and jumps to the next iteration.
+
+# break example
+# In below code the break statement will exit the loop as soon as the value of j reaches greater than 20
+
+j = 0
+while j < 100:
+    if j > 20:
+        print("j value is greater than 20 ... breaking the loop")
+        break
+    else:
+        print(j)
+
+    j = j + 1
+
+# continue example
+# Prints values only above 50
+k = 0
+while k < 100:
+    if k < 50:
+        k = k + 1
+        continue
+    else:
+        print(k)
+
+    k = k + 1
+
+# Shorthand representation of if else (for small stuff that can be done in one line, use the below format for if-else)
+val_a = int(input("Enter the value of a : "))
+val_b = int(input("Enter the value of b : "))
+
+print("A is greater than B") if val_a > val_b else print("A is less than B")
