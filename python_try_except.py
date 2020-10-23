@@ -117,3 +117,7 @@ except (TypeError, NameError) as excp: # Using one except block to catch two typ
 except (ValueError) as excp: # using another except block
     print("User has raised a Type 3 Exception : ", excp)
 
+# 'try' with else clause
+# In some situations, you might want to run a certain block of code if the code block inside try ran without any errors.
+# For these cases, you can use the optional else keyword with the try statement.
+#  NOTE : Exceptions in the else clause are not handled by the preceding except clauses.
