@@ -1,2 +1,5 @@
 
 .idea/codeStyles/codeStyleConfig.xml
+*.swp
+*.un~
+*.py~
