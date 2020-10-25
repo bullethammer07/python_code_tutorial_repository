@@ -44,5 +44,9 @@ for val in range(1, 10):
 #  .Random()
 #  .SystemRandom()
 
-for val in range(1, 20):
-    print("randrange : ", randf.randrange(1, val))
+print("randrange : ", randf.randrange(1, 10))
+
+# using the random.choice() function
+
+list = ["Kawasaki", "Yamaha", "Honda", "Ducati", "Suzuki", "KTM"]
+print("choice : ", randf.choice(list))
