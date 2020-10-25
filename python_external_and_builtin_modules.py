@@ -29,6 +29,7 @@ for val in range(1, 10):
 
 # Real valued distributions
 #  .random()
+#  .uniform()
 #  .triangular()
 #  .betavariate()
 #  .expovariate()
@@ -42,3 +43,6 @@ for val in range(1, 10):
 # Alternative Generator
 #  .Random()
 #  .SystemRandom()
+
+for val in range(1, 20):
+    print("randrange : ", randf.randrange(1, val))
