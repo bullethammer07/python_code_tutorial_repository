@@ -37,3 +37,8 @@ print(new_list)
 
 new_list = list(map(lambda x: x * 2 , my_list))
 print(new_list)
+
+# Another example with multiple arguments :
+
+result = lambda x, y, z: z * (x + y)
+print("Output is :: ", result(2, 5, 7))
