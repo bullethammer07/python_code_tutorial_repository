@@ -7,6 +7,7 @@
 # 2.)**kwargs (Key word Arguments)
 
 # “We use *args and **kwargs as an argument when we have no doubt about the number of  arguments we should pass in a function.”
+# NOTE : *args and **kwargs are optional arguments, so even if you specified them in the function definition. It is totally OK to not pass them.
 
 # Example 1 : Using *args
 
@@ -36,3 +37,16 @@ def my_function2(val1, *args_1):  # NOTE : If the arguments were passed as (*arg
 
 
 my_function2("random arg", *names)
+
+# Example 3 : Using **kwargs (Key-Word Args)
+# **kwargs is basically args with a key (like dictionaries)
+
+print("\n")
+# making a dictionary
+
+def my_function3(**kwargs_1):
+    for name, job in kwargs_1.items(): # .items() has to be specified to work with **kwargs
+        print(f"{name} works in {job}")
+
+name_and_job = {"Jayant": "Verif", "Mohit": "Data Science", "Nikhil": "Design", "Amit": "Sex"}
+my_function3(**name_and_job)
