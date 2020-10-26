@@ -50,3 +50,24 @@ def my_function3(**kwargs_1):
 
 name_and_job = {"Jayant": "Verif", "Mohit": "Data Science", "Nikhil": "Design", "Amit": "Sex"}
 my_function3(**name_and_job)
+
+# Example 3 : normal/regular arguments , *args and **kwargs ordering
+#             NOTE : If you are in a situation where you need to use all three, then remember it as a rule of thumb that their ordering folows:
+#                    1. normal/regular arguments takes precedence over *args and thus will come before it
+#                    2. *args takes precedence over **kwargs and thus will come before it
+
+print("\n")
+
+def my_function4(val1, *args_1, **kwargs_1):
+    print("This is my_function4")
+    print("The regular argument passed is : ", val1)
+
+    # Printing all the values passed in *args
+    for val in args_1:
+        print("Name is :: ", val)
+
+    # Printing all the values passed in **kwargs
+    for name, job in kwargs_1.items():
+        print(f"{name} works in {job}")
+
+my_function4("random arg", *names, **name_and_job)
