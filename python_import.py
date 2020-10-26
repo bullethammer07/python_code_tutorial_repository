@@ -15,3 +15,5 @@ my_function4("Stupid value")
 
 import python_args_kwargs
 
+print("The name is : ", __name__) # This will return as : The name is :  __main__
+                                  # only when this file is executed on run.
