@@ -63,3 +63,45 @@ while True:
     except StopIteration:
         # if StopIteration is raised, break from loop
         break
+
+#-----------------------------------------------------------------------------------------------------------
+# Example 3 : Building Custom Iterators
+#             Building an iterator from scratch is easy in Python. We just have to implement the __iter__() and the __next__() methods.
+#               1. The __iter__() method returns the iterator object itself. If required, some initialization can be performed.
+#               2. The __next__() method must return the next item in the sequence. On reaching the end, and in subsequent calls, it must raise StopIteration.
+
+# Here, we show an example that will give us the next power of 2 in each iteration. Power exponent starts from zero up to a user set number.
+
+print("\n")
+
+class PowTwo:
+    """Class to implement an iterator
+    of powers of two"""
+
+    def __init__(self, max=0):
+        self.max = max
+
+    def __iter__(self):
+        self.n = 0
+        return self
+
+    def __next__(self):
+        if self.n <= self.max:
+            result = 2 ** self.n
+            self.n += 1
+            return result
+        else:
+            raise StopIteration
+
+# create an object
+numbers = PowTwo(3)
+
+# create an iterable from the object
+i = iter(numbers)
+
+# Using next to get to the next iterator element
+print("Custom iterator : ", next(i))
+print("Custom iterator : ", next(i))
+print("Custom iterator : ", next(i))
+print("Custom iterator : ", next(i))
+# print("Custom iterator : ", next(i)) # UNCOMMENT TO RUN : This will generate an exception as end of iterator object has been reached.
