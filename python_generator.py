@@ -73,3 +73,33 @@ def str_reverse(str): # small function of reversing a string using yield
 
 for i in str_reverse("jayant"):
     print(i, end=" ")
+
+#------------------------------------------------------------------------------------------------------------
+# Example 3 : Python Generator Expression
+#             Simple generators can be easily created on the fly using generator expressions. It makes building generators easy.
+#             NOTE : Similar to the lambda functions which create anonymous functions, generator expressions create anonymous generator functions.
+#             syntax : The syntax for generator expression is similar to that of a list comprehension in Python.
+#                      But the square brackets are replaced with round parentheses.
+#
+#                      The major difference between a list comprehension and a generator expression is that
+#                      a list comprehension produces the entire list while the generator expression produces one item at a time.
+
+print("\n")
+
+my_list = [1, 2, 3, 4]
+
+# square each term using list comprehension
+list_ = [x**2 for x in my_list]
+
+# same thing can be done using a generator expression
+# generator expressions are surrounded by parenthesis ()
+generator_func1 = (x**2 for x in my_list)
+
+print(list_)
+print(generator_func1)  # This will return an iterator object
+
+print(next(generator_func1))
+print(next(generator_func1))
+print(next(generator_func1))
+print(next(generator_func1))
+#print(next(generator_func1)) # UNCOMMENT TO RUN : This will generate an exception as end of iterator has been reached : StopIteration
