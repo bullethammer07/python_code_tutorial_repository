@@ -17,4 +17,4 @@
 #             It is fairly simple to create a generator in Python.
 #             It is as easy as defining a normal function, but with a yield statement instead of a return statement.
 #             NOTE : The difference is that while a return statement terminates a function entirely,
-#             yield statement pauses the function saving all its states and later continues from there on successive calls.
+#                    yield statement pauses the function saving all its states and later continues from there on successive calls.
