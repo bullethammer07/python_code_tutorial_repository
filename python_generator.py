@@ -62,7 +62,7 @@ print(next(a))
 # Example 2 : Using generators with for loops
 
 print("\n")
-
+print("Using for loop with generators")
 for item in my_gen():
     print(item)
 
@@ -103,3 +103,54 @@ print(next(generator_func1))
 print(next(generator_func1))
 print(next(generator_func1))
 #print(next(generator_func1)) # UNCOMMENT TO RUN : This will generate an exception as end of iterator has been reached : StopIteration
+
+#------------------------------------------------------------------------------------------------------------
+# Example 4 : Using generator expression as function arguments.
+#             NOTE : When used in such a way, the round parentheses can be dropped.
+
+print("\n")
+# for eg. using for functions max() and sum()
+print("sum of values : ", sum(x**2 for x in my_list))  # This will return 30
+print("sum of values : ", max(x**2 for x in my_list))  # This will return 30
+
+#------------------------------------------------------------------------------------------------------------
+# Example 5 : Infinite stream using generators
+#             Generators are excellent mediums to represent an infinite stream of data.
+#             Infinite streams cannot be stored in memory, and since generators produce only one item at a time, they can represent an infinite stream of data.
+
+# The following generator function can generate all the even numbers
+
+print("\n")
+def all_even_nums():
+    n = 0
+    while True:
+        yield n
+        n += 2
+
+obj = all_even_nums()
+
+for val in range(1, 20):
+    print(next(obj))
+
+#------------------------------------------------------------------------------------------------------------
+# Example 6 : Pipelining generators
+#             Multiple generators can be used to pipeline a series of operations. This is best illustrated using an example.
+
+# For eg : Suppose we have a generator that produces the numbers in the Fibonacci series. And we have another generator for squaring numbers.
+#          If we want to find out the sum of squares of numbers in the Fibonacci series,
+#          we can do it in the following way by pipelining the output of generator functions together.
+
+print("\n")
+
+def fibonacci_nums(nums): # returns fibonacci series of n length
+    x, y = 0, 1
+    for val in range(nums):
+        x, y = y, x+y
+        yield x
+
+def square(nums): # returns the square all the numbers in the iterator
+    for val in nums:
+        yield val**2
+
+print(sum(square(fibonacci_nums(10))))
+
