@@ -142,13 +142,13 @@ for val in range(1, 20):
 
 print("\n")
 
-def fibonacci_nums(nums): # returns fibonacci series of n length
+def fibonacci_nums(nums):  # returns fibonacci series of n length
     x, y = 0, 1
     for val in range(nums):
         x, y = y, x+y
         yield x
 
-def square(nums): # returns the square all the numbers in the iterator
+def square(nums):  # returns the square all the numbers in the iterator
     for val in nums:
         yield val**2
 
