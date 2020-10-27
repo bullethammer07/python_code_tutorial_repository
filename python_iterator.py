@@ -34,3 +34,32 @@ except Exception as e:
 #-----------------------------------------------------------------------------------------------------------
 # Example 2 : Iterating using for loop.
 #             The usual for loop  is more better method for iterating over the list or iterable object.
+
+print("\n")
+for item in list1:
+    print(f"The item is {item}")
+
+#-----------------------------------------------------------------------------------------------------------
+# Example 3 : Working of for loop for Iterators
+#             As we see in the above example, the for loop was able to iterate automatically through the list.
+#             NOTE : In fact the for loop can iterate over any iterable. Let's take a closer look at how the for loop is actually implemented in Python.
+
+print("\n")
+
+# for element in iterable:
+#     # do something with element
+
+# Is actually implemented a :
+
+list2 = [1, 2, 3, 4, 5, 6, 7]
+list2_iter = iter(list2)
+
+while True:
+    try:
+        # get the next element
+        element = next(list2_iter)
+        print(f"for implemented using while : {element}")
+        # do something with element
+    except StopIteration:
+        # if StopIteration is raised, break from loop
+        break
