@@ -40,3 +40,46 @@ def square_or_cube(func, num): # here a function has been passed as argument to 
 
 print("passing square function : ", square_or_cube(square_of_num, 2))
 print("passing cube function : ", square_or_cube(cube_of_num, 3))
+
+#----------------------------------------------------------------------------------------------------------------
+# NOTE : Furthermore, functions can also return another function.
+
+# here 'returning_func' is a nested function which is defines and returned each time we call 'calling_func'
+def calling_func(num):
+
+    def returning_func():
+        return num + 2
+
+    return returning_func
+
+new = calling_func(5)
+print(new())
+
+#----------------------------------------------------------------------------------------------------------------
+# DECORATORS :
+#   Functions and methods are called callable as they can be called.
+#   In fact, any object which implements the special __call__() method is termed callable.
+#   NOTE : So, in the most basic sense, a decorator is a callable that returns a callable.
+#          Basically, a decorator takes in a function, adds some functionality and returns it.
+
+print("\n")
+
+def make_pretty(func):
+    def inner():
+        print("I got decorated")
+        func()
+    return inner
+
+def ordinary():
+    print("I am ordinary")
+
+# lets decorate this ordinary function
+decorated_func = make_pretty(ordinary)
+# calling the decorated function
+decorated_func()
+
+# In the example shown above, decorated_func() is a decorator. In the assignment step:
+# decorated_func = make_pretty(ordinary)
+
+# NOTE : Generally, we decorate a function and reassign it as :
+# ordinary = make_pretty(ordinary)
