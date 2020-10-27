@@ -58,3 +58,18 @@ print(next(a))
 # NOTE : To restart the process we need to create another generator object using something like a = my_gen().
 # NOTE : One final thing to note is that we can use generators with for loops directly (check Example 2).
 
+#------------------------------------------------------------------------------------------------------------
+# Example 2 : Using generators with for loops
+
+print("\n")
+
+for item in my_gen():
+    print(item)
+
+# A more useful example
+def str_reverse(str): # small function of reversing a string using yield
+    for i in range(len(str)-1, -1, -1):
+        yield str[i]
+
+for i in str_reverse("jayant"):
+    print(i, end=" ")
