@@ -83,3 +83,32 @@ decorated_func()
 
 # NOTE : Generally, we decorate a function and reassign it as :
 # ordinary = make_pretty(ordinary)
+
+# This is a common construct and for this reason, Python has a syntax to simplify this.
+# We can use the @ symbol along with the name of the decorator function and place it above the definition of the function to be decorated. For example,
+
+# @make_pretty
+# def ordinary():
+#     print("I am ordinary")
+# is equivalent to
+
+# def ordinary():
+#     print("I am ordinary")
+# ordinary = make_pretty(ordinary)
+
+#----------------------------------------------------------------------------------------------------------------
+# Decorating functions with parameters :
+
+def modified_sum(func):
+
+    def inner(x, y, z):
+        return func(x, (y+3))
+
+    return inner
+
+@modified_sum
+def sum_of_nums(a, b):
+    sum = a + b
+    return sum
+
+print(sum_of_nums(1, 2))
