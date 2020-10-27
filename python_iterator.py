@@ -1,6 +1,7 @@
 #-----------------
 # Python Iterator
 #-----------------
+
 # Iterators are objects that can be iterated upon
 # Technically speaking, a Python iterator object must implement two special methods, __iter__() and __next__(), collectively called the iterator protocol.
 # An object is called iterable if we can get an iterator from it. Most built-in containers in Python like: list, tuple, string etc. are iterables.
