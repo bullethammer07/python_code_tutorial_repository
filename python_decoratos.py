@@ -118,4 +118,39 @@ print(sum_of_nums(1, 2))
 # Taking this into account, now we can make general decorators that work with any number of parameters.
 # we can use *args and **kwargs to take as many number of arguments.
 
+print("\n")
 
+def function_modifier(func):
+
+    def inner(*args, **kwargs):
+        # print("Modifying base function")
+        return func(*args, **kwargs)
+
+    return inner
+
+@function_modifier
+def base_function(a, b):
+    sum = a + b
+    # print("Returning sum")
+    return sum
+
+added_params = (3, 5)
+print("decorators for functions with parameters : ", base_function(*added_params))
+
+#------------------------------------------------------------------------------------
+# Another example :
+
+print("\n")
+
+def do_twice(func):
+    def wrapper_do_twice(*args, **kwargs):
+        func(*args, **kwargs)
+        func(*args, **kwargs)
+
+    return wrapper_do_twice
+
+@do_twice
+def greet(name):
+    print(f"Hello {name}")
+
+greet("Jayant")
