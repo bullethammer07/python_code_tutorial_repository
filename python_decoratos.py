@@ -101,14 +101,21 @@ decorated_func()
 
 def modified_sum(func):
 
-    def inner(x, y, z):
+    def inner(x, y):
         return func(x, (y+3))
 
     return inner
 
+# sum_of_sums gets modified from here
 @modified_sum
 def sum_of_nums(a, b):
     sum = a + b
     return sum
 
 print(sum_of_nums(1, 2))
+
+# NOTE : notice that parameters of the nested inner() function inside the decorator is the same as the parameters of functions it decorates.
+# Taking this into account, now we can make general decorators that work with any number of parameters.
+# we can use *args and **kwargs to take as many number of arguments.
+
+
