@@ -19,6 +19,8 @@
 
 class some_class:
     # specifying some attributes
+    # NOTE : 1. All attributes specified inside the class are 'class variables', they are shared by all instances(object) of the class.
+    #        2. These attributes cannot be overridden from the object instance.
     name = "Jayant"
     age = 27
     desig = "Engg"
@@ -29,11 +31,16 @@ class some_class:
 
     pass
 
+# creating an object of type class
 class_inst = some_class()
 
 # calling some class behavior
 class_inst.class_info()
 
 # Adding another attribute to the class, even tho it is not present as part of the class
+# NOTE : All attributes added from the object are 'instance variables'. They are local copies of the object made and specific to the object made from.
+#        They do not alter any of the class attributes.
 class_inst.team = "ASIC"
+class_inst.proj = "subsystem verif"
 print("My team is : ", class_inst.team)
+print("Project is : ", class_inst.proj)
