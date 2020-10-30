@@ -66,12 +66,20 @@ bike_emp_1 = Biker_Employee("Karan", "ASIC", "UFS")  # NOTE : Here, We will need
 
 # bike_emp_1.print_biker(); # UNCOMMENT TO RUN : This will return an Exception as the attributes related to 'Biker' portion are not initialized.
 
+# Some points related to multiple inheritance :
+#  1. In the multiple inheritance scenario, any specified attribute is searched first in the current class.
+#     If not found, the search continues into parent classes in depth-first, left-right fashion without searching the same class twice.
+#  2. So, in the above example of 'Biker_Employee' class the search order is [Biker_Employee -> Employee/Biker]. This order is also called linearization of MultiDerived class
+#     and the set of rules used to find this order is called Method Resolution Order (MRO).
+#  3. MRO must prevent local precedence ordering and also provide monotonicity. It ensures that a class always appears before its parents.
+#     In case of multiple parents, the order is the same as tuples of base classes.
+#  4. MRO of a class can be viewed as the __mro__ attribute or the mro() method. The former returns a tuple while the latter returns a list.
+
 print("\n")
 print(bike_emp_1.kms_driven())
 print(f"Printing a common attribute : {bike_emp_1.val}") # printing a common attribute between 'Employee' and 'Biker' : val
                                                          # here if val is not present in 'Biker_Employee' the attribute of the first class passed will take precedence.
                                                          # in this case val is present in 'Biker_Employee' ... but if commented , val of 'Employee' will come into picture.
 
-
-
-
+print(Biker_Employee.__mro__) # This returns a tuple
+print(Biker_Employee.mro()) # this returns a list
