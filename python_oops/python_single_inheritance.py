@@ -50,3 +50,28 @@ class Coder(Employee):
 # Making an object of class 'Coder' using the new constructor made
 emp_4 = Coder("Abdul", "Emulation", "Firmware", 4, "Micron")
 print("emp_4 details : ", emp_4.__dict__)
+
+# NOTE : Notice that __init__() method was defined in both classes, 'Employee' as well 'Coder'.
+#        When this happens, the method in the derived class overrides that in the base class. This is to say,
+#        __init__() in 'Coder' gets preference over the __init__ in 'Employee'.
+
+# Generally when overriding a base method, we tend to extend the definition rather than simply replace it.
+# (We did not do that here however.. But Still ... It wont block or fail the code, but is not good practice).
+# A better option would be to use the built-in function super(). So, super().__init__(<arguments>) is equivalent to Employee.__init__(<arguments>) and is preferred.
+
+#----------------------------------------------------------------------------------------------------------------
+# Two built-in functions isinstance() and issubclass() are used to check inheritances.
+#   1. The function isinstance() returns True if the object is an instance of the class or other classes derived from it.
+#      Each and every class in Python inherits from the base class object.
+#   2. Similarly, issubclass() is used to check for class inheritance.
+
+# creating a random class that has no relation with 'Employee' or 'Coder'
+
+class RandomClass:
+    pass
+
+print("\n")
+
+print(isinstance(emp_4, Employee)) # True
+print(issubclass(Coder, Employee)) # True
+print(isinstance(emp_4, RandomClass)) # False
