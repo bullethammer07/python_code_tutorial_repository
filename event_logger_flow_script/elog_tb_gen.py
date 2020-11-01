@@ -35,20 +35,30 @@ evl_num_source1 = evl_num_source1_list[1]
 
 # creating name for the defines file
 project_defines_filename = str(PROJECT_NAME.replace("\n", "")) + "_elog_test_defines.sv"
-# creating a file by name of the defines file and opening it
+# creating name for the single source tests
+project_single_source_tests_filename = str(PROJECT_NAME.replace("\n", "")) + "_soc_evl_single_source_evm_tests.sv"
+# creating name for the mega random test
+project_mega_random_test_filename = str(PROJECT_NAME.replace("\n", "")) + "_elog_mega_random_test.sv"
+
+# creating a different files
 f_defines_file = open(project_defines_filename, 'w')
+f_mega_random_file = open(project_mega_random_test_filename, 'w')
+f_single_source_tests_file = open(project_single_source_tests_filename, 'w')
 
 num_of_lines_of_config_file = len(elog_config_file_lines)
 # print(num_of_lines_of_config_file)
 tick_define = "`define"
+ral_block_name =
 
 evm_config_list = []
-evm_instances_start_line = 5
+evm_instances_start_line = 6
 
 for line_num in range(0, num_of_lines_of_config_file):
     if line_num >= (int(evm_instances_start_line) - 1):
         evm_config_list.append(elog_config_file_lines[line_num].replace("\n", ""))
 
+#-------------------------------------------------------------------------------------------------------------
+# Functions related to creating the defines file:
 def evm_file_comment(cmnt, file):
     comment_length = len(cmnt)
     cmnt_len_with_pad = comment_length + 8 + 30 + 16
@@ -80,6 +90,27 @@ def evm_define_evl_related_end_of_file(inst, sources0, sources1, inst_path, file
     file.write(line2)
     file.write(line3)
 
+#-------------------------------------------------------------------------------------------------------------
+# Functions related to creating the tests file:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 for element in evm_config_list:
     evm_configuration = element.replace(" ", "").rsplit(":")
     evm_instance_name = evm_configuration[0]
@@ -97,3 +128,5 @@ evm_define_evl_related_end_of_file(PROJECT_NAME_CAPS.replace("\n", ""), evl_num_
 #--------------------------------------------------------------------------------
 # End of program and closing all created files
 f_defines_file.close()
+f_mega_random_file.close()
+f_single_source_tests_file.close()
