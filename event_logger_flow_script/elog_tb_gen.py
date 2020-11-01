@@ -94,9 +94,10 @@ def evm_define_evl_related_end_of_file(inst, sources0, sources1, inst_path, file
 #-------------------------------------------------------------------------------------------------------------
 # Functions related to creating the tests file:
 
-def proj_evl_gpio_config_sequence_gen (proj_name, file):
+def proj_elog_gpio_config_sequence_gen(proj_name, file):
     sequence_name = proj_name.replace("\n", "") + "_elog_gpio_configure_sequence"
     # print(sequence_name)
+    evm_file_comment("Description : To Configure the CHIP Nexus ports for Event Logger NEXUS", file)
     file.write("class " + sequence_name + " extends mvm_reg_sequence (.RM_TYPE(" + ral_block_name + "), .CFG_TYPE(" + proj_env_config + "));\n")
     file.write("\n")
     file.write("`uvm_object_utils(" + sequence_name + ")\n")
@@ -115,10 +116,80 @@ def proj_evl_gpio_config_sequence_gen (proj_name, file):
     file.write("endtask" + "\n")
     file.write("\n")
     file.write("endclass" + "\n")
+    file.write("\n")
+
+def proj_elog_sram_nexus_coonfigure_sequence_gen(proj_name, file):
+    sequence_name = proj_name.replace("\n", "") + "_elog_sram_nexus_configure_sequence"
+    evm_file_comment("Description : To configure the SRAM and NEXUS for the Event Logger", file)
+    file.write("class " + sequence_name + " extends mvm_reg_sequence (.RM_TYPE(" + ral_block_name + "), .CFG_TYPE(" + proj_env_config + "));\n")
+    file.write("\n")
+    file.write("`uvm_object_utils(" + sequence_name + ")\n")
+    file.write("\n")
+    file.write("// Class Constructor\n")
+    file.write("function new (string name = \"" + sequence_name + "\");\n")
+    file.write("  super.new(name);" + "\n")
+    file.write("endfunction" + "\n")
+    file.write("\n")
+    file.write("// Main Sequence Body" + "\n")
+    file.write("task body();" + "\n")
+    file.write("  `uvm_info(get_name(),\"Starting Sequence Body !!.....\", UVM_LOW)" + "\n")
+
+    file.write("  if($test$plusargs(\"ELOG_chan0_sram_en\"))" + "\n")
+    file.write("    begin" + "\n")
+    file.write("      // Code goes here" + "\n")
+    file.write("      " + "\n")
+    file.write("    end" + "\n")
+    file.write("\n")
+
+    file.write("  if($test$plusargs(\"ELOG_chan0_sram_en\"))" + "\n")
+    file.write("    begin" + "\n")
+    file.write("      // Code goes here" + "\n")
+    file.write("      " + "\n")
+    file.write("    end" + "\n")
+    file.write("\n")
+
+    file.write("  if($test$plusargs(\"elog_spare_rw_read_write_test\"))" + "\n")
+    file.write("    begin" + "\n")
+    file.write("      // Code goes here" + "\n")
+    file.write("      " + "\n")
+    file.write("      #100ns;" + "\n")
+    file.write("    end" + "\n")
+    file.write("\n")
+
+    file.write("  if($test$plusargs(\"elog_ds_toggle_test\"))" + "\n")
+    file.write("    begin" + "\n")
+    file.write("      // Code goes here" + "\n")
+    file.write("      " + "\n")
+    file.write("      #100ns;" + "\n")
+    file.write("    end" + "\n")
+    file.write("\n")
+
+    file.write("  if($test$plusargs(\"elog_sd_toggle_test\"))" + "\n")
+    file.write("    begin" + "\n")
+    file.write("      // Code goes here" + "\n")
+    file.write("      " + "\n")
+    file.write("      #100ns;" + "\n")
+    file.write("    end" + "\n")
+    file.write("\n")
+
+    file.write("  if($test$plusargs(\"elog_dbg_intr_test\"))" + "\n")
+    file.write("    begin" + "\n")
+    file.write("      // Code goes here" + "\n")
+    file.write("      " + "\n")
+    file.write("      #100ns;" + "\n")
+    file.write("    end" + "\n")
+    file.write("\n")
+
+    file.write("endtask" + "\n")
+    file.write("" + "\n")
+    file.write("endclass" + "\n")
+    file.write("\n")
 
 
-proj_evl_gpio_config_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
 
+
+proj_elog_gpio_config_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
+proj_elog_sram_nexus_coonfigure_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
 
 
 
