@@ -87,6 +87,7 @@ for element in evm_config_list:
     evm_sources = evm_configuration[2]
     evm_instance_path = evm_configuration[3]
 
+    # top level defines files
     evm_file_comment(evm_instance_name.upper(), f_defines_file)
     evm_define_source_dsize_and_path(evm_instance_name.upper(), evm_sources, evm_dsize, evm_instance_path, f_defines_file)
 
