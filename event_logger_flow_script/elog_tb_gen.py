@@ -260,8 +260,7 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     file.write(sequence_name2 + "    " + sequence_name_inst2 + "\n")
     file.write("\n")
     file.write("// Sequences for event driving" + "\n")
-
-    file.write("" + "\n")
+    file.write("\n")
 
     file.write("" + "\n")
     file.write("endtask" + "\n")
@@ -269,6 +268,29 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     file.write("endclass" + "\n")
     file.write("\n")
 
+    for element in evm_config_list:
+        evm_configuration = element.replace(" ", "").rsplit(":")
+        instance_name = evm_configuration[0]
+        instance_name_lower = instance_name.lower()
+        file.write(f"// {instance_name}" + "\n")
+        seq_decl = f"evm_in_single_tx_seq #(.D_SIZE(`{instance_name}_EVM_SOURCE_DSIZE))"
+        seq_inst = f"{instance_name_lower}_evm_in_tx_seq[`{instance_name}_EVM_SOURCES];"
+        sd_len = len(seq_decl)
+        file.write(seq_decl + " "*(100 - sd_len) + seq_inst + "\n")
+        file.write("\n")
+
+    file.write("// GID Values" + "\n")
+
+    count = 2
+    for element in evm_config_list:
+        evm_configuration = element.replace(" ", "").rsplit(":")
+        instance_name = evm_configuration[0]
+        instance_name_upper = instance_name.upper()
+        logic_decl = f"logic [6:0] {instance_name_upper}_GID"
+        logic_inst = f" = 7'd{count};"
+        count += 1
+        sd_len = len(logic_decl)
+        file.write(logic_decl + " " * (50 - sd_len) + logic_inst + "\n")
 
 
 proj_elog_gpio_config_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
