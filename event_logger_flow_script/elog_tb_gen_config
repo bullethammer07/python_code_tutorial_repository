@@ -2,7 +2,6 @@ PROJECT : tomcat
 EVL_INST_PATH : soc_evl_instance_path
 EVL_NUM_SOURCE0 : 9
 EVL_NUM_SOURCE1 : 3
-**EVM_Instances**
 DMA:32:3:dma_inst_path
 DDR:64:9:dma_inst_path
 SYSM_L2P:32:3:dma_inst_path
