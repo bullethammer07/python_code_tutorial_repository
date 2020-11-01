@@ -33,6 +33,12 @@ evl_num_source1_line = elog_config_file_lines[3]
 evl_num_source1_list = evl_num_source1_line.replace(" ", "").rsplit(":")
 evl_num_source1 = evl_num_source1_list[1]
 
+#---------------------------------------------------------------------------------------
+# Getting the project base test name
+evl_soc_base_test_line = elog_config_file_lines[4]
+evl_soc_base_test_list = evl_soc_base_test_line.replace(" ", "").rsplit(":")
+evl_soc_base_test = evl_soc_base_test_list[1]
+
 # creating name for the defines file
 project_defines_filename = str(PROJECT_NAME.replace("\n", "")) + "_elog_test_defines.sv"
 # creating name for the single source tests
@@ -62,10 +68,10 @@ for line_num in range(0, num_of_lines_of_config_file):
 # Functions related to creating the defines file:
 def evm_file_comment(cmnt, file):
     comment_length = len(cmnt)
-    cmnt_len_with_pad = comment_length + 30 + 16
+    cmnt_len_with_pad = comment_length + 30
 
     line1 = "//" + "-"*cmnt_len_with_pad
-    line2 = "//" + " "*15 + cmnt + " Related Defines" + " "*15
+    line2 = "//" + " "*15 + cmnt + " "*15
     line3 = "//" + "-"*cmnt_len_with_pad
 
     file.write(line1 + "\n")
@@ -235,10 +241,16 @@ def evm_in_single_tx_gen(file):
     file.write("endclass" + "\n")
     file.write("\n")
 
+def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
+    project_name = proj_name.replace("\n", "")
+    evm_file_comment(f"SOC EVL base test for all necessary {project_name.upper()} Initialization", file)
+
+
 
 proj_elog_gpio_config_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
 proj_elog_sram_nexus_coonfigure_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
 evm_in_single_tx_gen(f_single_source_tests_file)
+proj_soc_evl_base_test_gen(PROJECT_NAME, evl_soc_base_test, f_single_source_tests_file)
 
 
 
