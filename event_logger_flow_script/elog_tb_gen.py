@@ -185,11 +185,22 @@ def proj_elog_sram_nexus_coonfigure_sequence_gen(proj_name, file):
     file.write("endclass" + "\n")
     file.write("\n")
 
+def evm_in_single_tx_gen(file):
+    evm_file_comment("Description : Sequence to generate single event on EVM Instance", file)
+    sequence_name = "evm_in_single_tx_seq"
+    file.write("class " + sequence_name + " #(parameter D_SIZE = 32)" + " extends uvm_sequence #(evm_in_transaction);\n")
+
+    file.write("endtask" + "\n")
+    file.write("" + "\n")
+    file.write("endclass" + "\n")
+    file.write("\n")
+
 
 
 
 proj_elog_gpio_config_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
 proj_elog_sram_nexus_coonfigure_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
+evm_in_single_tx_gen(f_single_source_tests_file)
 
 
 
