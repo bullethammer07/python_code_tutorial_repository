@@ -243,7 +243,16 @@ def evm_in_single_tx_gen(file):
 
 def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     project_name = proj_name.replace("\n", "")
+    bt_name = base_test_name.replace("\n", "")
     evm_file_comment(f"SOC EVL base test for all necessary {project_name.upper()} Initialization", file)
+    test_name = proj_name.replace("\n", "")
+    file.write("class " + test_name + "_soc_evl_base_test extends " + f"{bt_name};" + "\n")
+
+    file.write("" + "\n")
+    file.write("endtask" + "\n")
+    file.write("" + "\n")
+    file.write("endclass" + "\n")
+    file.write("\n")
 
 
 
