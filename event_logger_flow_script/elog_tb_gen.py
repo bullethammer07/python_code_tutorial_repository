@@ -48,7 +48,8 @@ f_single_source_tests_file = open(project_single_source_tests_filename, 'w')
 num_of_lines_of_config_file = len(elog_config_file_lines)
 # print(num_of_lines_of_config_file)
 tick_define = "`define"
-ral_block_name =
+ral_block_name = PROJECT_NAME_CAPS.replace("\n", "") + "_block"
+proj_env_config = PROJECT_NAME.replace("\n", "") + "_env_cfg"
 
 evm_config_list = []
 evm_instances_start_line = 6
@@ -61,10 +62,10 @@ for line_num in range(0, num_of_lines_of_config_file):
 # Functions related to creating the defines file:
 def evm_file_comment(cmnt, file):
     comment_length = len(cmnt)
-    cmnt_len_with_pad = comment_length + 8 + 30 + 16
+    cmnt_len_with_pad = comment_length + 30 + 16
 
     line1 = "//" + "-"*cmnt_len_with_pad
-    line2 = "//" + " "*15 + "*** " + cmnt + " Related Defines" + " ***" + " "*15
+    line2 = "//" + " "*15 + cmnt + " Related Defines" + " "*15
     line3 = "//" + "-"*cmnt_len_with_pad
 
     file.write(line1 + "\n")
@@ -93,6 +94,30 @@ def evm_define_evl_related_end_of_file(inst, sources0, sources1, inst_path, file
 #-------------------------------------------------------------------------------------------------------------
 # Functions related to creating the tests file:
 
+def proj_evl_gpio_config_sequence_gen (proj_name, file):
+    sequence_name = proj_name.replace("\n", "") + "_elog_gpio_configure_sequence"
+    # print(sequence_name)
+    file.write("class " + sequence_name + " extends mvm_reg_sequence (.RM_TYPE(" + ral_block_name + "), .CFG_TYPE(" + proj_env_config + "));\n")
+    file.write("\n")
+    file.write("`uvm_object_utils(" + sequence_name + ")\n")
+    file.write("\n")
+    file.write("// Class Constructor\n")
+    file.write("function new (string name = \"" + sequence_name + "\");\n")
+    file.write("  super.new(name);" + "\n")
+    file.write("endfunction" + "\n")
+    file.write("\n")
+    file.write("// Main Sequence Body" + "\n")
+    file.write("task body();" + "\n")
+    file.write("  `uvm_info(get_name(),\"Starting Sequence Body !!.....\", UVM_LOW)" + "\n")
+    file.write("  // NEXUS Configuration code goes here" + "\n")
+    file.write("\n")
+    file.write("  `uvm_info(get_name(),\"Done Configuring NEXUS !!.....\", UVM_LOW)" + "\n")
+    file.write("endtask" + "\n")
+    file.write("\n")
+    file.write("endclass" + "\n")
+
+
+proj_evl_gpio_config_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
 
 
 
