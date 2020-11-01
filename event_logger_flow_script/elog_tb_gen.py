@@ -42,17 +42,18 @@ num_of_lines_of_config_file = len(elog_config_file_lines)
 # print(num_of_lines_of_config_file)
 
 evm_config_list = []
+evm_instances_start_line = 5
 
 for line_num in range(0, num_of_lines_of_config_file):
-    if line_num >= 4:
+    if line_num >= (int(evm_instances_start_line) - 1):
         evm_config_list.append(elog_config_file_lines[line_num].replace("\n", ""))
 
 def evm_define_file_comment(cmnt, file):
     comment_length = len(cmnt)
-    cmnt_len_with_pad = comment_length + 8 + 30
+    cmnt_len_with_pad = comment_length + 8 + 30 + 16
 
     line1 = "//" + "-"*cmnt_len_with_pad
-    line2 = "//" + " "*15 + "*** " + cmnt + " ***" + " "*15
+    line2 = "//" + " "*15 + "*** " + cmnt + " Related Defines" + " ***" + " "*15
     line3 = "//" + "-"*cmnt_len_with_pad
 
     file.write(line1 + "\n")
@@ -61,8 +62,8 @@ def evm_define_file_comment(cmnt, file):
 
 def evm_define_source_dsize_and_path(inst, sources, dsize, inst_path, file):
     tick_define = "`define"
-    line1 = tick_define + " " + inst + "_EVM_SOURCES " + dsize
-    line2 = tick_define + " " + inst + "_EVM_SOURCE_DSIZE " + sources
+    line1 = tick_define + " " + inst + "_EVM_SOURCES " + sources
+    line2 = tick_define + " " + inst + "_EVM_SOURCE_DSIZE " + dsize
     line3 = tick_define + " " + inst + "_EVM_PATH " + inst_path
 
     file.write(line1 + "\n")
@@ -72,19 +73,17 @@ def evm_define_source_dsize_and_path(inst, sources, dsize, inst_path, file):
 
 for element in evm_config_list:
     evm_configuration = element.replace(" ", "").rsplit(":")
-    # print(evm_configuration)
     evm_instance_name = evm_configuration[0]
     evm_dsize = evm_configuration[1]
     evm_sources = evm_configuration[2]
     evm_instance_path = evm_configuration[3]
-    # print(f"{evm_instance_name} {evm_dsize} {evm_sources} {evm_instance_path}")
 
     evm_define_file_comment(evm_instance_name.upper(), f_defines_file)
     evm_define_source_dsize_and_path(evm_instance_name.upper(), evm_sources, evm_dsize, evm_instance_path, f_defines_file)
 
 
-#evm_define_file_comment(PROJECT_NAME_CAPS.replace("\n", ""), f_defines_file)
-# evm_define_source_dsize_and_path()
+
+
 
 #--------------------------------------------------------------------------------
 # End of program and closing all created files
