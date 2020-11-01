@@ -244,9 +244,24 @@ def evm_in_single_tx_gen(file):
 def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     project_name = proj_name.replace("\n", "")
     bt_name = base_test_name.replace("\n", "")
+
+    sequence_name1 = proj_name.replace("\n", "") + "_elog_gpio_configure_sequence"
+    sequence_name_inst1 = proj_name.replace("\n", "") + "_gpio_config_seq"
+
+    sequence_name2 = proj_name.replace("\n", "") + "_elog_sram_nexus_configure_sequence"
+    sequence_name_inst2 = proj_name.replace("\n", "") + "_sram_nexus_config_seq"
+
     evm_file_comment(f"SOC EVL base test for all necessary {project_name.upper()} Initialization", file)
     test_name = proj_name.replace("\n", "")
     file.write("class " + test_name + "_soc_evl_base_test extends " + f"{bt_name};" + "\n")
+    file.write("\n")
+    file.write("// Sequences for Configuration" + "\n")
+    file.write(sequence_name1 + "          " + sequence_name_inst1 + "\n")
+    file.write(sequence_name2 + "    " + sequence_name_inst2 + "\n")
+    file.write("\n")
+    file.write("// Sequences for event driving" + "\n")
+
+    file.write("" + "\n")
 
     file.write("" + "\n")
     file.write("endtask" + "\n")
