@@ -73,8 +73,12 @@ def evm_define_source_dsize_and_path(inst, sources, dsize, inst_path, file):
 
 def evm_define_evl_related_end_of_file(inst, sources0, sources1, inst_path, file):
     line1 = tick_define + " " + inst + "_EVL_PATH " + inst_path
-    line2 = tick_define + " " + "EVT_LOG_NUM_CHAN0_SOURCES" + sources0
-    line3 = tick_define + " " + "EVT_LOG_NUM_CHAN0_SOURCES" + sources1
+    line2 = tick_define + " " + "EVT_LOG_NUM_CHAN0_SOURCES " + sources0
+    line3 = tick_define + " " + "EVT_LOG_NUM_CHAN1_SOURCES " + sources1
+    evm_file_comment("EVENT LOG ", f_defines_file)
+    file.write(line1)
+    file.write(line2)
+    file.write(line3)
 
 for element in evm_config_list:
     evm_configuration = element.replace(" ", "").rsplit(":")
