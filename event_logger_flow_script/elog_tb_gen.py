@@ -528,7 +528,6 @@ def proj_evl_env_gen(proj_name, file):
     file.write("\n")
     file.write("endclass" + "\n")
 
-
 def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     project_name = proj_name.replace("\n", "")
     bt_name = base_test_name.replace("\n", "")
