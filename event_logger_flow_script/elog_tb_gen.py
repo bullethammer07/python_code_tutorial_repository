@@ -43,13 +43,17 @@ evl_soc_base_test = evl_soc_base_test_list[1]
 project_defines_filename = str(PROJECT_NAME.replace("\n", "")) + "_elog_test_defines.sv"
 # creating name for the single source tests
 project_single_source_tests_filename = str(PROJECT_NAME.replace("\n", "")) + "_soc_evl_single_source_evm_tests.sv"
+# creating name for the proj_evl_env
+project_evl_env_filename = str(PROJECT_NAME.replace("\n", "")) + "_evl_env.sv"
+
 # creating name for the mega random test
-project_mega_random_test_filename = str(PROJECT_NAME.replace("\n", "")) + "_elog_mega_random_test.sv"
+#project_mega_random_test_filename = str(PROJECT_NAME.replace("\n", "")) + "_elog_mega_random_test.sv"
 
 # creating a different files
 f_defines_file = open(project_defines_filename, 'w')
-f_mega_random_file = open(project_mega_random_test_filename, 'w')
+#f_mega_random_file = open(project_mega_random_test_filename, 'w')
 f_single_source_tests_file = open(project_single_source_tests_filename, 'w')
+f_evl_env_file = open(project_evl_env_filename, 'w')
 
 num_of_lines_of_config_file = len(elog_config_file_lines)
 # print(num_of_lines_of_config_file)
@@ -338,6 +342,36 @@ def single_evm_instance_test_gen(proj_name, evm_inst_name, file):
     file.write("endclass" + "\n")
     file.write("\n")
 
+def proj_evl_env_gen(proj_name, file):
+    project_name = proj_name.replace("\n", "")
+    proj_name_upper = project_name.upper()
+
+    env_name = project_name + "_evl_env"
+    reg_block_name = proj_name_upper + "_block"
+    proj_env_cfg = project_name + "_env_cfg"
+
+    src0_define = proj_name_upper + "_EVL_CHAN0_SOURCES"
+    src1_define = proj_name_upper + "_EVL_CHAN1_SOURCES"
+
+    file.write("// Class definition for " + proj_name_upper + " EVL env for SoC Environment" + "\n")
+    file.write("class " + env_name + "#(int SOURCES0 = 2, INT SOURCES1 = 2) extends mvm_reg_env #(" + reg_block_name + "," + proj_env_cfg + ");" + "\n")
+    file.write("\n")
+    file.write("typedef " + env_name + "#(.SOURCES0(`" + src0_define + "), .SOURCES1(`" + src1_define + "))      t_evl_env;" + "\n")
+    file.write("" + "\n")
+    file.write("" + "\n")
+    file.write("" + "\n")
+    file.write("" + "\n")
+    file.write("" + "\n")
+    file.write("" + "\n")
+    file.write("" + "\n")
+    file.write("" + "\n")
+    file.write("" + "\n")
+    file.write("" + "\n")
+    file.write("" + "\n")
+    file.write("" + "\n")
+    file.write("" + "\n")
+
+
 def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     project_name = proj_name.replace("\n", "")
     bt_name = base_test_name.replace("\n", "")
@@ -511,6 +545,7 @@ proj_elog_gpio_config_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
 proj_elog_sram_nexus_coonfigure_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
 evm_in_single_tx_gen(f_single_source_tests_file)
 proj_soc_evl_base_test_gen(PROJECT_NAME, evl_soc_base_test, f_single_source_tests_file)
+proj_evl_env_gen(PROJECT_NAME, f_evl_env_file)
 
 for element in evm_config_list:
     evm_configuration = element.replace(" ", "").rsplit(":")
@@ -528,5 +563,6 @@ evm_define_evl_related_end_of_file(PROJECT_NAME_CAPS.replace("\n", ""), evl_num_
 #--------------------------------------------------------------------------------
 # End of program and closing all created files
 f_defines_file.close()
-f_mega_random_file.close()
+#f_mega_random_file.close()
 f_single_source_tests_file.close()
+f_evl_env_file.close()
