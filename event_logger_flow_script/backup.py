@@ -245,97 +245,97 @@ def evm_instance_event_drive_task_gen(evm_inst_name, file):
     inst_name = evm_inst_name.replace("\n", "")
     inst_name_lower = inst_name.lower()
 
-    task_name = inst_name_lower + "_event_drive"
-    all_evl_plusarg = "ALL_" + inst_name + "_EVM_SOURCE_ACTIVE"
-    inst_src_dsize = inst_name + "_EVM_SOURCE_DSIZE"
-    inst_sources = inst_name + "_EVM_SOURCES"
-    gid_name = inst_name + "_GID"
-    seq_name = inst_name_lower + "_evm_in_tx_seq"
-    agent_path = "evl_env_tc." + inst_name_lower + "_evm_env.evm_in_agt"
+    task_name = f"{inst_name_lower}_event_drive"
+    all_evl_plusarg = f"ALL_{inst_name}_EVM_SOURCE_ACTIVE"
+    inst_src_dsize = f"{inst_name}_EVM_SOURCE_DSIZE"
+    inst_sources = f"{inst_name}_EVM_SOURCES"
+    gid_name = f"{inst_name}_GID"
+    seq_name = f"{inst_name_lower}_evm_in_tx_seq"
+    agent_path = f"evl_env_tc.{inst_name_lower}_evm_env.evm_in_agt"
 
     cbo = "{"
     cbc = "}"
 
-    file.write("// Task to write Events on " + inst_name + "\n")
-    file.write("task " + task_name + ";" + "\n")
-    file.write("  if($test$plusargs(\"" + all_evl_plusarg + "\")) // To RUN on all Sources of the EVM Instance" + "\n")
-    file.write("    begin" + "\n")
-    file.write("      foreach(" + seq_name + "[i])" + "\n")
-    file.write("        begin" + "\n")
-    file.write("          automatic int var_i = i;" + "\n")
-    file.write("          " + "\n")
-    file.write("          fork" + "\n")
-    file.write("            agent_name = $psprintf(\"" + seq_name + "[%0d]\",var_i);" + "\n")
-    file.write("            event_iterations = $urandom_range(10,max_iter_cnt);" + "\n")
-    file.write("            " + "\n")
-    file.write("            `uvm_info(get_name(),$sformatf(\"Event Iteration for Agent %0d of " + inst_name + " is :: %0d\",var_i,event_iterations),UVM_LOW)" + "\n")
-    file.write("            " + "\n")
-    file.write("            repeat(event_iterations)" + "\n")
-    file.write("              begin" + "\n")
-    file.write("                " + seq_name + "[var_i] = evm_in_single_tx_seq#(.D_SIZE(" + inst_src_dsize + "))::type_id::create(agent_name);" + "\n")
-    file.write("                if($test$plusargs(\"ENABLE_UNIQUE_GID\")) begin " + seq_name + "[var_i].randomize() with { gid == " + gid_name + "}; }; end else begin " + seq_name + "[var_i].randomize(); end" + "\n")
-    file.write("                " + seq_name + "[var_i].start(" + agent_path + "[var_i].evm_sqr);" + "\n")
-    file.write("              end" + "\n")
-    file.write("          join_none" + "\n")
-    file.write("        end" + "\n")
-    file.write("      wait fork;" + "\n")
-    file.write("    end" + "\n")
-    file.write("  else // To RUN on any one source of t he EVM Instance" + "\n")
-    file.write("    begin" + "\n")
-    file.write("      event_iterations = $urandom_range(10, max_iter_cnt);" + "\n")
-    file.write("      active_source = $urandom_range(0, (`" + inst_sources + " - 1));" + "\n")
-    file.write("      agent_name = $psprintf(\"" + seq_name + "[%0d]\",active_source);" + "\n")
-    file.write("      " + "\n")
-    file.write("      `uvm_info(get_name(),$sformatf(\"Event Iteration          :: %0d\",event_iterations),UVM_LOW)" + "\n")
-    file.write("      `uvm_info(get_name(),$sformatf(\"Active Source Selected   :: %0d\",active_source),UVM_LOW)" + "\n")
-    file.write("       " + "\n")
-    file.write("       repeat(event_iterations)" + "\n")
-    file.write("         begin" + "\n")
-    file.write("           " + seq_name + "[active_source] = evm_in_single_tx_seq#(.D_SIZE(`" + inst_src_dsize + "))::type_id::create(agent_name);" + "\n")
-    file.write("           " + seq_name + "[active_source].randomize();" + "\n")
-    file.write("           " + seq_name + "[active_source].start(" + agent_path + "[active_source].evm_sqr);" + "\n")
-    file.write("         end" + "\n")
-    file.write("       #5000ns;" + "\n")
-    file.write("     end" + "\n")
-    file.write("endtask" + "\n")
+    file.write(f"// Task to write Events on {inst_name}" + "\n")
+    file.write(f"task {task_name};" + "\n")
+    file.write(f"  if($test$plusargs(\"{all_evl_plusarg}\")) // To RUN on all Sources of the EVM Instance" + "\n")
+    file.write( "    begin" + "\n")
+    file.write(f"      foreach({seq_name}[i])" + "\n")
+    file.write( "        begin" + "\n")
+    file.write( "          automatic int var_i = i;" + "\n")
+    file.write( "          " + "\n")
+    file.write( "          fork" + "\n")
+    file.write(f"            agent_name = $psprintf(\"{seq_name}[%0d]\",var_i);" + "\n")
+    file.write( "            event_iterations = $urandom_range(10,max_iter_cnt);" + "\n")
+    file.write( "            " + "\n")
+    file.write(f"            `uvm_info(get_name(),$sformatf(\"Event Iteration for Agent %0d of {inst_name} is :: %0d\",var_i,event_iterations),UVM_LOW)" + "\n")
+    file.write( "            " + "\n")
+    file.write( "            repeat(event_iterations)" + "\n")
+    file.write( "              begin" + "\n")
+    file.write(f"                {seq_name}[var_i] = evm_in_single_tx_seq#(.D_SIZE({inst_src_dsize}))::type_id::create(agent_name);" + "\n")
+    file.write(f"                if($test$plusargs(\"ENABLE_UNIQUE_GID\")) begin {seq_name}[var_i].randomize() with {cbo} gid == {gid_name}; {cbc}; end else begin {seq_name}[var_i].randomize(); end" + "\n")
+    file.write(f"                {seq_name}[var_i].start({agent_path}[var_i].evm_sqr);" + "\n")
+    file.write( "              end" + "\n")
+    file.write( "          join_none" + "\n")
+    file.write( "        end" + "\n")
+    file.write( "      wait fork;" + "\n")
+    file.write( "    end" + "\n")
+    file.write( "  else // To RUN on any one source of t he EVM Instance" + "\n")
+    file.write( "    begin" + "\n")
+    file.write( "      event_iterations = $urandom_range(10, max_iter_cnt);" + "\n")
+    file.write(f"      active_source = $urandom_range(0, (`{inst_sources} - 1));" + "\n")
+    file.write(f"      agent_name = $psprintf(\"{seq_name}[%0d]\",active_source);" + "\n")
+    file.write( "      " + "\n")
+    file.write( "      `uvm_info(get_name(),$sformatf(\"Event Iteration          :: %0d\",event_iterations),UVM_LOW)" + "\n")
+    file.write( "      `uvm_info(get_name(),$sformatf(\"Active Source Selected   :: %0d\",active_source),UVM_LOW)" + "\n")
+    file.write( "       " + "\n")
+    file.write( "       repeat(event_iterations)" + "\n")
+    file.write( "         begin" + "\n")
+    file.write(f"           {seq_name}[active_source] = evm_in_single_tx_seq#(.D_SIZE(`{inst_src_dsize}))::type_id::create(agent_name);" + "\n")
+    file.write(f"           {seq_name}[active_source].randomize();" + "\n")
+    file.write(f"           {seq_name}[active_source].start({agent_path}[active_source].evm_sqr);" + "\n")
+    file.write( "         end" + "\n")
+    file.write( "       #5000ns;" + "\n")
+    file.write( "     end" + "\n")
+    file.write( "endtask" + "\n")
     file.write("\n")
 
 def single_evm_instance_test_gen(proj_name, evm_inst_name, file):
     project_name = proj_name.replace("\n", "")
     inst_name_caps = evm_inst_name.replace("\n", "")
     inst_name = inst_name_caps.lower()
-    base_test_name = project_name + "_soc_evl_base_test"
-    test_name = project_name + "_elog_" + inst_name + "_event_drive_test"
-    task_name = inst_name + "_event_drive"
+    base_test_name = f"{project_name}_soc_evl_base_test"
+    test_name = f"{project_name}_elog_{inst_name}_event_drive_test"
+    task_name = f"{inst_name}_event_drive"
 
-    file.write("class " + test_name + " extends " + base_test_name + ";" + "\n")
+    file.write(f"class {test_name} extends {base_test_name};" + "\n")
     file.write("\n")
-    file.write("`uvm_component_utils("+test_name+")" + "\n")
+    file.write(f"`uvm_component_utils({test_name})" + "\n")
     file.write("\n")
-    file.write("// Class Constructor" + "\n")
-    file.write("function new(string name = \"" + test_name + "\", uvm_component parent = null);" + "\n")
-    file.write("  super.new(name,parent);" + "\n")
-    file.write("endfunction" + "\n")
+    file.write(f"// Class Constructor" + "\n")
+    file.write(f"function new(string name = \"{test_name}\", uvm_component parent = null);" + "\n")
+    file.write(f"  super.new(name,parent);" + "\n")
+    file.write(f"endfunction" + "\n")
     file.write("\n")
-    file.write("// Build Phase" + "\n")
-    file.write("function void build_phase(uvm_phase phase);" + "\n")
-    file.write("  super.build_phase(phase);" + "\n")
-    file.write("endfunction" + "\n")
+    file.write(f"// Build Phase" + "\n")
+    file.write(f"function void build_phase(uvm_phase phase);" + "\n")
+    file.write(f"  super.build_phase(phase);" + "\n")
+    file.write(f"endfunction" + "\n")
     file.write("\n")
-    file.write("// Main Phase" + "\n")
-    file.write("task main_phase(uvm_phase phase);" + "\n")
-    file.write("  super.main_phase(phase);" + "\n")
-    file.write("  phase.raise_objection(this, \"main_phase\");" + "\n")
+    file.write(f"// Main Phase" + "\n")
+    file.write(f"task main_phase(uvm_phase phase);" + "\n")
+    file.write(f"  super.main_phase(phase);" + "\n")
+    file.write(f"  phase.raise_objection(this, \"main_phase\");" + "\n")
     file.write("\n")
-    file.write("  wait(evl_configuration_done == 1'b1);" + "\n")
-    file.write("    `uvm_info(get_name(),\"EVL CONFIGURATION DONE FLAG SET :: Starting TEST\",UVM_LOW)" + "\n")
-    file.write("  " + task_name + "();" + "\n")
-    file.write("  #500ns;" + "\n")
+    file.write(f"  wait(evl_configuration_done == 1'b1);" + "\n")
+    file.write(f"    `uvm_info(get_name(),\"EVL CONFIGURATION DONE FLAG SET :: Starting TEST\",UVM_LOW)" + "\n")
+    file.write(f"  {task_name}();" + "\n")
+    file.write(f"  #500ns;" + "\n")
     file.write("\n")
-    file.write("  phase.drop_objection(this, \"main_phase\");" + "\n")
-    file.write("endtask" + "\n")
+    file.write(f"  phase.drop_objection(this, \"main_phase\");" + "\n")
+    file.write(f"endtask" + "\n")
     file.write("\n")
-    file.write("endclass" + "\n")
+    file.write(f"endclass" + "\n")
     file.write("\n")
 
 def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
@@ -350,9 +350,9 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
 
     aux_intf_name = proj_name.replace("\n", "") + "_evl_aux_intf"
 
-    evm_file_comment("SOC EVL base test for all necessary" + project_name.upper() + "Initialization", file)
+    evm_file_comment(f"SOC EVL base test for all necessary {project_name.upper()} Initialization", file)
     test_name = proj_name.replace("\n", "")
-    file.write("class " + test_name + "_soc_evl_base_test extends " + bt_name + ";" + "\n")
+    file.write("class " + test_name + "_soc_evl_base_test extends " + f"{bt_name};" + "\n")
     file.write("\n")
     file.write("// Sequences for Configuration" + "\n")
     file.write(sequence_name1 + "          " + sequence_name_inst1 + "\n")
@@ -371,9 +371,9 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
         evm_configuration = element.replace(" ", "").rsplit(":")
         instance_name = evm_configuration[0]
         instance_name_lower = instance_name.lower()
-        file.write("// " + instance_name + "\n")
-        seq_decl = "evm_in_single_tx_seq #(.D_SIZE(`" + instance_name + "_EVM_SOURCE_DSIZE))"
-        seq_inst = instance_name_lower + "_evm_in_tx_seq[`" + instance_name + "_EVM_SOURCES];"
+        file.write(f"// {instance_name}" + "\n")
+        seq_decl = f"evm_in_single_tx_seq #(.D_SIZE(`{instance_name}_EVM_SOURCE_DSIZE))"
+        seq_inst = f"{instance_name_lower}_evm_in_tx_seq[`{instance_name}_EVM_SOURCES];"
         sd_len = len(seq_decl)
         file.write(seq_decl + " "*(100 - sd_len) + seq_inst + "\n")
         file.write("\n")
@@ -385,8 +385,8 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
         evm_configuration = element.replace(" ", "").rsplit(":")
         instance_name = evm_configuration[0]
         instance_name_upper = instance_name.upper()
-        logic_decl = "logic [6:0] " + instance_name_upper + "_GID"
-        logic_inst = " = 7'd" + str(count) + ";"
+        logic_decl = f"logic [6:0] {instance_name_upper}_GID"
+        logic_inst = f" = 7'd{count};"
         count += 1
         sd_len = len(logic_decl)
         file.write(logic_decl + " " * (50 - sd_len) + logic_inst + "\n")
@@ -400,12 +400,12 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     file.write("int max_iter_cnt = 500;" + "\n")
     file.write("`else" + "\n")
     file.write("int max_iter_cnt = 50;" + "\n")
-    file.write("`endif " + "\n")
+    file.write("`endif" + "\n")
     file.write("\n")
-    file.write("`uvm_component_utils(" + test_name + ")" + "\n")
+    file.write(f"`uvm_component_utils({test_name})" + "\n")
     file.write("\n")
     file.write("// Class Constructor" + "\n")
-    file.write("function new(string name = \"" + test_name + "\", uvm_component parent = null);" + "\n")
+    file.write(f"function new(string name = \"{test_name}\", uvm_component parent = null);" + "\n")
     file.write("  super.new(name, parent);" + "\n")
     file.write("endfunction" + "\n")
     file.write("// Build Phase" + "\n")
@@ -413,8 +413,8 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     file.write("  super.build_phase(phase)" + "\n")
     file.write("  // Add any project rellated builds here" + "\n")
     file.write("  " + "\n")
-    file.write(" " + sequence_name_inst1 + " =  " + sequence_name1 + "::type_id::create(\"{sequence_name_inst1}\");" + "\n")
-    file.write(" " + sequence_name_inst2 + " =  " + sequence_name2 + "::type_id::create(\" + sequence_name_inst2 + \");" + "\n")
+    file.write(f" {sequence_name_inst1} = {sequence_name1}::type_id::create(\"{sequence_name_inst1}\");" + "\n")
+    file.write(f" {sequence_name_inst2} = {sequence_name2}::type_id::create(\"{sequence_name_inst2}\");" + "\n")
     file.write("endfunction" + "\n")
     file.write("\n")
     file.write("// Configure Phase" + "\n")
@@ -425,14 +425,14 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     file.write("  super.configure_phase(phase)" + "\n")
     file.write("  " + "\n")
     file.write("  // NEXUS GPIO Configure sequence" + "\n")
-    file.write("  " + sequence_name_inst1 + ".set_sequencer(env_h.get_sequencer());" + "\n")
-    file.write("  `randomize_or_fatal(" + sequence_name_inst1 + ")" + "\n")
-    file.write("  " + sequence_name_inst1 + ".start(null);" + "\n")
+    file.write(f"  {sequence_name_inst1}.set_sequencer(env_h.get_sequencer());" + "\n")
+    file.write(f"  `randomize_or_fatal({sequence_name_inst1})" + "\n")
+    file.write(f"  {sequence_name_inst1}.start(null);" + "\n")
     file.write("  " + "\n")
     file.write("  // SRAM NEXUS Configure Sequence" + "\n")
-    file.write("  " + sequence_name_inst2 + ".set_sequencer(env_h.get_sequencer());" + "\n")
-    file.write("  `randomize_or_fatal(" + sequence_name_inst2 + ")" + "\n")
-    file.write("  " + sequence_name_inst2 + ".start(null);" + "\n")
+    file.write(f"  {sequence_name_inst2}.set_sequencer(env_h.get_sequencer());" + "\n")
+    file.write(f"  `randomize_or_fatal({sequence_name_inst2})" + "\n")
+    file.write(f"  {sequence_name_inst2}.start(null);" + "\n")
     file.write("  " + "\n")
     file.write("  `uvm_info(get_name(),\"Exiting Configure Phase\", UVM_LOW)" + "\n")
     file.write("  phase.drop_objection(this, \"configure_phase\");" + "\n")
@@ -444,7 +444,7 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     file.write("  " + "\n")
     file.write("  `uvm_info(get_name(),\"Entering Shutdown Phase\", UVM_LOW)" + "\n")
     file.write("  super.shutdown_phase(phase);" + "\n")
-    file.write("  " + aux_intf_name + ".start_clock_forcing = 1'b0;" + "\n")
+    file.write(f"  {aux_intf_name}.start_clock_forcing = 1'b0;" + "\n")
     file.write("  " + "\n")
     file.write("  #1000ns;" + "\n")
     file.write("  phase.drop_objection(this, \"shutdown_phase\");" + "\n")
@@ -464,38 +464,38 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
         evm_configuration = element.replace(" ", "").rsplit(":")
         instance_name = evm_configuration[0]
 
-        evm_file_comment("TESTCASE : To drive events on " + instance_name + " EVM", file)
+        evm_file_comment(f"TESTCASE : To drive events on {instance_name} EVM" , file)
         single_evm_instance_test_gen(project_name, instance_name, file)
 
-    mega_random_test_name = project_name + "_elog_mega_random_test"
-    base_test = project_name + "_soc_evl_base_test"
+    mega_random_test_name = f"{project_name}_elog_mega_random_test"
+    base_test = f"{project_name}_soc_evl_base_test"
 
-    evm_file_comment("*** " + project_name + " EVL MEGA RANDOM TEST ***", file)
-    file.write("class " + mega_random_test_name + " extends " + base_test + ";" + "\n")
+    evm_file_comment(f"*** {project_name} EVL MEGA RANDOM TEST ***", file)
+    file.write(f"class {mega_random_test_name} extends {base_test};" + "\n")
     file.write("\n")
-    file.write("`uvm_component_utils(" + mega_random_test_name + ")" + "\n")
+    file.write(f"`uvm_component_utils({mega_random_test_name})" + "\n")
     file.write("\n")
-    file.write("// Class Constructor" + "\n")
-    file.write("// Build Phase" + "\n")
-    file.write("function void build_phase(uvm_phase phase);" + "\n")
-    file.write("  super.build_phase(phase)" + "\n")
+    file.write(f"// Class Constructor" + "\n")
+    file.write(f"// Build Phase" + "\n")
+    file.write(f"function void build_phase(uvm_phase phase);" + "\n")
+    file.write(f"  super.build_phase(phase)" + "\n")
     file.write("\n")
-    file.write("task main_phase(uvm_phase phase);" + "\n")
-    file.write("  super.main_phase(phase);" + "\n")
-    file.write("  phase.raise_objection(this, \"main_phase\");" + "\n")
+    file.write(f"task main_phase(uvm_phase phase);" + "\n")
+    file.write(f"  super.main_phase(phase);" + "\n")
+    file.write(f"  phase.raise_objection(this, \"main_phase\");" + "\n")
     file.write("\n")
-    file.write("  wait(evl_configuration_done == 1'b1);" + "\n")
-    file.write("    `uvm_info(get_name(),\"EVL CONFIGURATION DONE FLAG SET :: Starting TEST\",UVM_LOW)" + "\n")
+    file.write(f"  wait(evl_configuration_done == 1'b1);" + "\n")
+    file.write(f"    `uvm_info(get_name(),\"EVL CONFIGURATION DONE FLAG SET :: Starting TEST\",UVM_LOW)" + "\n")
     file.write("\n")
     file.write("   fork" + "\n")
 
     for element in evm_config_list:
         evm_configuration = element.replace(" ", "").rsplit(":")
         instance_name = evm_configuration[0]
-        task_name = instance_name + "_event_drive();"
+        task_name = f"{instance_name}_event_drive();"
 
-        file.write("      //" + instance_name + "\n")
-        file.write("      begin " + task_name + "  end" + "\n")
+        file.write(f"      //{instance_name}" + "\n")
+        file.write(f"      begin {task_name} end" + "\n")
         file.write("\n")
 
     file.write("   join" + "\n")
