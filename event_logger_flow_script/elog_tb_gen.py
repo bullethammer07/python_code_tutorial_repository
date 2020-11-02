@@ -309,6 +309,48 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     file.write(f"function new(string name = \"{test_name}\", uvm_component parent = null);" + "\n")
     file.write("  super.new(name, parent);" + "\n")
     file.write("endfunction" + "\n")
+    file.write("// Build Phase" + "\n")
+    file.write("function void build_phase(uvm_phase phase);" + "\n")
+    file.write("  super.build_phase(phase)" + "\n")
+    file.write("  // Add any project rellated builds here" + "\n")
+    file.write("  " + "\n")
+    file.write(f" {sequence_name_inst1} = {sequence_name1}::type_id::create(\"{sequence_name_inst1}\");" + "\n")
+    file.write(f" {sequence_name_inst2} = {sequence_name2}::type_id::create(\"{sequence_name_inst2}\");" + "\n")
+    file.write("endfunction" + "\n")
+    file.write("\n")
+    file.write("// Configure Phase" + "\n")
+    file.write("task configure_phase(uvm_phase phase);" + "\n")
+    file.write("  phase.raise_objection(this, \"configure_phase\");" + "\n")
+    file.write("  " + "\n")
+    file.write("  `uvm_info(get_name(),\"Entering Configure Phase\", UVM_LOW)" + "\n")
+    file.write("  super.configure_phase(phase)" + "\n")
+    file.write("  " + "\n")
+    file.write("  // NEXUS GPIO Configure sequence" + "\n")
+    file.write(f"  {sequence_name_inst1}.set_sequencer(env_h.get_sequencer());" + "\n")
+    file.write(f"  `randomize_or_fatal({sequence_name_inst1})" + "\n")
+    file.write(f"  {sequence_name_inst1}.start(null);" + "\n")
+    file.write("  " + "\n")
+    file.write("  // SRAM NEXUS Configure Sequence" + "\n")
+    file.write(f"  {sequence_name_inst2}.set_sequencer(env_h.get_sequencer());" + "\n")
+    file.write(f"  `randomize_or_fatal({sequence_name_inst2})" + "\n")
+    file.write(f"  {sequence_name_inst2}.start(null);" + "\n")
+    file.write("  " + "\n")
+    file.write("  `uvm_info(get_name(),\"Exiting Configure Phase\", UVM_LOW)" + "\n")
+    file.write("  phase.drop_objection(this, \"configure_phase\");" + "\n")
+    file.write("endtask" + "\n")
+
+
+
+
+    file.write("" + "\n")
+
+
+
+
+
+
+
+
 
 
 proj_elog_gpio_config_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
