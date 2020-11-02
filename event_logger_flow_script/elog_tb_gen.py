@@ -463,41 +463,54 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     for element in evm_config_list:
         evm_configuration = element.replace(" ", "").rsplit(":")
         instance_name = evm_configuration[0]
-        instance_name_upper = instance_name.upper()
 
+        evm_file_comment(f"TESTCASE : To drive events on {instance_name} EVM" , file)
         single_evm_instance_test_gen(project_name, instance_name, file)
 
+    mega_random_test_name = f"{project_name}_elog_mega_random_test"
+    base_test = f"{project_name}_soc_evl_base_test"
 
+    evm_file_comment(f"*** {project_name} EVL MEGA RANDOM TEST ***", file)
+    file.write(f"class {mega_random_test_name} extends {base_test};" + "\n")
+    file.write("\n")
+    file.write(f"`uvm_component_utils({mega_random_test_name})" + "\n")
+    file.write("\n")
+    file.write(f"// Class Constructor" + "\n")
+    file.write(f"// Build Phase" + "\n")
+    file.write(f"function void build_phase(uvm_phase phase);" + "\n")
+    file.write(f"  super.build_phase(phase)" + "\n")
+    file.write("\n")
+    file.write(f"task main_phase(uvm_phase phase);" + "\n")
+    file.write(f"  super.main_phase(phase);" + "\n")
+    file.write(f"  phase.raise_objection(this, \"main_phase\");" + "\n")
+    file.write("\n")
+    file.write(f"  wait(evl_configuration_done == 1'b1);" + "\n")
+    file.write(f"    `uvm_info(get_name(),\"EVL CONFIGURATION DONE FLAG SET :: Starting TEST\",UVM_LOW)" + "\n")
+    file.write("\n")
+    file.write("   fork" + "\n")
 
+    for element in evm_config_list:
+        evm_configuration = element.replace(" ", "").rsplit(":")
+        instance_name = evm_configuration[0]
+        task_name = f"{instance_name}_event_drive();"
 
+        file.write(f"      //{instance_name}" + "\n")
+        file.write(f"      begin {task_name} end" + "\n")
+        file.write("\n")
 
-
-
-
-
-
-
+    file.write("   join" + "\n")
+    file.write("\n")
+    file.write("   #5us;" + "\n")
+    file.write("\n")
+    file.write("phase.drop_objection(this,\"main_phase\");" + "\n")
+    file.write("endtask" + "\n")
+    file.write("\n")
+    file.write("endclass" + "\n")
 
 proj_elog_gpio_config_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
 proj_elog_sram_nexus_coonfigure_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
 evm_in_single_tx_gen(f_single_source_tests_file)
 proj_soc_evl_base_test_gen(PROJECT_NAME, evl_soc_base_test, f_single_source_tests_file)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 for element in evm_config_list:
     evm_configuration = element.replace(" ", "").rsplit(":")
@@ -511,7 +524,6 @@ for element in evm_config_list:
     evm_define_source_dsize_and_path(evm_instance_name.upper(), evm_sources, evm_dsize, evm_instance_path, f_defines_file)
 
 evm_define_evl_related_end_of_file(PROJECT_NAME_CAPS.replace("\n", ""), evl_num_source0, evl_num_source1, evl_inst_path, f_defines_file)
-
 
 #--------------------------------------------------------------------------------
 # End of program and closing all created files
