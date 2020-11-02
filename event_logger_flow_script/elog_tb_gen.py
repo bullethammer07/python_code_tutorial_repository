@@ -248,33 +248,57 @@ def evm_instance_event_drive_task_gen(evm_inst_name, file):
     task_name = f"{inst_name_lower}_event_drive"
     all_evl_plusarg = f"ALL_{inst_name}_EVM_SOURCE_ACTIVE"
     inst_src_dsize = f"{inst_name}_EVM_SOURCE_DSIZE"
+    inst_sources = f"{inst_name}_EVM_SOURCES"
+    gid_name = f"{inst_name}_GID"
     seq_name = f"{inst_name_lower}_evm_in_tx_seq"
+    agent_path = f"evl_env_tc.{inst_name_lower}_evm_env.evm_in_agt"
 
-    file.write(f"// Task to write Events on {inst_name}" + "\n");
-    file.write(f"task {task_name};" + "\n");
-    file.write(f"  if($test$plusargs(\"{all_evl_plusarg}\")) // To RUN on all Sources of the EVM Instance" + "\n");
-    file.write( "    begin" + "\n");
-    file.write(f"      foreach({seq_name}[i])" + "\n");
-    file.write( "        begin" + "\n");
-    file.write( "          automatic int var_i = i;" + "\n");
-    file.write( "          " + "\n");
-    file.write( "          fork" + "\n");
-    file.write(f"            agent_name = $psprintf(\"{seq_name}[%0d],var_i\");" + "\n");
-    file.write( "            event_iterations = $urandom_range(10,max_iter_cnt);" + "\n");
-    file.write( "            " + "\n");
-    file.write(f"            `uvm_info(get_name(),$sformatf(\"Event Iteration for Agent %0d of {inst_name} is :: %0d,var_i,event_iterations\"),UVM_LOW)" + "\n");
-    file.write( "            " + "\n");
-    file.write( "            repeat(event_iterations)" + "\n");
-    file.write( "              begin" + "\n");
-    file.write(f"                {seq_name}[var_i] = evm_in_single_tx_seq#(.D_SIZE({inst_src_dsize}))::type_id::create(agent_name);" + "\n");
-    file.write(f"                " + "\n");
-    file.write(f"                " + "\n");
-    file.write( "              end" + "\n");
-    file.write( "          " + "\n");
-    file.write( "          " + "\n");
-    file.write( "          " + "\n");
+    cbo = "{"
+    cbc = "}"
 
-    file.write( "" + "\n");
+    file.write(f"// Task to write Events on {inst_name}" + "\n")
+    file.write(f"task {task_name};" + "\n")
+    file.write(f"  if($test$plusargs(\"{all_evl_plusarg}\")) // To RUN on all Sources of the EVM Instance" + "\n")
+    file.write( "    begin" + "\n")
+    file.write(f"      foreach({seq_name}[i])" + "\n")
+    file.write( "        begin" + "\n")
+    file.write( "          automatic int var_i = i;" + "\n")
+    file.write( "          " + "\n")
+    file.write( "          fork" + "\n")
+    file.write(f"            agent_name = $psprintf(\"{seq_name}[%0d]\",var_i);" + "\n")
+    file.write( "            event_iterations = $urandom_range(10,max_iter_cnt);" + "\n")
+    file.write( "            " + "\n")
+    file.write(f"            `uvm_info(get_name(),$sformatf(\"Event Iteration for Agent %0d of {inst_name} is :: %0d\",var_i,event_iterations),UVM_LOW)" + "\n")
+    file.write( "            " + "\n")
+    file.write( "            repeat(event_iterations)" + "\n")
+    file.write( "              begin" + "\n")
+    file.write(f"                {seq_name}[var_i] = evm_in_single_tx_seq#(.D_SIZE({inst_src_dsize}))::type_id::create(agent_name);" + "\n")
+    file.write(f"                if($test$plusargs(\"ENABLE_UNIQUE_GID\")) begin {seq_name}[var_i].randomize() with {cbo} gid == {gid_name}; {cbc}; end else begin {seq_name}[var_i].randomize(); end" + "\n")
+    file.write(f"                {seq_name}[var_i].start({agent_path}[var_i].evm_sqr);" + "\n")
+    file.write( "              end" + "\n")
+    file.write( "          join_none" + "\n")
+    file.write( "        end" + "\n")
+    file.write( "      wait fork;" + "\n")
+    file.write( "    end" + "\n")
+    file.write( "  else // To RUN on any one source of t he EVM Instance" + "\n")
+    file.write( "    begin" + "\n")
+    file.write( "      event_iterations = $urandom_range(10, max_iter_cnt);" + "\n")
+    file.write(f"      active_source = $urandom_range(0, (`{inst_sources} - 1));" + "\n")
+    file.write(f"      agent_name = $psprintf(\"{seq_name}[%0d]\",active_source);" + "\n")
+    file.write( "      " + "\n")
+    file.write( "      `uvm_info(get_name(),$sformatf(\"Event Iteration          :: %0d\",event_iterations),UVM_LOW)" + "\n")
+    file.write( "      `uvm_info(get_name(),$sformatf(\"Active Source Selected   :: %0d\",active_source),UVM_LOW)" + "\n")
+    file.write( "       " + "\n")
+    file.write( "       repeat(event_iterations)" + "\n")
+    file.write( "         begin" + "\n")
+    file.write(f"           {seq_name}[active_source] = evm_in_single_tx_seq#(.D_SIZE(`{inst_src_dsize}))::type_id::create(agent_name);" + "\n")
+    file.write(f"           {seq_name}[active_source].randomize();" + "\n")
+    file.write(f"           {seq_name}[active_source].start({agent_path}[active_source].evm_sqr);" + "\n")
+    file.write( "         end" + "\n")
+    file.write( "       #5000ns;" + "\n")
+    file.write( "     end" + "\n")
+    file.write( "endtask" + "\n")
+    file.write("\n")
 
 def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     project_name = proj_name.replace("\n", "")
@@ -387,11 +411,16 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     file.write("  #1000ns;" + "\n")
     file.write("  phase.drop_objection(this, \"shutdown_phase\");" + "\n")
     file.write("endtask" + "\n")
+    file.write("\n")
+
+    for element in evm_config_list:
+        evm_configuration = element.replace(" ", "").rsplit(":")
+        instance_name = evm_configuration[0]
+        instance_name_upper = instance_name.upper()
+
+        evm_instance_event_drive_task_gen(instance_name_upper, file)
 
 
-
-
-    file.write("" + "\n")
 
 
 
