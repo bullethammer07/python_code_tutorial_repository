@@ -300,6 +300,44 @@ def evm_instance_event_drive_task_gen(evm_inst_name, file):
     file.write( "endtask" + "\n")
     file.write("\n")
 
+def single_evm_instance_test_gen(proj_name, evm_inst_name, file):
+    project_name = proj_name.replace("\n", "")
+    inst_name_caps = evm_inst_name.replace("\n", "")
+    inst_name = inst_name_caps.lower()
+    base_test_name = f"{project_name}_soc_evl_base_test"
+    test_name = f"{project_name}_elog_{inst_name}_event_drive_test"
+    task_name = f"{inst_name}_event_drive"
+
+    file.write(f"class {test_name} extends {base_test_name};" + "\n")
+    file.write("\n")
+    file.write(f"`uvm_component_utils({test_name})" + "\n")
+    file.write("\n")
+    file.write(f"// Class Constructor" + "\n")
+    file.write(f"function new(string name = \"{test_name}\", uvm_component parent = null);" + "\n")
+    file.write(f"  super.new(name,parent);" + "\n")
+    file.write(f"endfunction" + "\n")
+    file.write("\n")
+    file.write(f"// Build Phase" + "\n")
+    file.write(f"function void build_phase(uvm_phase phase);" + "\n")
+    file.write(f"  super.build_phase(phase);" + "\n")
+    file.write(f"endfunction" + "\n")
+    file.write("\n")
+    file.write(f"// Main Phase" + "\n")
+    file.write(f"task main_phase(uvm_phase phase);" + "\n")
+    file.write(f"  super.main_phase(phase);" + "\n")
+    file.write(f"  phase.raise_objection(this, \"main_phase\");" + "\n")
+    file.write("\n")
+    file.write(f"  wait(evl_configuration_done == 1'b1);" + "\n")
+    file.write(f"    `uvm_info(get_name(),\"EVL CONFIGURATION DONE FLAG SET :: Starting TEST\",UVM_LOW)" + "\n")
+    file.write(f"  {task_name}();" + "\n")
+    file.write(f"  #500ns;" + "\n")
+    file.write("\n")
+    file.write(f"  phase.drop_objection(this, \"main_phase\");" + "\n")
+    file.write(f"endtask" + "\n")
+    file.write("\n")
+    file.write(f"endclass" + "\n")
+    file.write("\n")
+
 def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     project_name = proj_name.replace("\n", "")
     bt_name = base_test_name.replace("\n", "")
@@ -419,6 +457,15 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
         instance_name_upper = instance_name.upper()
 
         evm_instance_event_drive_task_gen(instance_name_upper, file)
+
+    file.write("endclass" + "\n")
+
+    for element in evm_config_list:
+        evm_configuration = element.replace(" ", "").rsplit(":")
+        instance_name = evm_configuration[0]
+        instance_name_upper = instance_name.upper()
+
+        single_evm_instance_test_gen(project_name, instance_name, file)
 
 
 
