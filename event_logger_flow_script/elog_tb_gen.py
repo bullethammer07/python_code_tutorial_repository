@@ -346,6 +346,11 @@ def proj_evl_env_gen(proj_name, file):
     project_name = proj_name.replace("\n", "")
     proj_name_upper = project_name.upper()
 
+    proj_nexus_pd = project_name + "_evl_nexus_pd"
+    proj_nexus_sb = project_name + "_evl_nexus_sb_h"
+    proj_virt_seqr = project_name + "_evl_virtual_sequencer"
+    proj_checker_block = project_name + "_elog_event_checker_block"
+
     env_name = project_name + "_evl_env"
     reg_block_name = proj_name_upper + "_block"
     proj_env_cfg = project_name + "_env_cfg"
@@ -357,19 +362,171 @@ def proj_evl_env_gen(proj_name, file):
     file.write("class " + env_name + "#(int SOURCES0 = 2, INT SOURCES1 = 2) extends mvm_reg_env #(" + reg_block_name + "," + proj_env_cfg + ");" + "\n")
     file.write("\n")
     file.write("typedef " + env_name + "#(.SOURCES0(`" + src0_define + "), .SOURCES1(`" + src1_define + "))      t_evl_env;" + "\n")
-    file.write("" + "\n")
-    file.write("" + "\n")
-    file.write("" + "\n")
-    file.write("" + "\n")
-    file.write("" + "\n")
-    file.write("" + "\n")
-    file.write("" + "\n")
-    file.write("" + "\n")
-    file.write("" + "\n")
-    file.write("" + "\n")
-    file.write("" + "\n")
-    file.write("" + "\n")
-    file.write("" + "\n")
+    file.write("\n")
+    file.write("`uvm_component_param_utils(t_evl_env)" + "\n")
+    file.write("\n")
+    file.write(reg_block_name + "     " + reg_block_name + "_h;" + "\n")
+    file.write("\n")
+    file.write("typedef " + "         eva_env#(.SOURCES(`" + src0_define + "),.D_SIZE(64))" + "       t_eva_env0;" + "\n")
+    file.write("typedef " + "         eva_env#(.SOURCES(`" + src1_define + "),.D_SIZE(64))" + "       t_eva_env1;" + "\n")
+    file.write("\n")
+
+    for element in evm_config_list:
+        evm_configuration = element.replace(" ", "").rsplit(":")
+        instance_name = evm_configuration[0]
+        instance_name_lower = instance_name.lower()
+        srcs = "`" + instance_name + "_EVM_SOURCES"
+        dsize = "`" + instance_name + "_EVM_SOURCE_DSIZE"
+        LHS = "evm_env #(.SOURCES(" + srcs + "),.D_SIZE(" + dsize + "))"
+        lhs_len = len(LHS)
+        inst_evm_env = instance_name + "_evm_env"
+
+        file.write("//" + instance_name + " EVM env" + "\n")
+        file.write(LHS + " "*(120 - lhs_len) + inst_evm_env + ";" + "\n")
+        file.write("\n")
+
+    file.write("// sub-environment" + "\n")
+    file.write("t_eva_env0            eva_env_h0;" + "\n")
+    file.write("t_eva_env1            eva_env_h1" + "\n")
+    file.write("\n")
+    file.write("// NEXUS Environment" + "\n")
+    file.write("typedef nexus_agent #(.D_WIDTH(8),.M_WIDTH(1))      t_nexus_agent;" + "\n")
+    file.write("\n")
+    file.write("// nexus agent" + "\n")
+    file.write("t_nexus_agent                      nexus_agent_h;" + "\n")
+    file.write("// evl nexus predictor" + "\n")
+    file.write(proj_nexus_pd + "               evl_nexus_pd_h;" + "\n")
+    file.write("// evl nexus scoreboard" + "\n")
+    file.write(proj_nexus_sb + "             evl_nexus_sb_h;" + "\n")
+    file.write("\n")
+    file.write("// EVL virtual sequencer" + "\n")
+    file.write(proj_virt_seqr + "      virt_seqr;" + "\n")
+    file.write("// EVL Event Checker Block" + "\n")
+    file.write(proj_checker_block + "   evl_check_blk" + "\n")
+    file.write("\n")
+    file.write("// Class Constructor" + "\n")
+    file.write("function new(string name=\"" + env_name + "\", uvm_component parent = null);" + "\n")
+    file.write("  super.new(name,parent);" + "\n")
+    file.write("endfunction" + "\n")
+    file.write("\n")
+    file.write("// Build Phase" + "\n")
+    file.write("function void build_phase(uvm_phase phase);" + "\n")
+    file.write("  string agent_name;" + "\n")
+    file.write("  super.build_phase(phase);" + "\n")
+    file.write("\n")
+    file.write("  // Creating the register model" + "\n")
+    file.write("  " + reg_block_name + "_h" + "  =  get_rm();" + "\n")
+    file.write("\n")
+
+    evm_file_comment("Creating the EVM Environments for the EVM Instances", file)
+
+    for element in evm_config_list:
+        evm_configuration = element.replace(" ", "").rsplit(":")
+        instance_name = evm_configuration[0]
+        instance_name_lower = instance_name.lower()
+
+        env_name = instance_name_lower + "_evm_env"
+        srcs = "`" + instance_name + "_EVM_SOURCES"
+        dsize = "`" + instance_name + "_EVM_SOURCE_DSIZE"
+
+        file.write("  //" + instance_name + "\n")
+        file.write("  " + env_name + " = evm_env #(.SOURCES(" + srcs + "),.D_SIZE(" + dsize + "))::type_id::create(\"" + env_name + "\",this);" + "\n")
+        file.write("\n")
+
+    evm_file_comment("Creating the EVL Subenvironments", file)
+
+    file.write("\n")
+    file.write("  // creating the EVL CH0 EVA Sub Environment" + "\n")
+    file.write("  eva_env_h0 = t_eva_env0::type_id::create(\"eva_env_h0\",this);" + "\n")
+    file.write("  agent_name = \"eva_env_h0.eva_out_agent\";" + "\n")
+    file.write("  `mvm_set_enum(uvm_active_passive_enum, this, agent_name,\"is_active\",UVM_PASSIVE)" + "\n")
+    file.write("  foreach(eva_env_h0.eva_in_agent[i])" + "\n")
+    file.write("    begin" + "\n")
+    file.write("      agent_name = $psprintf(\"eva_env_h0.eva_in_agent[%0d]\",i);" + "\n")
+    file.write("      `mvm_set_enum(uvm_active_passive_enum, this, agent_name,\"is_active\",UVM_PASSIVE)" + "\n")
+    file.write("    end" + "\n")
+    file.write("\n")
+    file.write("  // creating the EVL CH1 EVA Sub Environment" + "\n")
+    file.write("  eva_env_h1 = t_eva_env1::type_id::create(\"eva_env_h1\",this);" + "\n")
+    file.write("  agent_name = \"eva_env_h1.eva_out_agent\";" + "\n")
+    file.write("  `mvm_set_enum(uvm_active_passive_enum, this, agent_name,\"is_active\",UVM_PASSIVE)" + "\n")
+    file.write("  foreach(eva_env_h1.eva_in_agent[i])" + "\n")
+    file.write("    begin" + "\n")
+    file.write("      agent_name = $psprintf(\"eva_env_h1.eva_in_agent[%0d]\",i);" + "\n")
+    file.write("      `mvm_set_enum(uvm_active_passive_enum, this, agent_name,\"is_active\",UVM_PASSIVE)" + "\n")
+    file.write("    end" + "\n")
+    file.write("\n")
+
+    evm_file_comment("Creating the NEXUS Environments", file)
+    file.write("\n")
+    file.write("  if($test$plusargs(\"enable_elog_nexus_sb\"))" + "\n")
+    file.write("    begin" + "\n")
+    file.write("      // Create the Nexus Predictor and Scoreboard" + "\n")
+    file.write("      nexus_agent_h = t_nexus_agent::type_id::create(\"nexus_agent_h\",this);" + "\n")
+    file.write("      evl_nexus_pd_h = " + proj_nexus_pd + "::type_id::create(\"evl_nexus_pd_h\", this);" + "\n")
+    file.write("      evl_nexus_sb_h = " + proj_nexus_sb + "::type_id::create(\"evl_nexus_sb_h\", this);" + "\n")
+    file.write("    end" + "\n")
+    file.write("\n")
+
+    evm_file_comment("Creating the virtual sequencer", file)
+    file.write("  virt_seqr = " + proj_virt_seqr + "type_id::create::(\"virt_seqr\",this);" + "\n")
+    file.write("\n")
+    file.write("  if($test$plusargs(\"ENABLE_UNIQUE_GID\"))" + "\n")
+    file.write("    begin" + "\n")
+    file.write("      // Event Checker Block" + "\n")
+    file.write("      `uvm_info(get_name(),\"Creating the EVENT CHECKER Block\", UVM_LOW)" + "\n")
+    file.write("      evl_check_blk = " + proj_checker_block + "::type_id::create(\"evl_check_blk\",this);" + "\n")
+    file.write("    end" + "\n")
+    file.write("\n")
+
+    file.write("endfunction" + "\n")
+    file.write("\n")
+
+    file.write("// Connect Phase" + "\n")
+    file.write("function void connect_phase(uvm_phase phase);" + "\n")
+    file.write("  super.connect_phase(phase);" + "\n")
+    file.write("\n")
+    file.write("  // Connecting NEXUS Scoreboard components" + "\n")
+    file.write("  if($test$plusargs(\"enable_elog_nexus_sb\"))" + "\n")
+    file.write("    begin" + "\n")
+    file.write("      // connect the nexus agent monitor to the evl_nexus_predictor" + "\n")
+    file.write("      nexus_agent_h.mon_h.actual_ap.connect(evl_nexus_pd_h.evl_nexus_exp);" + "\n")
+    file.write("      // connect the evl nexus predictor to the evl nexus scorebaord" + "\n")
+    file.write("      evl_nexus_pd_h.evl_nexus_ap.connect(evl_nexus_sb_h.ev_actual_exp);" + "\n")
+    file.write("      // connect event channel0 and channel1 to the nexus scorebaord" + "\n")
+    file.write("      eva_env_h0.eva_out_agent.mon_h.actual_ap.connect(evl_nexus_sb_h.ev_expected0_exp);" + "\n")
+    file.write("      eva_env_h1.eva_out_agent.mon_h.actual_ap.connect(evl_nexus_sb_h.ev_expected1_exp);" + "\n")
+    file.write("    end" + "\n")
+    file.write("\n")
+    file.write("  if($test$plusargs(\"ENABLE_UNIQUE_GID\"))" + "\n")
+    file.write("    begin" + "\n")
+
+    for element in evm_config_list:
+        evm_configuration = element.replace(" ", "").rsplit(":")
+        instance_name = evm_configuration[0]
+        instance_name_lower = instance_name.lower()
+
+        lhs = instance_name_lower + "_evm_env.evm_out_agt.evm_mon.evm_mon_ap.connect"
+        rhs = "(evl_check_blk." + instance_name_lower + "_event_exp);"
+        lhs_len = len(lhs)
+
+        file.write("      " + lhs + " "*(100 - (lhs_len)) + rhs + "\n")
+
+    file.write("    end" + "\n")
+    file.write("\n")
+
+    for element in evm_config_list:
+        evm_configuration = element.replace(" ", "").rsplit(":")
+        instance_name = evm_configuration[0]
+        instance_name_lower = instance_name.lower()
+
+        file.write("  //" + instance_name + "\n")
+        file.write("  foreach(virt_seqr." + instance_name_lower + "_evm_sequencer[i]) begin virt_seqr." + instance_name_lower + "_evm_sequencer[i] = " + instance_name_lower + "_evm_env.evm_in_agt[i].evm_sqr; end" + "\n")
+        file.write("\n")
+
+    file.write("endfunction" + "\n")
+    file.write("\n")
+    file.write("endclass" + "\n")
 
 
 def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
