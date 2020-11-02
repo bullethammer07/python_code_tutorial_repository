@@ -45,6 +45,8 @@ project_defines_filename = str(PROJECT_NAME.replace("\n", "")) + "_elog_test_def
 project_single_source_tests_filename = str(PROJECT_NAME.replace("\n", "")) + "_soc_evl_single_source_evm_tests.sv"
 # creating name for the proj_evl_env
 project_evl_env_filename = str(PROJECT_NAME.replace("\n", "")) + "_evl_env.sv"
+# creating name for the interface connections
+project_intf_connect_filename = str(PROJECT_NAME.replace("\n", "")) + "_evm_interface_connections.sv"
 
 # creating name for the mega random test
 #project_mega_random_test_filename = str(PROJECT_NAME.replace("\n", "")) + "_elog_mega_random_test.sv"
@@ -54,6 +56,7 @@ f_defines_file = open(project_defines_filename, 'w')
 #f_mega_random_file = open(project_mega_random_test_filename, 'w')
 f_single_source_tests_file = open(project_single_source_tests_filename, 'w')
 f_evl_env_file = open(project_evl_env_filename, 'w')
+f_evm_intf_connect_file = open(project_intf_connect_filename, 'w')
 
 num_of_lines_of_config_file = len(elog_config_file_lines)
 # print(num_of_lines_of_config_file)
@@ -697,6 +700,9 @@ def proj_soc_evl_base_test_gen(proj_name, base_test_name, file):
     file.write("\n")
     file.write("endclass" + "\n")
 
+def proj_evm_intf_connect_gen(proj_name, file):
+    project_name = proj_name.replace("\n", "")
+
 proj_elog_gpio_config_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
 proj_elog_sram_nexus_coonfigure_sequence_gen(PROJECT_NAME, f_single_source_tests_file)
 evm_in_single_tx_gen(f_single_source_tests_file)
@@ -722,3 +728,4 @@ f_defines_file.close()
 #f_mega_random_file.close()
 f_single_source_tests_file.close()
 f_evl_env_file.close()
+f_evm_intf_connect_file.close()
