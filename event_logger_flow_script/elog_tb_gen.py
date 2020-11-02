@@ -273,7 +273,7 @@ def evm_instance_event_drive_task_gen(evm_inst_name, file):
     file.write("            repeat(event_iterations)" + "\n")
     file.write("              begin" + "\n")
     file.write("                " + seq_name + "[var_i] = evm_in_single_tx_seq#(.D_SIZE(" + inst_src_dsize + "))::type_id::create(agent_name);" + "\n")
-    file.write("                if($test$plusargs(\"ENABLE_UNIQUE_GID\")) begin " + seq_name + "[var_i].randomize() with { gid == " + gid_name + "}; }; end else begin " + seq_name + "[var_i].randomize(); end" + "\n")
+    file.write("                if($test$plusargs(\"ENABLE_UNIQUE_GID\")) begin " + seq_name + "[var_i].randomize() with { gid == " + gid_name + "}; end else begin " + seq_name + "[var_i].randomize(); end" + "\n")
     file.write("                " + seq_name + "[var_i].start(" + agent_path + "[var_i].evm_sqr);" + "\n")
     file.write("              end" + "\n")
     file.write("          join_none" + "\n")
