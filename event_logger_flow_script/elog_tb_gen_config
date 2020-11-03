@@ -1,9 +1,0 @@
-PROJECT : tomcat
-EVL_INST_PATH : soc_evl_instance_path
-EVL_NUM_SOURCE0 : 9
-EVL_NUM_SOURCE1 : 3
-SOC_BASE_TEST : project_evl_base_test
-DMA:32:3:dma_inst_path
-DDR:64:9:ddr_inst_path
-SYSM_L2P:32:3:sysm_l2p_inst_path
-SYSM_CC:32:8:sysm_cc_inst_path
