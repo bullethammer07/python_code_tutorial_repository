@@ -2,6 +2,8 @@
 #   Python List Comprehension   
 #-------------------------------
 
+# NOTE : List Comprehensions use : []
+
 # List comprehension is an elegant way to define and create lists based on existing lists.
 
 #-----------------------------------------------------------------------------------------------------

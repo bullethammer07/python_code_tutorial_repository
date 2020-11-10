@@ -2,6 +2,8 @@
 # Python Dictionary Comprehensions
 #-----------------------------------------
 
+# NOTE : Dictionary Comprehensions use : {}
+
 # What is dictionary comprehension ?
 # It is an Elegant and concise way to create dictionaries.
 
