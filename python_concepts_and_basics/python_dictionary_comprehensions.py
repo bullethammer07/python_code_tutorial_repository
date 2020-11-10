@@ -38,7 +38,7 @@ old_price = {"milk": 25, "coffee": 80, "bread": 40}
 print("Old price dict : ", old_price)
 
 # converting old price to new price
-added_price = 10
+added_price = 10 
 new_price = {item: value + added_price for (item, value) in old_price.items()}
 print("New updated price dict : ", new_price)
 
