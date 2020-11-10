@@ -78,3 +78,10 @@ inst.send("Input 4")
 inst.send("Input 5")
 inst.send("Input 6")
 inst.close()
+
+#---------------------------------------------
+# Chaining coroutines for creating pipeline :
+#---------------------------------------------
+# Coroutines can be used to set pipes. We can chain together coroutines and push data through pipe using send() method. A pipe needs :
+#   An initial source(producer) which derives the whole pipe line. Producer is usually not a coroutine, it’s just a simple method.
+#   A sink, which is the end point of the pipe. A sink might collect all data and display it.
