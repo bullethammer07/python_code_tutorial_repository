@@ -20,7 +20,8 @@ class Student:
     # Here we have overridden the __add__ operator and given is some new functionality
     # now it will return both the 'name' attribute of each object when '+' is called
     def __add__(self, other):
-        return(f"Name : {self.name} and {other.name}")
+        ret_val = f"Name : {self.name} and {other.name}"
+        return ret_val
 
 # now if we make objects of the 'Student' Class
 # nothing out of the ordinary here, just two object instances get
